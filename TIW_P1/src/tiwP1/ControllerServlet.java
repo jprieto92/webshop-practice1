@@ -1,4 +1,4 @@
-package tiw.P1;
+package tiwP1;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,6 +37,8 @@ public class ControllerServlet extends HttpServlet {
 		// Ejemplos de mapeos
 		//handlerHash.put("/login.html", new jhc.labmvc.ShowRecordRequestHandler());
 		//handlerHash.put("/showInfo.html", new jhc.labmvc.ShowRecordRequestHandler());
+		handlerHash.put("login", new tiwP1.LoginRequestHandler());
+		handlerHash.put(null, new tiwP1.NullRequestHandler());
 	}
 
 	/**
@@ -45,7 +47,7 @@ public class ControllerServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// Obtenemos la url desde la que nos han llamado para así buscarla en el hashmap, donde creamos el objeto que implemente la logica de negocio para esa URL.
-		RequestHandler rh = (RequestHandler) handlerHash.get(request.getServletPath());
+		RequestHandler rh = (RequestHandler) handlerHash.get(request.getParameter("pAccion"));
 
 		// Si no encontramos ninguna URL que esperasemos, el servletcontrolador lanzara un error, ya que no sabemos que hacer
 		if (rh == null) {

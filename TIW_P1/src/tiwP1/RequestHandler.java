@@ -1,4 +1,4 @@
-package tiw.P1;
+package tiwP1;
 
 import java.io.*;
 import javax.servlet.*;
