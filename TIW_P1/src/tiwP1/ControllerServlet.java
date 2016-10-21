@@ -34,9 +34,6 @@ public class ControllerServlet extends HttpServlet {
     //Aqui meteremos el mapeo de URL desde el que nos llaman al objeto encargado de esa URL que implementa el modelo de negocio
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		// Ejemplos de mapeos
-		//handlerHash.put("/login.html", new jhc.labmvc.ShowRecordRequestHandler());
-		//handlerHash.put("/showInfo.html", new jhc.labmvc.ShowRecordRequestHandler());
 		handlerHash.put("login", new tiwP1.LoginRequestHandler());
 		handlerHash.put(null, new tiwP1.NullRequestHandler());
 	}
