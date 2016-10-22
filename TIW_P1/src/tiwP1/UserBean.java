@@ -1,8 +1,13 @@
 package tiwP1;
 
-public class UserBean {
+public class UserBean implements java.io.Serializable{
 
-	  private String email;
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String email;
 	  
 	  private String pass;
 	  

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+//Filtro que comprobará en todas las peticiones si el usuario está logado, si no lo está, le mandará a la página de login, en caso contrario, la petición proseguirá su curso.
+
 /**
  * Servlet Filter implementation class SessionFilter
  */
@@ -44,22 +46,22 @@ public class SessionFilter implements Filter {
 		HttpServletRequest requestHttp = (HttpServletRequest) request;
 		HttpServletResponse reponseHttp = (HttpServletResponse) response;
 		
+		//Vemos si tiene sesion creada. Si no la tiene, no la creamos.
 		HttpSession session = requestHttp.getSession(false);
-		if (session == null) {
-
+		
+		RequestDispatcher miR;
+		
+		//Si la sesión es nula o el userBean es nulo, significa que no ha sesión creada.
+		if (session == null || session.getAttribute("userBean") == null) {
 			System.out.println("No hay sesion abierta");
 			// Volvemos a presentar los productos
-			RequestDispatcher miR = requestHttp
-					.getRequestDispatcher("formulario.jsp");
-			miR.forward(requestHttp, reponseHttp);
+			miR = requestHttp.getRequestDispatcher("index.jsp");
+			miR.forward(request, response);
+			return;
 		} else {
-			// Presentamos el contenido del carrito
-			RequestDispatcher miR = requestHttp
-					.getRequestDispatcher("porVer.jsp");
-			miR.forward(requestHttp, reponseHttp);
-
+			System.out.println("Hay sesion abierta");
 		}
-		
+
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
