@@ -1,4 +1,4 @@
-package tiwP1;
+package beans;
 
 public class UserBean implements java.io.Serializable{
 

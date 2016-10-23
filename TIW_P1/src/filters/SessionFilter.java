@@ -1,4 +1,4 @@
-package tiwP1;
+package filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;

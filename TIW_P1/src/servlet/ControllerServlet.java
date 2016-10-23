@@ -1,14 +1,20 @@
-package tiwP1;
+package servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import modelJPA.GestorDatos;
 
 
 /**
@@ -17,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private GestorDatos gestordatos = null;
 	
 	// Hash table of Request stHandler instances, keyed by request URL
 	private HashMap<String, RequestHandler> handlerHash = new HashMap<String, RequestHandler>();
@@ -34,8 +41,18 @@ public class ControllerServlet extends HttpServlet {
     //Aqui meteremos el mapeo de URL desde el que nos llaman al objeto encargado de esa URL que implementa el modelo de negocio
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		handlerHash.put("login", new tiwP1.LoginRequestHandler());
-		handlerHash.put(null, new tiwP1.NullRequestHandler());
+		handlerHash.put("login", new servlet.LoginRequestHandler());
+		handlerHash.put(null, new servlet.NullRequestHandler());
+		
+		ServletContext ctx = config.getServletContext();
+		final Context context;
+        try {
+        	context = new InitialContext();
+			gestordatos = (GestorDatos) context.lookup("java:global/EjemplosEJBEAR/EjemplosEJB/GestorDatos!universidad.ejb.Datos.GestorDatosLocal");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		super.init(config);
 	}
 
 	/**

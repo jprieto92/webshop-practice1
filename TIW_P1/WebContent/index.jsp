@@ -124,7 +124,7 @@
     </section>
 
     <!-- Register Section -->
-    <section class="success" id="register">
+    <section id="register">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

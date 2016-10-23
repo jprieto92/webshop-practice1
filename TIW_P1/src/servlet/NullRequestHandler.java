@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package tiwP1;
+package servlet;
 
 import java.io.*;
 import javax.servlet.*;
