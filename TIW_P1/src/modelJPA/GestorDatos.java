@@ -27,9 +27,20 @@ public class GestorDatos {
 	    	em.getTransaction().commit();
 	    }catch(Exception e){
 			e.printStackTrace();
+
+		}
+    }
+    
+    /*Método usado por Local*/
+    public void modificar(Usuario usuario) {
+    	try{
+	    	em.getTransaction().begin();
+	    	em.merge(usuario);
+	    	em.getTransaction().commit();
+
+	    }catch(Exception e){
+			e.printStackTrace();
 			
-			//Por ver
-			em.close();
 		}
     }
     

@@ -30,7 +30,8 @@ import modelJPA.Usuario;
 				throws ServletException, IOException {
 			UserBean userBean = new UserBean();
 			GestorDatos gestorDatos = new GestorDatos();
-			
+
+
 			Usuario a = new Usuario();
 			a.setApellido1((String)request.getParameter("apellido1"));
 			a.setApellido2((String)request.getParameter("apellido2"));
