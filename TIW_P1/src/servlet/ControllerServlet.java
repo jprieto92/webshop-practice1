@@ -23,7 +23,7 @@ import modelJPA.GestorDatos;
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private GestorDatos gestordatos = null;
+
 	
 	// Hash table of Request stHandler instances, keyed by request URL
 	private HashMap<String, RequestHandler> handlerHash = new HashMap<String, RequestHandler>();
@@ -42,17 +42,9 @@ public class ControllerServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		handlerHash.put("login", new servlet.LoginRequestHandler());
+		handlerHash.put("register", new servlet.RegisterRequestHandler());
 		handlerHash.put(null, new servlet.NullRequestHandler());
 		
-		ServletContext ctx = config.getServletContext();
-		final Context context;
-        try {
-        	context = new InitialContext();
-			gestordatos = (GestorDatos) context.lookup("java:global/EjemplosEJBEAR/EjemplosEJB/GestorDatos!universidad.ejb.Datos.GestorDatosLocal");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-		super.init(config);
 	}
 
 	/**

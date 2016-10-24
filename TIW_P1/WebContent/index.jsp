@@ -179,13 +179,13 @@
                         
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Cuidad</label>
+                                <label>Ciudad</label>
                                 <input type="text" class="form-control" placeholder="Ciudad" id="Cuidad" name ="Ciudad" required data-validation-required-message="Campo requerido.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         
-                        <input type="hidden" name="pAccion" value="login">
+                        <input type="hidden" name="pAccion" value="register">
                         <br>
                         <div id="success"></div>
                         <div class="row">

@@ -15,7 +15,7 @@ public class GestorDatos {
      * Default constructor. 
      */
     public GestorDatos() {
-        emf = Persistence.createEntityManagerFactory("UserEntity");
+        emf = Persistence.createEntityManagerFactory("tiwPersistence");
 		em = emf.createEntityManager();
     }
     
@@ -27,6 +27,9 @@ public class GestorDatos {
 	    	em.getTransaction().commit();
 	    }catch(Exception e){
 			e.printStackTrace();
+			
+			//Por ver
+			em.close();
 		}
     }
     
