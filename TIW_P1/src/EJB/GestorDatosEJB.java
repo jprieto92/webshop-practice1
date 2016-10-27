@@ -1,20 +1,22 @@
-package modelJPA;
+package EJB;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import entitiesJPA.Usuario;
+
 
 @Stateless
-public class GestorDatos {
+public class GestorDatosEJB {
 	private EntityManagerFactory emf;
 	public EntityManager em;
 	
     /**
      * Default constructor. 
      */
-    public GestorDatos() {
+    public GestorDatosEJB() {
         emf = Persistence.createEntityManagerFactory("tiwPersistence");
 		em = emf.createEntityManager();
     }

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import EJB.GestorDatosEJB;
 import beans.UserBean;
-import modelJPA.GestorDatos;
-import modelJPA.Usuario;
+import entitiesJPA.Usuario;
 
 
 	public class RegisterRequestHandler implements RequestHandler {
@@ -29,7 +29,7 @@ import modelJPA.Usuario;
 		public String handleRequest(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
 			UserBean userBean = new UserBean();
-			GestorDatos gestorDatos = new GestorDatos();
+			GestorDatosEJB gestorDatos = new GestorDatosEJB();
 
 
 			Usuario a = new Usuario();

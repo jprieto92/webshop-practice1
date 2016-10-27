@@ -180,7 +180,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Ciudad</label>
-                                <input type="text" class="form-control" placeholder="Ciudad" id="Cuidad" name ="Ciudad" required data-validation-required-message="Campo requerido.">
+                                <input type="text" class="form-control" placeholder="Ciudad" id="Ciudad" name ="ciudad" required data-validation-required-message="Campo requerido.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
