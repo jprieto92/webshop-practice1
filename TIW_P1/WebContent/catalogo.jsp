@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+aqui se muestra el catalogo de los productos
 </body>
 </html>
