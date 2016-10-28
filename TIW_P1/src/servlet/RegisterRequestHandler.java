@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import EJB.GestorDatosEJB;
-import beans.UserBean;
 import entitiesJPA.Usuario;
+import entityManagers.UserManager;
 
 
 	public class RegisterRequestHandler implements RequestHandler {
@@ -28,11 +27,11 @@ import entitiesJPA.Usuario;
 		 */
 		public String handleRequest(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-			UserBean userBean = new UserBean();
-			GestorDatosEJB gestorDatos = new GestorDatosEJB();
+			UserManager gestorDatos = new UserManager();
 
-
-			Usuario a = new Usuario();
+			Usuario usuario  = new Usuario();
+			
+			Usuario a  = new Usuario();
 			a.setApellido1((String)request.getParameter("apellido1"));
 			a.setApellido2((String)request.getParameter("apellido2"));
 			a.setNombre((String)request.getParameter("name"));
@@ -41,15 +40,15 @@ import entitiesJPA.Usuario;
 			try {
 
 				gestorDatos.insertarUsuario(a);
-				userBean.setName("El usuario "+request.getParameter("name")+" ha sido insertado correctamente");
-				request.setAttribute("userBeanModel", userBean);
+				usuario.setNombre("El usuario "+request.getParameter("name")+" ha sido insertado correctamente");
+				request.setAttribute("userBeanModel", usuario);
 				
 				return "insertadoCorrectamente.jsp";
 				
 			}catch(Exception e){
 				e.printStackTrace();
-				userBean.setName("El usuario "+request.getParameter("name")+" NO ha sido insertado correctamente");
-				request.setAttribute("userBeanModel", userBean);
+				usuario.setNombre("El usuario "+request.getParameter("name")+" NO ha sido insertado correctamente");
+				request.setAttribute("userBeanModel", usuario);
 				
 				return "falloEnLaInserccion.jsp";
 			}

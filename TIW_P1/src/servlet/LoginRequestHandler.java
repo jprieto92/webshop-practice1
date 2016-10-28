@@ -16,7 +16,7 @@ import java.util.Hashtable;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import beans.UserBean;
+import entitiesJPA.Usuario;
 
 public class LoginRequestHandler implements RequestHandler {
 
@@ -48,22 +48,21 @@ public class LoginRequestHandler implements RequestHandler {
 		HttpSession session = request.getSession(true);
 		
 		
-		UserBean userBean = (UserBean) session.getAttribute("userBean");
+		Usuario usuario = (Usuario) session.getAttribute("userBean");
 		
 		//En el caso de no estar creado (técnicamente no debería estarlo, ya que es la primera vez que se loguea y se crea la sesión)
-		if(userBean == null){
-			userBean = new UserBean();
+		if(usuario == null){
+			usuario = new Usuario();
 		}
 		//Añadimos al userBean creado todos los datos del usuario recuperados de la BBDD
-		userBean.setCity("Madrid");
-		userBean.setEmail("pruebas@hotmail.com");
-		userBean.setName("NombrePrueba");
-		userBean.setSurname1("Apellido1Prueba");
-		userBean.setSurname2("Apellido2Prueba");
-		
+		usuario.setDireccion("Madrid");
+		usuario.setNombre("NombrePrueba");
+		usuario.setApellido1("Apellido1Prueba");
+		usuario.setApellido2("Apellido2Prueba");
+
 		
 		//Añadimos a la sesión la userBean
-		session.setAttribute("userBean", userBean);
+		session.setAttribute("userBean", usuario);
 		
 		//Devolvemos que debe ir al catálogo
 		return "pruebas.jsp";
