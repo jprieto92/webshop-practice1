@@ -8,5 +8,7 @@
 </head>
 <body>
 aqui se muestra el catalogo de los productos
+aqui van los productos
+
 </body>
 </html>
