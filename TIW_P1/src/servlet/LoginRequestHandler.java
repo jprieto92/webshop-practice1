@@ -33,28 +33,29 @@ public class LoginRequestHandler implements RequestHandler {
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String email = (String) request.getAttribute("pass");
-		String pass = (String) request.getAttribute("pass");
+		String email = (String) request.getParameter("emailLogin");
+		String pass = (String) request.getParameter("passLogin");
 		
-		//Comprobar que el usuario existe en la BBDD
-		
+		//Comprobar que el usuario existe en la BBDD. De momento, daremos como que lo ha creado
+
 		//si no se corresponden las credenciales pasadas con las de la BBDD, error.
-		if(email != "prueba" && pass != "prueba"){
-			return "ErrorLogin.jsp";
+		if(email.equals("prueba") != true && pass.equals("prueba") != true){
+			request.setAttribute("indexMessage", "Ha habido un error con las credenciales. Inserte su usuario y contraseña nuevamente");
+			return "index.jsp";
 		}
 
-		
+
 		//Si existe el usuario, se procede a crear la sesión
 		HttpSession session = request.getSession(true);
 		
-		
-		Usuario usuario = (Usuario) session.getAttribute("userBean");
+		/* Creamos una entityBean donde encapsular todos los datos de la sesión */
+		Usuario usuario = (Usuario) session.getAttribute("userEntityBean");
 		
 		//En el caso de no estar creado (técnicamente no debería estarlo, ya que es la primera vez que se loguea y se crea la sesión)
 		if(usuario == null){
 			usuario = new Usuario();
 		}
-		//Añadimos al userBean creado todos los datos del usuario recuperados de la BBDD
+		//Añadimos al userBean creado todos los datos del usuario recuperados de la BBDD. De momento están puesto estáticamente
 		usuario.setDireccion("Madrid");
 		usuario.setNombre("NombrePrueba");
 		usuario.setApellido1("Apellido1Prueba");
@@ -64,10 +65,9 @@ public class LoginRequestHandler implements RequestHandler {
 		//Añadimos a la sesión la userBean
 		session.setAttribute("userBean", usuario);
 		
-		//Devolvemos que debe ir al catálogo
-		return "pruebas.jsp";
-			
-		
+		//Devolvemos que debe ir al catálogo, pero este no está relleno...
+		request.setAttribute("sAccion", "catalog");
+		return "ControllerServlet";			
 
 	}
 }

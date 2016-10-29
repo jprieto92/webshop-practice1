@@ -30,7 +30,7 @@ public class NullRequestHandler implements RequestHandler {
 			throws ServletException, IOException {
 
 
-				return "pruebas.jsp";
+		return "index.jsp";
 			
 		
 

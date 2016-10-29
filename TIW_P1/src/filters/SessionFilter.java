@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class SessionFilter
  */
-@WebFilter(filterName="/SessionFilter", urlPatterns="/ControllerServlet")
+@WebFilter(filterName="/SessionFilter", urlPatterns={"/ControllerServlet/perfilUsuario.jsp", "/ControllerServlet/catalogo.jsp", "/ControllerServlet/chat.jsp", "/ControllerServlet/crearProducto.jsp"})
 public class SessionFilter implements Filter {
 
     /**
@@ -42,7 +42,7 @@ public class SessionFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 
-		
+		System.out.println("El filtro está actuando");
 		HttpServletRequest requestHttp = (HttpServletRequest) request;
 		HttpServletResponse reponseHttp = (HttpServletResponse) response;
 		

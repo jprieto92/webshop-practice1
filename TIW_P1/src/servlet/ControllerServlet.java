@@ -43,17 +43,27 @@ public class ControllerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		handlerHash.put("login", new servlet.LoginRequestHandler());
 		handlerHash.put("register", new servlet.RegisterRequestHandler());
+		handlerHash.put("catalog", new servlet.CatalogRequestHandler());
+		handlerHash.put("userProfile", new servlet.UserProfileRequestHandler());
+		handlerHash.put("createProduct", new servlet.CreateProductRequestHandler());
+		handlerHash.put("chat", new servlet.ChatRequestHandler());
 		handlerHash.put(null, new servlet.NullRequestHandler());
-		
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		RequestHandler rh;
 		// Obtenemos la url desde la que nos han llamado para así buscarla en el hashmap, donde creamos el objeto que implemente la logica de negocio para esa URL.
-		RequestHandler rh = (RequestHandler) handlerHash.get(request.getParameter("pAccion"));
+		// Primero se comprueba el sAction por si nos han llamado desde algún manejador. En caso contrario, miramos desde que formulario de las páginas JSP nos han llamado
+		if(request.getAttribute("sAccion") != null){
+			rh = (RequestHandler) handlerHash.get(request.getAttribute("sAccion"));
+		}
+		else{
+			rh = (RequestHandler) handlerHash.get(request.getParameter("pAccion"));
+		}
 
 		// Si no encontramos ninguna URL que esperasemos, el servletcontrolador lanzara un error, ya que no sabemos que hacer
 		if (rh == null) {
@@ -61,7 +71,6 @@ public class ControllerServlet extends HttpServlet {
 		} else {
 			// Llamamos al método que implenta el objeto encargado de la logica de negocio. Ya que todos usan la interfaz "requestHandler", sea cual sea el objeto asociado a esa URL, podremos aplicar la logica de negocio.
 			String viewURL = rh.handleRequest(request, response);
-
 			
 			// La logica de negocio nos devolverá la URL destino que le corresponde, también habrá añadido a la petición los datos que sean necesarios.
 			if (viewURL == null) {
