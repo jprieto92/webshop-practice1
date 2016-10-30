@@ -1,32 +1,16 @@
-package servlet;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+package handlers;
 
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
+	//Manejador de la accion "registro".Zz
+	public class RegisterRequestHandler extends ActionHandler {
 
-	public class RegisterRequestHandler implements RequestHandler {
-
-
-		public RegisterRequestHandler() {
-
-		}
-
-		/**
-		 * @return the the URL of the view that should render the response (probably
-		 *         a JSP), or null to indicate that the response has been output
-		 *         already and processing is complete.
-		 */
-		public String handleRequest(HttpServletRequest request, HttpServletResponse response)
-				throws ServletException, IOException {
+		public void execute () throws Exception {
+			
+			String informe = " No hay libros disponibles de ningún tipo, todos están prestados";  
+			request.setAttribute("LibrosEncontrados", informe);
+			
 			UserManager gestorDatos = new UserManager();
 
 			Usuario usuario  = new Usuario();
@@ -43,17 +27,16 @@ import entityManagers.UserManager;
 				usuario.setNombre("El usuario "+request.getParameter("name")+" ha sido insertado correctamente");
 				request.setAttribute("userBeanModel", usuario);
 				
-				return "insertadoCorrectamente.jsp";
 				
 			}catch(Exception e){
 				e.printStackTrace();
 				usuario.setNombre("El usuario "+request.getParameter("name")+" NO ha sido insertado correctamente");
 				request.setAttribute("userBeanModel", usuario);
 				
-				return "falloEnLaInserccion.jsp";
+				//Hay que lanzar una excepción, para saber que no se ha insertado y así mandarle a otro manejador distinto
+				throw new Exception("Error en la insercción de la BBDD");
 			}
-				
-
-
+			
 		}
+		
 }

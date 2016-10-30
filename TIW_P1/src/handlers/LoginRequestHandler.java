@@ -8,40 +8,23 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package servlet;
+package handlers;
 
-import java.io.*;
-import java.util.Hashtable;
-
-import javax.servlet.*;
-import javax.servlet.http.*;
-
+import javax.servlet.http.HttpSession;
 import entitiesJPA.Usuario;
 
-public class LoginRequestHandler implements RequestHandler {
+public class LoginRequestHandler extends ActionHandler {
 
-
-	public LoginRequestHandler() {
-
-	}
-
-	/**
-	 * @return the the URL of the view that should render the response (probably
-	 *         a JSP), or null to indicate that the response has been output
-	 *         already and processing is complete.
-	 */
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
+	public void execute () throws Exception {
 		String email = (String) request.getParameter("emailLogin");
 		String pass = (String) request.getParameter("passLogin");
 		
-		//Comprobar que el usuario existe en la BBDD. De momento, daremos como que lo ha creado
+		//Comprobar que el usuario existe en la BBDD. De momento, dejamos esto como prueba
 
 		//si no se corresponden las credenciales pasadas con las de la BBDD, error.
 		if(email.equals("prueba") != true && pass.equals("prueba") != true){
 			request.setAttribute("indexMessage", "Ha habido un error con las credenciales. Inserte su usuario y contraseña nuevamente");
-			return "index.jsp";
+			throw new Exception("Creedenciales erróneas");
 		}
 
 
@@ -55,7 +38,7 @@ public class LoginRequestHandler implements RequestHandler {
 		if(usuario == null){
 			usuario = new Usuario();
 		}
-		//Añadimos al userBean creado todos los datos del usuario recuperados de la BBDD. De momento están puesto estáticamente
+		//Añadimos al userBean creado todos los datos del usuario recuperados de la BBDD. De momento están puestos de prueba
 		usuario.setDireccion("Madrid");
 		usuario.setNombre("NombrePrueba");
 		usuario.setApellido1("Apellido1Prueba");
@@ -64,10 +47,6 @@ public class LoginRequestHandler implements RequestHandler {
 		
 		//Añadimos a la sesión la userBean
 		session.setAttribute("userBean", usuario);
-		
-		//Devolvemos que debe ir al catálogo, pero este no está relleno...
-		request.setAttribute("sAccion", "catalog");
-		return "ControllerServlet";			
-
 	}
+	
 }

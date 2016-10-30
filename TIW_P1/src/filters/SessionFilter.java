@@ -51,7 +51,7 @@ public class SessionFilter implements Filter {
 		
 		RequestDispatcher miR;
 		
-		//Si la sesión es nula o el userBean es nulo, significa que no ha sesión creada.
+		//Si la sesión es nula o el userBean es nulo, significa que no hay sesión creada.
 		if (session == null || session.getAttribute("userBean") == null) {
 			System.out.println("No hay sesion abierta");
 			// Volvemos a presentar los productos

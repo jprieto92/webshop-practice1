@@ -1,20 +1,13 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.HashMap;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import entityManagers.UserManager;
+import handlers.HandlerProxy;
 
 
 /**
@@ -23,10 +16,9 @@ import entityManagers.UserManager;
 @WebServlet("/ControllerServlet")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	
-	// Hash table of Request stHandler instances, keyed by request URL
-	private HashMap<String, RequestHandler> handlerHash = new HashMap<String, RequestHandler>();
+	protected javax.servlet.ServletConfig config = null;
+	protected javax.servlet.ServletContext sc = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,45 +33,28 @@ public class ControllerServlet extends HttpServlet {
     //Aqui meteremos el mapeo de URL desde el que nos llaman al objeto encargado de esa URL que implementa el modelo de negocio
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		handlerHash.put("login", new servlet.LoginRequestHandler());
-		handlerHash.put("register", new servlet.RegisterRequestHandler());
-		handlerHash.put("catalog", new servlet.CatalogRequestHandler());
-		handlerHash.put("userProfile", new servlet.UserProfileRequestHandler());
-		handlerHash.put("createProduct", new servlet.CreateProductRequestHandler());
-		handlerHash.put("chat", new servlet.ChatRequestHandler());
-		handlerHash.put(null, new servlet.NullRequestHandler());
+				
+		sc = config.getServletContext();
+		this.config = config;
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		
-		RequestHandler rh;
-		// Obtenemos la url desde la que nos han llamado para así buscarla en el hashmap, donde creamos el objeto que implemente la logica de negocio para esa URL.
-		// Primero se comprueba el sAction por si nos han llamado desde algún manejador. En caso contrario, miramos desde que formulario de las páginas JSP nos han llamado
-		if(request.getAttribute("sAccion") != null){
-			rh = (RequestHandler) handlerHash.get(request.getAttribute("sAccion"));
-		}
-		else{
-			rh = (RequestHandler) handlerHash.get(request.getParameter("pAccion"));
-		}
-
-		// Si no encontramos ninguna URL que esperasemos, el servletcontrolador lanzara un error, ya que no sabemos que hacer
-		if (rh == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-		} else {
-			// Llamamos al método que implenta el objeto encargado de la logica de negocio. Ya que todos usan la interfaz "requestHandler", sea cual sea el objeto asociado a esa URL, podremos aplicar la logica de negocio.
-			String viewURL = rh.handleRequest(request, response);
+		String parametro, accion = null;
+		parametro = request.getParameter("pAccion");
+		
+		if(parametro != null && parametro.length() > 0){
 			
-			// La logica de negocio nos devolverá la URL destino que le corresponde, también habrá añadido a la petición los datos que sean necesarios.
-			if (viewURL == null) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			}
-			else {
-				//Reenviamos la petición a la URL devuelta 
-				request.getRequestDispatcher(viewURL).forward(request, response);
-			}
+			accion = parametro;
+			HandlerProxy hdlProxy = HandlerProxy.getInstance();
+			hdlProxy.creaAction(request, response, accion);
+			
+		}
+		if(parametro == null){
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 
