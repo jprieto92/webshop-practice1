@@ -36,6 +36,8 @@
 <% String variable = (String) request.getAttribute("createProductMessage"); %>
 <p>Me han pasado el siguiente mensaje: <%= variable %></p>
 
+
+
 <%@include file="includes/footer.jsp" %>
 </body>
 </html>
