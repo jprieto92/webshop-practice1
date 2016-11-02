@@ -37,7 +37,115 @@
 <p>Me han pasado el siguiente mensaje: <%= variable %></p>
 
 
-
+<!-- Register Product Section -->
+    <section id="registerProduct">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Añadir producto</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Titulo</label>
+                                <input type="text" class="form-control" placeholder="Titulo" id="tituloProducto" name ="tituloProducto" required data-validation-required-message="Por favor, introduce un título de producto">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Categoria</label>
+                                <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
+                                	<option value="volvo">Coches</option>
+                                	<option value="saab">Electronica</option>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Descripción</label>
+                                <!-- <textarea name="message" class="form-control" cols="40" rows="6" id="descripcion" name="descripcion" required data-validation-required-message="Por favor, introduce una descripcción."></textarea>-->
+                                <input type="text" class="form-control" placeholder="Titulo" id="descripcion" name ="descripcion" required data-validation-required-message="Por favor, introduce una descripcción.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                                                                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Imagen 1</label>
+                                <input type="file" class="form-control" placeholder="Imagen 1 del producto" id="imagen1Producto" name="imagen1Producto" >
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+						<div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Imagen 2</label>
+                                <input type="file" class="form-control" placeholder="Imagen 2 del producto" id="imagen2Producto" name="imagen2Producto" >
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>                       
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Imagen 3</label>
+                                <input type="file" class="form-control" placeholder="Imagen 3 del producto" id="imagen3Producto" name="imagen3Producto" >
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                       <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Realiza envios</label>
+                                <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
+                                	<option value="si">Si</option>
+                                	<option value="no">No</option>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>      
+                        
+                       <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Precio negociable</label>
+                                <select class="form-control" id="precioNegociable" name ="precioNegociable">
+                                	<option value="si">Si</option>
+                                	<option value="no">No</option>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Precio</label>
+                                <input type="text" class="form-control" placeholder="Precio del producto" id="precioProducto" name ="precioProducto" required data-validation-required-message="Inserte un precio para el producto.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" name="pAccion" value="createProduct">
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-success btn-lg">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 <%@include file="includes/footer.jsp" %>

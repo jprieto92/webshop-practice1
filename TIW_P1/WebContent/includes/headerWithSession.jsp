@@ -65,7 +65,7 @@
                     <li class="page-scroll">
                         <a HREF="javascript:document.createProductSubmitForm.submit()">Crear Producto</a>
                         <form action="ControllerServlet" name="createProductSubmitForm" novalidate method="post">
-                        	<input type="hidden" name="pAccion" value="createProduct">
+                        	<input type="hidden" name="pAccion" value="showFormCreateProduct">
                         </form> 
                     </li>
                     <li class="page-scroll">

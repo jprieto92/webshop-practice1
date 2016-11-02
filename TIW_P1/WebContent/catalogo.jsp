@@ -1,3 +1,5 @@
+<%@page import="entitiesJPA.Producto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,6 +37,10 @@
 
 <% String variable = (String) request.getAttribute("catalogMessage"); %>
 <p>Me han pasado el siguiente mensaje: <%= variable %></p>
+
+<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos"); %>
+<%= listaProductos.get(0).getTitulo() %>
+<%= listaProductos.get(1).getTitulo() %>
 
 <%@include file="includes/footer.jsp" %>
 </body>

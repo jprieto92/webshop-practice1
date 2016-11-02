@@ -11,10 +11,30 @@ import java.util.Date;
  */
 @Entity
 @Table(name="producto")
-@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p")
+@NamedQueries({
+@NamedQuery(name="Producto.findAll", query="SELECT p FROM Producto p"),
+@NamedQuery(name=Producto.BUSCAR_PRODUCT_ID, query="SELECT p FROM Producto p where p.productId=:productId"),
+@NamedQuery(name=Producto.BUSCAR_REALIZA_ENVIOS, query="SELECT p FROM Producto p where p.envios=:envios"),
+@NamedQuery(name=Producto.BUSCAR_FECHA_BAJA, query="SELECT p FROM Producto p where p.fechaBaja=:fechaBaja"),
+@NamedQuery(name=Producto.BUSCAR_FECHA_PUBLICACION, query="SELECT p FROM Producto p where p.fechaPublicacion=:fechaPublicacion"),
+@NamedQuery(name=Producto.BUSCAR_CATEGORIA, query="SELECT p FROM Producto p where p.categoria=:categoria"),
+@NamedQuery(name=Producto.BUSCAR_DISPONIBILIDAD, query="SELECT p FROM Producto p where p.disponibilidad=:disponibilidad"),
+@NamedQuery(name=Producto.BUSCAR_USUARIO_PROPIETARIO, query="SELECT p FROM Producto p where p.usuario=:usuario"),
+@NamedQuery(name=Producto.BUSCAR_TITULO, query="SELECT p FROM Producto p where p.titulo LIKE :titulo")
+})
 public class Producto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	//Nombre de las búsquedas mapeadas
+	 public static final String BUSCAR_PRODUCT_ID="Producto.seleccionarProductId";
+	 public static final String BUSCAR_REALIZA_ENVIOS="Producto.seleccionarRealizaEnvios";
+	 public static final String BUSCAR_FECHA_BAJA="Producto.seleccionarFechaBaja";
+	 public static final String BUSCAR_FECHA_PUBLICACION="Producto.seleccionarFechaPublicacion";
+	 public static final String BUSCAR_CATEGORIA="Producto.seleccionarCategoria";
+	 public static final String BUSCAR_DISPONIBILIDAD="Producto.seleccionarDisponibilidad";
+	 public static final String BUSCAR_USUARIO_PROPIETARIO="Producto.seleccionarUsuarioPropietario";
+	 public static final String BUSCAR_TITULO="Producto.seleccionarTitulo";
+	
 	@Id
 	@Column(name="product_id")
 	private int productId;

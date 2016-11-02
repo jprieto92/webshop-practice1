@@ -46,7 +46,7 @@ public class UserManager {
 
 	    }catch(Exception e){
 			e.printStackTrace();
-			
+			throw new RollbackException(e);
 		}
     }
     public Usuario buscarPorEmail(String email){
@@ -55,23 +55,21 @@ public class UserManager {
     	    		consultaUsuario = em.createNamedQuery(Usuario.BUSCAR_EMAIL, Usuario.class);
     	        	consultaUsuario.setParameter("email", email);   	
     		    }catch(Exception e){
-    		    	throw new RollbackException(e);		
-    			}
-    	    	
-    	    	return consultaUsuario.getSingleResult();
-    	    	}
-    	    
-    	    public Usuario comprobarCredenciales(String email, String contraseña){
-    	    	TypedQuery<Usuario> consultaUsuario = null;
-    	    	try{
-    	    		consultaUsuario = em.createNamedQuery(Usuario.BUSCAR_CREDENCIALES, Usuario.class);
-    	        	consultaUsuario.setParameter("email", email);
-    	        	consultaUsuario.setParameter("contraseña", contraseña);
-    		    }catch(NoResultException e){
     		    	throw new NoResultException();		
     			}
-    	    	
     	    	return consultaUsuario.getSingleResult();
-    	    	}
+    }
+    	    
+    public Usuario comprobarCredenciales(String email, String contraseña){
+    	TypedQuery<Usuario> consultaUsuario = null;
+    	try{
+    	    consultaUsuario = em.createNamedQuery(Usuario.BUSCAR_CREDENCIALES, Usuario.class);
+    	    consultaUsuario.setParameter("email", email);
+    	    consultaUsuario.setParameter("contraseña", contraseña);
+    	}catch(NoResultException e){
+    		throw new NoResultException();		
+    	}
+    	return consultaUsuario.getSingleResult();
+    }
     
 }

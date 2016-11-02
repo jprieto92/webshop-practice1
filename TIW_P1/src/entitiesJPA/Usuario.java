@@ -14,12 +14,12 @@ import java.util.List;
 @Table(name="usuario")
 @NamedQueries({
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
-@NamedQuery(name="Usuario.BUSCAR_NOMBRE", query="SELECT u FROM Usuario u where u.nombre=:nombre"),
-@NamedQuery(name="Usuario.BUSCAR_APELLIDO_1", query="SELECT u FROM Usuario u where u.apellido1=:apellido1"),
-@NamedQuery(name="Usuario.BUSCAR_APELLIDO_2", query="SELECT u FROM Usuario u where u.apellido2=:apellido2"),
-@NamedQuery(name="Usuario.BUSCAR_CIUDAD", query="SELECT u FROM Usuario u where u.ciudad=:ciudad"),
-@NamedQuery(name="Usuario.BUSCAR_EMAIL", query="SELECT u FROM Usuario u where u.email=:email"),
-@NamedQuery(name="Usuario.BUSCAR_ESTADO", query="SELECT u FROM Usuario u where u.estado=:estado"),
+@NamedQuery(name=Usuario.BUSCAR_NOMBRE, query="SELECT u FROM Usuario u where u.nombre=:nombre"),
+@NamedQuery(name=Usuario.BUSCAR_APELLIDO_1, query="SELECT u FROM Usuario u where u.apellido1=:apellido1"),
+@NamedQuery(name=Usuario.BUSCAR_APELLIDO_2, query="SELECT u FROM Usuario u where u.apellido2=:apellido2"),
+@NamedQuery(name=Usuario.BUSCAR_CIUDAD, query="SELECT u FROM Usuario u where u.ciudad=:ciudad"),
+@NamedQuery(name=Usuario.BUSCAR_EMAIL, query="SELECT u FROM Usuario u where u.email=:email"),
+@NamedQuery(name=Usuario.BUSCAR_ESTADO, query="SELECT u FROM Usuario u where u.estado=:estado"),
 @NamedQuery(name=Usuario.BUSCAR_CREDENCIALES, query="SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña")
 })
 public class Usuario implements Serializable {
@@ -64,7 +64,7 @@ public class Usuario implements Serializable {
 	private int telefono;
 
 	//bi-directional many-to-one association to Producto
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL)
 	private List<Producto> productos;
 
 	//bi-directional many-to-one association to TipoUsuario
