@@ -1,42 +1,47 @@
 package handlers;
 
+import java.sql.Date;
+import javax.persistence.RollbackException;
+import entitiesJPA.TipoUsuario;
+import entitiesJPA.Usuario;
+import entityManagers.UserManager;
+ 
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
-	//Manejador de la accion "registro".Zz
-	public class RegisterRequestHandler extends ActionHandler {
-
+//Manejador de la accion "registro".
+public class RegisterRequestHandler extends ActionHandler {
 		public void execute () throws Exception {
-			
-			String informe = " No hay libros disponibles de ningún tipo, todos están prestados";  
-			request.setAttribute("LibrosEncontrados", informe);
-			
+ 			
+			//Creamos un entidad con TipoUsuario con ID 1, que user normal
+			TipoUsuario tipoUsuario = new TipoUsuario();
+			tipoUsuario.setId_tipoUsuario(1);
+ 			
+
+			//Rellenamos la entidad usuario con los datos proporcionados en el formulario y datos de control
+			Usuario usuarioAInsertar  = new Usuario();
+			usuarioAInsertar.setApellido1((String)request.getParameter("apellido1"));
+			usuarioAInsertar.setApellido2((String)request.getParameter("apellido2"));
+			usuarioAInsertar.setNombre((String)request.getParameter("name"));
+			usuarioAInsertar.setCiudad((String)request.getParameter("ciudad"));
+			usuarioAInsertar.setEmail((String)request.getParameter("email"));
+			usuarioAInsertar.setContraseña((String)request.getParameter("pass"));
+			usuarioAInsertar.setTelefono(Integer.parseInt(request.getParameter("phone")));
+			usuarioAInsertar.setFechaAlta(new Date(0));
+			usuarioAInsertar.setTipoUsuario(tipoUsuario);
+ 			
+			//Gestora de la persistencia de los datos de usuario
 			UserManager gestorDatos = new UserManager();
+ 			try {
+				gestorDatos.insertarUsuario(usuarioAInsertar);
+				request.setAttribute("indexMessage", "El usuario "+request.getParameter("name")+" SI ha sido insertado correctamente");
+			}catch(RollbackException e){
+ 				e.printStackTrace();			
+				request.setAttribute("indexMessage", "Error en la creacion del usuario en el sistema");
+ 				//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
+				throw new Exception("Error en la creacion del usuario");
+ 			}
 
-			Usuario usuario  = new Usuario();
-			
-			Usuario a  = new Usuario();
-			a.setApellido1((String)request.getParameter("apellido1"));
-			a.setApellido2((String)request.getParameter("apellido2"));
-			a.setNombre((String)request.getParameter("name"));
-			a.setDireccion((String)request.getParameter("ciudad"));
-
-			try {
-
-				gestorDatos.insertarUsuario(a);
-				usuario.setNombre("El usuario "+request.getParameter("name")+" ha sido insertado correctamente");
-				request.setAttribute("userBeanModel", usuario);
-				
-				
-			}catch(Exception e){
-				e.printStackTrace();
-				usuario.setNombre("El usuario "+request.getParameter("name")+" NO ha sido insertado correctamente");
-				request.setAttribute("userBeanModel", usuario);
-				
-				//Hay que lanzar una excepción, para saber que no se ha insertado y así mandarle a otro manejador distinto
-				throw new Exception("Error en la insercción de la BBDD");
-			}
-			
-		}
-		
+ 			
+ }
 }

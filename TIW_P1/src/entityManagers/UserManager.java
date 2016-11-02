@@ -1,9 +1,11 @@
 package entityManagers;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
+import javax.persistence.TypedQuery;
 
 import entitiesJPA.Usuario;
 
@@ -21,7 +23,7 @@ public class UserManager {
 		em = emf.createEntityManager();
     }
     
-    /*Método usado por Local*/
+
     public void insertarUsuario(Usuario usuario) {
     	try{
 	    	em.getTransaction().begin();
@@ -29,11 +31,13 @@ public class UserManager {
 	    	em.getTransaction().commit();
 	    }catch(Exception e){
 			e.printStackTrace();
-
+			System.out.println("Lanzando excepcion en la clase userManager");
+			throw new RollbackException(e);
+			 		
 		}
     }
     
-    /*Método usado por Local*/
+
     public void modificar(Usuario usuario) {
     	try{
 	    	em.getTransaction().begin();
@@ -45,5 +49,29 @@ public class UserManager {
 			
 		}
     }
+    public Usuario buscarPorEmail(String email){
+    	    	TypedQuery<Usuario> consultaUsuario = null;
+    	    	try{
+    	    		consultaUsuario = em.createNamedQuery(Usuario.BUSCAR_EMAIL, Usuario.class);
+    	        	consultaUsuario.setParameter("email", email);   	
+    		    }catch(Exception e){
+    		    	throw new RollbackException(e);		
+    			}
+    	    	
+    	    	return consultaUsuario.getSingleResult();
+    	    	}
+    	    
+    	    public Usuario comprobarCredenciales(String email, String contraseña){
+    	    	TypedQuery<Usuario> consultaUsuario = null;
+    	    	try{
+    	    		consultaUsuario = em.createNamedQuery(Usuario.BUSCAR_CREDENCIALES, Usuario.class);
+    	        	consultaUsuario.setParameter("email", email);
+    	        	consultaUsuario.setParameter("contraseña", contraseña);
+    		    }catch(NoResultException e){
+    		    	throw new NoResultException();		
+    			}
+    	    	
+    	    	return consultaUsuario.getSingleResult();
+    	    	}
     
 }

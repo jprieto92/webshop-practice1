@@ -2,6 +2,7 @@ package entitiesJPA;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -22,29 +23,46 @@ public class Producto implements Serializable {
 
 	private String envios;
 
-	private String estado;
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_baja")
+	private Date fechaBaja;
 
-	private String imagen;
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_publicacion")
+	private Date fechaPublicacion;
 
-	private int likes;
+	@Lob
+	@Column(name="imagen_1")
+	private byte[] imagen1;
 
-	private String nombre;
+	@Lob
+	@Column(name="imagen_2")
+	private byte[] imagen2;
+
+	@Lob
+	@Column(name="imagen_3")
+	private byte[] imagen3;
 
 	private int precio;
 
 	@Column(name="precio_negociable")
 	private String precioNegociable;
 
-	private int visitas;
+	private String titulo;
 
 	//bi-directional many-to-one association to Categoria
 	@ManyToOne
 	@JoinColumn(name="id_categoria")
 	private Categoria categoria;
 
+	//bi-directional many-to-one association to Disponibilidad
+	@ManyToOne
+	@JoinColumn(name="id_disponibilidad")
+	private Disponibilidad disponibilidad;
+
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="email_usuario_propietario")
 	private Usuario usuario;
 
 	public Producto() {
@@ -74,36 +92,44 @@ public class Producto implements Serializable {
 		this.envios = envios;
 	}
 
-	public String getEstado() {
-		return this.estado;
+	public Date getFechaBaja() {
+		return this.fechaBaja;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
 	}
 
-	public String getImagen() {
-		return this.imagen;
+	public Date getFechaPublicacion() {
+		return this.fechaPublicacion;
 	}
 
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
+	public void setFechaPublicacion(Date fechaPublicacion) {
+		this.fechaPublicacion = fechaPublicacion;
 	}
 
-	public int getLikes() {
-		return this.likes;
+	public byte[] getImagen1() {
+		return this.imagen1;
 	}
 
-	public void setLikes(int likes) {
-		this.likes = likes;
+	public void setImagen1(byte[] imagen1) {
+		this.imagen1 = imagen1;
 	}
 
-	public String getNombre() {
-		return this.nombre;
+	public byte[] getImagen2() {
+		return this.imagen2;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setImagen2(byte[] imagen2) {
+		this.imagen2 = imagen2;
+	}
+
+	public byte[] getImagen3() {
+		return this.imagen3;
+	}
+
+	public void setImagen3(byte[] imagen3) {
+		this.imagen3 = imagen3;
 	}
 
 	public int getPrecio() {
@@ -122,12 +148,12 @@ public class Producto implements Serializable {
 		this.precioNegociable = precioNegociable;
 	}
 
-	public int getVisitas() {
-		return this.visitas;
+	public String getTitulo() {
+		return this.titulo;
 	}
 
-	public void setVisitas(int visitas) {
-		this.visitas = visitas;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public Categoria getCategoria() {
@@ -136,6 +162,14 @@ public class Producto implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Disponibilidad getDisponibilidad() {
+		return this.disponibilidad;
+	}
+
+	public void setDisponibilidad(Disponibilidad disponibilidad) {
+		this.disponibilidad = disponibilidad;
 	}
 
 	public Usuario getUsuario() {
