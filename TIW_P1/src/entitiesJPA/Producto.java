@@ -20,6 +20,7 @@ import java.util.Date;
 @NamedQuery(name=Producto.BUSCAR_CATEGORIA, query="SELECT p FROM Producto p where p.categoria=:categoria"),
 @NamedQuery(name=Producto.BUSCAR_DISPONIBILIDAD, query="SELECT p FROM Producto p where p.disponibilidad=:disponibilidad"),
 @NamedQuery(name=Producto.BUSCAR_USUARIO_PROPIETARIO, query="SELECT p FROM Producto p where p.usuario=:usuario"),
+// El parametro debe contener % a cada uno de los lados
 @NamedQuery(name=Producto.BUSCAR_TITULO, query="SELECT p FROM Producto p where p.titulo LIKE :titulo")
 })
 public class Producto implements Serializable {

@@ -50,7 +50,14 @@ public class HandlerProxy {
 						nextHandler = true;
 		                nombAcc = valorRespAccExe;
 						
-					} else {
+					} else if(tipoRespAccExe.equals("redirect")){
+						try { 
+							nextHandler = false;
+							response.sendRedirect("/"+ valorRespAccExe);
+							break;
+						} catch (Exception e) {  System.out.println(" error en redirect: " + e.getMessage()); }
+					}
+					else{
 						try { 
 							nextHandler = false;
 							request.getRequestDispatcher("/"+ valorRespAccExe).forward(request, response);
@@ -71,7 +78,15 @@ public class HandlerProxy {
 						nextHandler = true;
 		                nombAcc = valorRespAccExe;
 						
-					} else {
+					} 
+					else if(tipoRespAccExe.equals("redirect")){
+						try { 
+						nextHandler = false;
+						response.sendRedirect("/"+ valorRespAccExe);
+						break;
+						} catch (Exception e) {  System.out.println(" error en redirect: " + e.getMessage()); }
+					}					
+					else {
 						try { 
 							nextHandler = false;
 							request.getRequestDispatcher("/"+ valorRespAccExe).forward(request, response);

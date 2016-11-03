@@ -67,8 +67,8 @@
                                 <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                      System.out.println("pruebas");
-                                	for(int i = 0;i<listaCategorias.size();i++){
-                                		out.println("<option value=\""+ listaCategorias.get(i).getIdCategoria() + "\">"+listaCategorias.get(i).getNombre()+"</option>");
+                                	for(Categoria categoria : listaCategorias){
+                                		out.println("<option value=\""+ categoria.getIdCategoria() + "\">"+categoria.getNombre()+"</option>");
                                 	}
                                 	%>
                                 </select>
