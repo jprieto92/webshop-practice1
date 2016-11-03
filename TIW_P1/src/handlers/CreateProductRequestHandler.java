@@ -2,12 +2,16 @@ package handlers;
 
 import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import entitiesJPA.Categoria;
 import entitiesJPA.Disponibilidad;
+import entitiesJPA.Imagen;
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
+import entityManagers.ImagenManager;
 import entityManagers.ProductManager;
+
 
 public class CreateProductRequestHandler extends ActionHandler {
 	
@@ -29,7 +33,8 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setTitulo((String) request.getParameter("tituloProducto"));
 		//Se establece a quien pertenece el producto a través de la sesión recuperada
 		productoAInsertar.setUsuario((Usuario) session.getAttribute("entityUser"));
-
+		
+		
 		//Se crea la disponibilidad por defecto ("DISPONIBLE")
 		Disponibilidad disponibilidad = new Disponibilidad();
 		disponibilidad.setIdDisponibilidad(1);
@@ -51,7 +56,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 			request.setAttribute("createProductMessage", "Ha habido un error insertando el producto");
 			throw new Exception("Error en la creacion del producto");
 		}
-		
+
 		request.setAttribute("createProductMessage", "El producto "+ (String) request.getParameter("tituloProducto") + " se ha insertado correctamente");
 	}
 

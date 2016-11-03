@@ -4,6 +4,7 @@
 		<non-jta-data-source>jdbc/tiwDataSource</non-jta-data-source>
 		<class>entitiesJPA.Categoria</class>
 		<class>entitiesJPA.Disponibilidad</class>
+		<class>entitiesJPA.Imagen</class>
 		<class>entitiesJPA.Producto</class>
 		<class>entitiesJPA.TipoUsuario</class>
 		<class>entitiesJPA.Usuario</class>

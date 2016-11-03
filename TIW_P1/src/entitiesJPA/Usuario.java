@@ -5,35 +5,32 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the usuario database table.
  * 
  */
 @Entity
-@Table(name="usuario")
-@NamedQueries({
-@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
-@NamedQuery(name=Usuario.BUSCAR_NOMBRE, query="SELECT u FROM Usuario u where u.nombre=:nombre"),
-@NamedQuery(name=Usuario.BUSCAR_APELLIDO_1, query="SELECT u FROM Usuario u where u.apellido1=:apellido1"),
-@NamedQuery(name=Usuario.BUSCAR_APELLIDO_2, query="SELECT u FROM Usuario u where u.apellido2=:apellido2"),
-@NamedQuery(name=Usuario.BUSCAR_CIUDAD, query="SELECT u FROM Usuario u where u.ciudad=:ciudad"),
-@NamedQuery(name=Usuario.BUSCAR_EMAIL, query="SELECT u FROM Usuario u where u.email=:email"),
-@NamedQuery(name=Usuario.BUSCAR_ESTADO, query="SELECT u FROM Usuario u where u.estado=:estado"),
-@NamedQuery(name=Usuario.BUSCAR_CREDENCIALES, query="SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña")
-})
+@Table(name = "usuario")
+@NamedQueries({ @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+		@NamedQuery(name = Usuario.BUSCAR_NOMBRE, query = "SELECT u FROM Usuario u where u.nombre=:nombre"),
+		@NamedQuery(name = Usuario.BUSCAR_APELLIDO_1, query = "SELECT u FROM Usuario u where u.apellido1=:apellido1"),
+		@NamedQuery(name = Usuario.BUSCAR_APELLIDO_2, query = "SELECT u FROM Usuario u where u.apellido2=:apellido2"),
+		@NamedQuery(name = Usuario.BUSCAR_CIUDAD, query = "SELECT u FROM Usuario u where u.ciudad=:ciudad"),
+		@NamedQuery(name = Usuario.BUSCAR_EMAIL, query = "SELECT u FROM Usuario u where u.email=:email"),
+		@NamedQuery(name = Usuario.BUSCAR_ESTADO, query = "SELECT u FROM Usuario u where u.estado=:estado"),
+		@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES, query = "SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña") })
 public class Usuario implements Serializable {
+	// Nombre de las búsquedas mapeadas
+	public static final String BUSCAR_NOMBRE = "Usuario.seleccionarNombre";
+	public static final String BUSCAR_APELLIDO_1 = "Usuario.seleccionarApellido1";
+	public static final String BUSCAR_APELLIDO_2 = "Usuario.seleccionarApellido2";
+	public static final String BUSCAR_CIUDAD = "Usuario.seleccionarCiudad";
+	public static final String BUSCAR_EMAIL = "Usuario.seleccionarEmail";
+	public static final String BUSCAR_ESTADO = "Usuario.seleccionarEstado";
+	public static final String BUSCAR_CREDENCIALES = "Usuario.comprobarCredenciales";
+
 	private static final long serialVersionUID = 1L;
-	
-	//Nombre de las búsquedas mapeadas
-	 public static final String BUSCAR_NOMBRE="Usuario.seleccionarNombre";
-	 public static final String BUSCAR_APELLIDO_1="Usuario.seleccionarApellido1";
-	 public static final String BUSCAR_APELLIDO_2="Usuario.seleccionarApellido2";
-	 public static final String BUSCAR_CIUDAD="Usuario.seleccionarCiudad";
-	 public static final String BUSCAR_EMAIL="Usuario.seleccionarEmail";
-	 public static final String BUSCAR_ESTADO="Usuario.seleccionarEstado";
-	 public static final String BUSCAR_CREDENCIALES="Usuario.comprobarCredenciales";
-	 
+
 	@Id
 	private String email;
 
@@ -48,28 +45,29 @@ public class Usuario implements Serializable {
 	private String estado;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_alta")
+	@Column(name = "fecha_alta")
 	private Date fechaAlta;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_baja")
+	@Column(name = "fecha_baja")
 	private Date fechaBaja;
 
 	@Lob
-	@Column(name="imagen_perfil")
+	@Column(name = "imagen_perfil")
 	private byte[] imagenPerfil;
 
 	private String nombre;
 
 	private int telefono;
 
-	//bi-directional many-to-one association to Producto
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL)
+	// bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private List<Producto> productos;
+	
 
-	//bi-directional many-to-one association to TipoUsuario
+	// bi-directional many-to-one association to TipoUsuario
 	@ManyToOne
-	@JoinColumn(name="id_tipoUsuario")
+	@JoinColumn(name = "id_tipoUsuario")
 	private TipoUsuario tipoUsuario;
 
 	public Usuario() {
