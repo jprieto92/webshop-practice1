@@ -12,12 +12,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     
     <title>Freelancer - Start Bootstrap Theme</title>
-
+	<link href="css/my_style.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
     <link href="css/freelancer.min.css" rel="stylesheet">
+    
+    
 
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -37,10 +39,23 @@
 
 <% String variable = (String) request.getAttribute("catalogMessage"); %>
 <p>Me han pasado el siguiente mensaje: <%= variable %></p>
+<section id="login">
+        
+            <div class="completo">
+<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
+for(int i = 0;i<listaProductos.size();i++){%>
+	
+                <div class="tresPorColumna">
+                    <h2><%=listaProductos.get(i).getTitulo() %></h2>
+                    
+                </div>
+            
+<%} %>
+			</div>
+      
+        
+</section>
 
-<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos"); %>
-<%= listaProductos.get(0).getTitulo() %>
-<%= listaProductos.get(1).getTitulo() %>
 
 <%@include file="includes/footer.jsp" %>
 </body>
