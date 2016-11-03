@@ -19,7 +19,6 @@ public class CreateProductRequestHandler extends ActionHandler {
 		Producto productoAInsertar  = new Producto();
 
 		productoAInsertar.setDescripccion((String) request.getParameter("descripcion"));
-		System.out.println("La descripccion del producto es "+(String) request.getParameter("descripcion"));
 		productoAInsertar.setEnvios((String) request.getParameter("realizaEnviosProducto"));
 		productoAInsertar.setFechaPublicacion(new java.util.Date());
 		//productoAInsertar.setImagen1(imagen1);
@@ -28,6 +27,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setPrecio(Integer.parseInt(request.getParameter("precioProducto")));
 		productoAInsertar.setPrecioNegociable((String) request.getParameter("precioNegociable"));
 		productoAInsertar.setTitulo((String) request.getParameter("tituloProducto"));
+		//Se establece a quien pertenece el producto a través de la sesión recuperada
 		productoAInsertar.setUsuario((Usuario) session.getAttribute("entityUser"));
 
 		//Se crea la disponibilidad por defecto ("DISPONIBLE")
@@ -44,7 +44,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		//Gestora de la persistencia de los datos de producto
 		ProductManager gestorDatos = new ProductManager();
 		try {
-			gestorDatos.insertarProducto(productoAInsertar);
+			gestorDatos.insertar(productoAInsertar);
 		}catch(RollbackException e){
 			e.printStackTrace();
 			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto

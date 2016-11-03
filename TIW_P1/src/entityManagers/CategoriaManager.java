@@ -1,8 +1,16 @@
 package entityManagers;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
+import javax.persistence.TypedQuery;
+
+import entitiesJPA.Categoria;
+
 
 public class CategoriaManager {
 
@@ -17,4 +25,40 @@ public class CategoriaManager {
 		em = emf.createEntityManager();
     }
 	
+    public void insertar(Categoria categoria) {
+    	try{
+	    	em.getTransaction().begin();
+	    	em.persist(categoria);
+	    	em.getTransaction().commit();
+	    }catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Lanzando excepcion en la clase CategoriaManager");
+			throw new RollbackException(e);
+			 		
+		}
+    }
+    
+    public void modificar(Categoria categoria) {
+    	try{
+	    	em.getTransaction().begin();
+	    	em.merge(categoria);
+	    	em.getTransaction().commit();
+
+	    }catch(Exception e){
+			e.printStackTrace();
+			throw new RollbackException(e);
+		}
+    }
+    
+    //Devuelve todas los tipos de usuario
+    public List<Categoria> buscarTodas(){
+    	TypedQuery<Categoria> consultaCategorias = null;
+    	try{
+    		consultaCategorias = em.createNamedQuery("Categoria.findAll", Categoria.class);
+	    }catch(Exception e){
+	    	throw new NoResultException();		
+		}
+    	return consultaCategorias.getResultList();
+    }
+    
 }

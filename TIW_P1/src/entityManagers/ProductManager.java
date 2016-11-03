@@ -26,7 +26,7 @@ public class ProductManager {
 		em = emf.createEntityManager();
     }
 	
-    public void insertarProducto(Producto producto) {
+    public void insertar(Producto producto) {
     	try{
 	    	em.getTransaction().begin();
 	    	em.persist(producto);
@@ -52,7 +52,7 @@ public class ProductManager {
     }
     
     //Devuelve todos los productos correspondientes a un usuario
-    public List<Producto> buscarProductosUsuario(Usuario usuario){
+    public List<Producto> buscarPorUsuario(Usuario usuario){
     	    	TypedQuery<Producto> consultaProductos = null;
     	    	try{
     	    		consultaProductos = em.createNamedQuery(Usuario.BUSCAR_EMAIL, Producto.class);
@@ -64,7 +64,7 @@ public class ProductManager {
     }
     
     //Devuelve todos los productos
-    public List<Producto> buscarTodosLosProductos(){
+    public List<Producto> buscarTodos(){
     	TypedQuery<Producto> consultaProductos = null;
     	try{
     		consultaProductos = em.createNamedQuery("Producto.findAll", Producto.class);

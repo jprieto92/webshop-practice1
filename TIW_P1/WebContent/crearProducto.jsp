@@ -1,3 +1,5 @@
+<%@page import="entitiesJPA.Categoria"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -58,13 +60,17 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
-                        
+
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Categoria</label>
                                 <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
-                                	<option value="volvo">Coches</option>
-                                	<option value="saab">Electronica</option>
+                                	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
+                                     System.out.println("pruebas");
+                                	for(int i = 0;i<listaCategorias.size();i++){
+                                		out.println("<option value=\""+ listaCategorias.get(i).getIdCategoria() + "\">"+listaCategorias.get(i).getNombre()+"</option>");
+                                	}
+                                	%>
                                 </select>
                                 <p class="help-block text-danger"></p>
                             </div>

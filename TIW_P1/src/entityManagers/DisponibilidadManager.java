@@ -1,8 +1,15 @@
 package entityManagers;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
+import javax.persistence.TypedQuery;
+
+import entitiesJPA.Disponibilidad;
 
 public class DisponibilidadManager {
 
@@ -18,4 +25,40 @@ public class DisponibilidadManager {
 		em = emf.createEntityManager();
     }
 	
+    public void insertar(Disponibilidad disponibilidad) {
+    	try{
+	    	em.getTransaction().begin();
+	    	em.persist(disponibilidad);
+	    	em.getTransaction().commit();
+	    }catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Lanzando excepcion en la clase DisponibilidadManager");
+			throw new RollbackException(e);
+			 		
+		}
+    }
+    
+    public void modificar(Disponibilidad disponibilidad) {
+    	try{
+	    	em.getTransaction().begin();
+	    	em.merge(disponibilidad);
+	    	em.getTransaction().commit();
+
+	    }catch(Exception e){
+			e.printStackTrace();
+			throw new RollbackException(e);
+		}
+    }
+    
+    //Devuelve todas las disponibilidades
+    public List<Disponibilidad> buscarTodas(){
+    	TypedQuery<Disponibilidad> consultaDisponibilidades = null;
+    	try{
+    		consultaDisponibilidades = em.createNamedQuery("Disponibilidad.findAll", Disponibilidad.class);
+	    }catch(Exception e){
+	    	throw new NoResultException();		
+		}
+    	return consultaDisponibilidades.getResultList();
+    }
+    
 }

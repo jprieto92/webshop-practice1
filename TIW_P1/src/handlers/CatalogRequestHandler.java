@@ -15,7 +15,7 @@ public class CatalogRequestHandler extends ActionHandler {
 		List<Producto> productos;
 		ProductManager gestorDatos = new ProductManager();
 		try {
-			productos = gestorDatos.buscarTodosLosProductos();
+			productos = gestorDatos.buscarTodos();
 		}catch(NoResultException e){
 			e.printStackTrace();
 			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
