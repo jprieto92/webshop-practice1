@@ -45,20 +45,16 @@ public class ControllerServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		
-		String parametro, accion = null;
-		parametro = request.getParameter("pAccion");
+		String action = null;
+		action = request.getParameter("pAccion");
 		
-		if(parametro == null){
-			accion = "catalog";
+		if(action == null){
+			action = "catalog";
 		}
-		
-		if(parametro != null && parametro.length() > 0){
+	
+		HandlerProxy hdlProxy = HandlerProxy.getInstance();
+		hdlProxy.creaAction(request, response, action);
 			
-			accion = parametro;
-			HandlerProxy hdlProxy = HandlerProxy.getInstance();
-			hdlProxy.creaAction(request, response, accion);
-			
-		}
 	}
 
 	/**

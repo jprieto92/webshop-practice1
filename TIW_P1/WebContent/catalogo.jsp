@@ -1,5 +1,7 @@
 <%@page import="entitiesJPA.Producto"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.util.List,java.util.ArrayList,org.apache.commons.codec.binary.StringUtils,org.apache.commons.codec.binary.Base64;" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,7 +49,10 @@ for(int i = 0;i<listaProductos.size();i++){%>
 	
                 <div class="tresPorColumna">
                     <h2><%=listaProductos.get(i).getTitulo() %></h2>
-                    
+                    <img style="height: 50px;" src="<% StringBuilder sb = new StringBuilder();
+						sb.append("data:image/png;base64,");
+						sb.append(StringUtils.newStringUtf8(Base64.encodeBase64(listaProductos.get(i).getImagen(), false)));
+						out.print(sb.toString()); %>">
                 </div>
             
 <%} %>
