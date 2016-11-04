@@ -52,7 +52,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
+                    <form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post" enctype="multipart/form-data">
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Titulo</label>
@@ -85,7 +85,7 @@
                         </div>
                                                                         
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <div class="form-group col-xs-12 floating-label-form-group controls ">
                                 <label>Imagen 1</label>
                                 <input type="file" class="form-control" placeholder="Imagen 1 del producto" id="imagen1Producto" name="imagen1Producto" >
                                 <p class="help-block text-danger"></p>
