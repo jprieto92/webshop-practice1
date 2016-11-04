@@ -48,7 +48,9 @@ public class ControllerServlet extends HttpServlet {
 		String action = null;
 		action = request.getParameter("pAccion");
 		
+		System.out.println("Está en el servlet controlador");
 		if(action == null){
+			System.out.println("No hay acción, asi que se le manda al catálogo");
 			action = "catalog";
 		}
 	

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="entitiesJPA.Usuario"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,102 +35,12 @@
 
 <%@include file="includes/headerWithoutSession.jsp" %>
 
-<% String variable = (String) request.getAttribute("userProfileMessage"); %>
-<p>Me han pasado el siguiente mensaje: <%= variable %></p>
-
-<!--  Se recupera la entidad usuario de la sesión -->
-<% Usuario usuario = (Usuario) session.getAttribute("entityUser"); %>
-
 <!-- Register Section -->
     <section id="register">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Modificación Perfil</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post">     
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Contraseña</label>
-                                <input type="password" class="form-control" name="Nueva contraseña" id="pass" name ="pass" required data-validation-required-message="Por favor, introduce tu contraseña.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label> Verificar Contraseña</label>
-                                <input type="password" class="form-control" name="Verficar Contraseña" id="verifypass" name ="verifypass" required data-validation-required-message="Las contraseñas no coinciden">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                                                                        
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Nombre</label>
-                                <input type="text" class="form-control" value="<%=usuario.getNombre()%>" id="Nombre" name="name" required data-validation-required-message="Por favor, introduce tu nombre.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Apellido 1</label>
-                                <input type="text" class="form-control" value="<%=usuario.getApellido1()%>" id="Apellido 1" name ="apellido1" required data-validation-required-message="Campo requerido.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Apellido 2</label>
-                                <input type="text" class="form-control" value="<%=usuario.getApellido2()%>" id="Apellido 2" name ="apellido2" required data-validation-required-message="Campo requerido.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Ciudad</label>
-                                <input type="text" class="form-control" value="<%=usuario.getCiudad()%>" id="Ciudad" name ="ciudad" required data-validation-required-message="Campo requerido.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Teléfono</label>
-                                <input type="phone" class="form-control" value="<%=usuario.getTelefono()%>" id="phone" name ="phone" required data-validation-required-message="Campo opcional">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        
-                        <input type="hidden" name="pAccion" value="modificarPerfil">
-                        <br>
-                        <div id="success"></div>
-                        <div class="row">
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Modificar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- Unsubscribe Section -->
-    <section id="unsubscribe">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Dar de baja usuario</h2>
+                    <h2>Registro</h2>
                     <hr class="star-light">
                 </div>
             </div>
@@ -140,12 +49,76 @@
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
-                        <input type="hidden" name="pAccion" value="darBajaUsuario">
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" placeholder="Correo electrónico" id="email" name ="email" required data-validation-required-message="Please enter your email address.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Contraseña</label>
+                                <input type="password" class="form-control" placeholder="Contraseña" id="pass" name ="pass" required data-validation-required-message="Por favor, introduce tu contraseña.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label> Verificar Contraseña</label>
+                                <input type="password" class="form-control" placeholder="VerficiarContraseña" id="verifypass" name ="verifypass" required data-validation-required-message="Por favor, introduce otra vez tu contraseña.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                                                                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" placeholder="Nombre real" id="Nombre" name="name" required data-validation-required-message="Por favor, introduce tu nombre.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Apellido 1</label>
+                                <input type="text" class="form-control" placeholder="Apellido 1" id="Apellido 1" name ="apellido1" required data-validation-required-message="Campo requerido.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Apellido 2</label>
+                                <input type="text" class="form-control" placeholder="Apellido 2" id="Apellido 2" name ="apellido2" required data-validation-required-message="Campo requerido.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Ciudad</label>
+                                <input type="text" class="form-control" placeholder="Ciudad" id="Ciudad" name ="ciudad" required data-validation-required-message="Campo requerido.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Teléfono</label>
+                                <input type="phone" class="form-control" placeholder="Teléfono" id="phone" name ="phone" required data-validation-required-message="Campo opcional">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" name="pAccion" value="register">
                         <br>
                         <div id="success"></div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Dar de baja</button>
+                                <button type="submit" class="btn btn-success btn-lg">Enviar</button>
                             </div>
                         </div>
                     </form>

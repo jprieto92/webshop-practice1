@@ -50,7 +50,7 @@ public class SessionFilter implements Filter {
 		HttpSession session = requestHttp.getSession(false);
 		
 		RequestDispatcher miR;
-		System.out.println("Voy a entrsr");
+		System.out.println("Voy a entrar");
 		/** Si venimos del login y la accion no es nula, no hacemos filtro.
 		 * Esto solo ocurre la 1º vez que se arranque el servidor
 		 */
@@ -59,16 +59,14 @@ public class SessionFilter implements Filter {
 		{
 			chain.doFilter(request, response);
 		}
-		//Si la sesión es nula o el userBean es nulo, significa que no hay sesión creada.
+		//Si la sesión es nula o el entityUser es nulo, significa que no hay sesión creada.
 		else if (session == null || session.getAttribute("entityUser") == null) {
 			System.out.println("No hay sesion abierta");
 			// Volvemos a presentar los productos
 			miR = requestHttp.getRequestDispatcher("index.jsp");
 			miR.forward(request, response);
-		} else {
-			System.out.println("Hay sesion abierta");
 		}
-
+		System.out.println("Hay sesion abierta");
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}

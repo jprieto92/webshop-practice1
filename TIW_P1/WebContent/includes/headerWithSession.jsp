@@ -74,6 +74,13 @@
                         	<input type="hidden" name="pAccion" value="chat">
                         </form> 
                     </li>
+                    <li class="page-scroll">
+                        <a HREF="javascript:document.logoutSubmitForm.submit()">Logout</a>
+                        <form action="ControllerServlet" name="logoutSubmitForm" novalidate method="post">
+                        	<input type="hidden" name="pAccion" value="logout">
+                        </form> 
+                    </li>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
