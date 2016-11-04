@@ -1,15 +1,17 @@
 package handlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import entitiesJPA.Categoria;
 import entitiesJPA.Disponibilidad;
-import entitiesJPA.Imagen;
+
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
-import entityManagers.ImagenManager;
 import entityManagers.ProductManager;
 
 
@@ -25,9 +27,17 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setDescripccion((String) request.getParameter("descripcion"));
 		productoAInsertar.setEnvios((String) request.getParameter("realizaEnviosProducto"));
 		productoAInsertar.setFechaPublicacion(new java.util.Date());
-		//productoAInsertar.setImagen1(imagen1);
-		//productoAInsertar.setImagen2(imagen2);
-		//productoAInsertar.setImagen3(imºagen3);
+		
+		
+		//Se recogen las imagenes
+		Part filePart = request.getPart("imagen1Producto");
+		// El tamaño de un array en Java es máximo Integer.maxValue por lo tanto la manera que lo
+		// he hecho tenemos una limitación de maximo de 2 GB en el fichero si tiene que ser más grande
+		// hay que buscar otra manera.
+	    byte[] data = new byte[(int) filePart.getSize()];
+	    filePart.getInputStream().read(data, 0, data.length);
+		productoAInsertar.setImagen(data);
+		
 		productoAInsertar.setPrecio(Integer.parseInt(request.getParameter("precioProducto")));
 		productoAInsertar.setPrecioNegociable((String) request.getParameter("precioNegociable"));
 		productoAInsertar.setTitulo((String) request.getParameter("tituloProducto"));

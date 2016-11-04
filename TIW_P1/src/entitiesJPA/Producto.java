@@ -3,7 +3,7 @@ package entitiesJPA;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
 
 /**
  * The persistent class for the producto database table.
@@ -22,6 +22,7 @@ import java.util.List;
 		// El parametro debe contener % a cada uno de los lados
 		@NamedQuery(name = Producto.BUSCAR_TITULO, query = "SELECT p FROM Producto p where p.titulo LIKE :titulo") })
 public class Producto implements Serializable {
+	
 	// Nombre de las búsquedas mapeadas
 	public static final String BUSCAR_PRODUCT_ID = "Producto.seleccionarProductId";
 	public static final String BUSCAR_REALIZA_ENVIOS = "Producto.seleccionarRealizaEnvios";
@@ -33,9 +34,8 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_TITULO = "Producto.seleccionarTitulo";
 
 	private static final long serialVersionUID = 1L;
-
 	@Id
-	@Column(name = "product_id")
+	@Column(name="product_id")
 	private int productId;
 
 	private String descripccion;
@@ -43,38 +43,37 @@ public class Producto implements Serializable {
 	private String envios;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_baja")
+	@Column(name="fecha_baja")
 	private Date fechaBaja;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "fecha_publicacion")
+	@Column(name="fecha_publicacion")
 	private Date fechaPublicacion;
+
+	@Lob
+	private byte[] imagen;
 
 	private int precio;
 
-	@Column(name = "precio_negociable")
+	@Column(name="precio_negociable")
 	private String precioNegociable;
 
 	private String titulo;
 
-	// bi-directional many-to-one association to Imagen
-	@OneToMany(mappedBy = "producto")
-	private List<Imagen> imagens;
-
-	// bi-directional many-to-one association to Categoria
+	//bi-directional many-to-one association to Categoria
 	@ManyToOne
-	@JoinColumn(name = "id_categoria")
+	@JoinColumn(name="id_categoria")
 	private Categoria categoria;
 
-	// bi-directional many-to-one association to Disponibilidad
+	//bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name = "id_disponibilidad")
-	private Disponibilidad disponibilidad;
-
-	// bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name = "email_usuario_propietario")
+	@JoinColumn(name="email_usuario_propietario")
 	private Usuario usuario;
+
+	//bi-directional many-to-one association to Disponibilidad
+	@ManyToOne
+	@JoinColumn(name="id_disponibilidad")
+	private Disponibilidad disponibilidad;
 
 	public Producto() {
 	}
@@ -119,6 +118,14 @@ public class Producto implements Serializable {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
+	public byte[] getImagen() {
+		return this.imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
 	public int getPrecio() {
 		return this.precio;
 	}
@@ -143,28 +150,6 @@ public class Producto implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public List<Imagen> getImagens() {
-		return this.imagens;
-	}
-
-	public void setImagens(List<Imagen> imagens) {
-		this.imagens = imagens;
-	}
-
-	public Imagen addImagen(Imagen imagen) {
-		getImagens().add(imagen);
-		imagen.setProducto(this);
-
-		return imagen;
-	}
-
-	public Imagen removeImagen(Imagen imagen) {
-		getImagens().remove(imagen);
-		imagen.setProducto(null);
-
-		return imagen;
-	}
-
 	public Categoria getCategoria() {
 		return this.categoria;
 	}
@@ -173,20 +158,20 @@ public class Producto implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public Disponibilidad getDisponibilidad() {
-		return this.disponibilidad;
-	}
-
-	public void setDisponibilidad(Disponibilidad disponibilidad) {
-		this.disponibilidad = disponibilidad;
-	}
-
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Disponibilidad getDisponibilidad() {
+		return this.disponibilidad;
+	}
+
+	public void setDisponibilidad(Disponibilidad disponibilidad) {
+		this.disponibilidad = disponibilidad;
 	}
 
 }

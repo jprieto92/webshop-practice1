@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class SessionFilter
  */
-@WebFilter(filterName="/SessionFilter", urlPatterns={"/ControllerServlet/perfilUsuario.jsp", "/ControllerServlet/catalogo.jsp", "/ControllerServlet/chat.jsp", "/ControllerServlet/crearProducto.jsp"})
+@WebFilter(filterName="/SessionFilter", urlPatterns={"/ControllerServlet/sss"})
 public class SessionFilter implements Filter {
 
     /**
@@ -51,6 +51,15 @@ public class SessionFilter implements Filter {
 		
 		RequestDispatcher miR;
 		
+		/** Si venimos del login y la accion no es nula, no hacemos filtro.
+		 * Esto solo ocurre la 1º vez que se arranque el servidor
+		 */
+		
+		if(request.getParameter("pAccion") != null && request.getParameter("pAccion").equals("login"))
+		{
+			chain.doFilter(request, response);
+			return;
+		}
 		//Si la sesión es nula o el userBean es nulo, significa que no hay sesión creada.
 		if (session == null || session.getAttribute("userBean") == null) {
 			System.out.println("No hay sesion abierta");

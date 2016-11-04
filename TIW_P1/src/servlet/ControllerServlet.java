@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import handlers.HandlerProxy;
  * Servlet implementation class ControllerServlet
  */
 @WebServlet("/ControllerServlet")
+@MultipartConfig
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -46,15 +48,16 @@ public class ControllerServlet extends HttpServlet {
 		String parametro, accion = null;
 		parametro = request.getParameter("pAccion");
 		
+		if(parametro == null){
+			accion = "catalog";
+		}
+		
 		if(parametro != null && parametro.length() > 0){
 			
 			accion = parametro;
 			HandlerProxy hdlProxy = HandlerProxy.getInstance();
 			hdlProxy.creaAction(request, response, accion);
 			
-		}
-		if(parametro == null){
-			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 
