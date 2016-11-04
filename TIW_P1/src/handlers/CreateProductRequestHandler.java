@@ -29,7 +29,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setFechaPublicacion(new java.util.Date());
 		
 		
-		//Se recogen las imagenes
+		//Se recogen las imagenes dadf
 		Part filePart = request.getPart("imagen1Producto");
 		// El tamaño de un array en Java es máximo Integer.maxValue por lo tanto la manera que lo
 		// he hecho tenemos una limitación de maximo de 2 GB en el fichero si tiene que ser más grande
