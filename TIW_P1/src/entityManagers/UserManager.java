@@ -1,15 +1,10 @@
 package entityManagers;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
-import javax.persistence.TypedQuery;
-
 import entitiesJPA.Usuario;
 
 
@@ -28,7 +23,7 @@ public class UserManager {
 		emf = Persistence.createEntityManagerFactory("tiwUnitPersistence");
 	}  
 
-	public String insertar(Usuario usuario) {
+	public String insertar(Usuario usuario) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -50,7 +45,7 @@ public class UserManager {
 		return "El usuario "+usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2()+" "+" se ha insertado correctamente";
 	}
 
-	public String modificar(Usuario usuario) {
+	public String modificar(Usuario usuario) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		try {
 			em.getTransaction().begin();
@@ -62,9 +57,10 @@ public class UserManager {
 					em.getTransaction().rollback();
 				}
 			} catch (Exception e) {
-				ex.printStackTrace();
+				e.printStackTrace();
 				throw e;
 			}
+			ex.printStackTrace();
 			throw ex;
 		} finally {
 			em.close();
@@ -72,7 +68,7 @@ public class UserManager {
 		return "El usuario "+usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2()+" "+" se ha modificado correctamente";
 	}   
 
-	public Usuario buscarPorEmail(String email){
+	public Usuario buscarPorEmail(String email) throws NoResultException {
 		Usuario resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
@@ -80,6 +76,7 @@ public class UserManager {
 			query.setParameter("email", email);
 			resultado = (Usuario) query.getSingleResult();
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new NoResultException();		
 		}finally {
 			em.close();
@@ -87,7 +84,7 @@ public class UserManager {
 		return resultado;
 	}
 
-	public Usuario comprobarCredenciales(String email, String contraseña){
+	public Usuario comprobarCredenciales(String email, String contraseña) throws NoResultException {
 		Usuario resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
@@ -96,12 +93,30 @@ public class UserManager {
 			query.setParameter("contraseña", contraseña);
 			resultado = (Usuario) query.getSingleResult();
 		}catch(NoResultException e){
+			e.printStackTrace();
 			throw new NoResultException();		
 		}
 		finally {
-		em.close();
+			em.close();
 		}
 		return resultado;
-}
+	}
 
+	public String darDeBaja(String email) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		Usuario usuarioBBDD = null;
+		try {
+			usuarioBBDD = em.find(Usuario.class, email);
+			em.getTransaction().begin();
+			System.out.println("Antes del remove");
+			em.remove(usuarioBBDD);
+			System.out.println("Despues del remove");
+			em.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			em.close();
+			throw ex;
+		}
+		return "El usuario "+usuarioBBDD.getNombre()+" "+usuarioBBDD.getApellido1()+" "+usuarioBBDD.getApellido2()+" "+" se ha dado de baja correctamente";
+	}
 }

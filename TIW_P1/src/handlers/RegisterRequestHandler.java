@@ -36,7 +36,7 @@ public class RegisterRequestHandler extends ActionHandler {
 		try {
 			message = gestorDatos.insertar(usuarioAInsertar);
 			request.setAttribute("indexMessage", message);
-		}catch(RollbackException e){
+		}catch(Exception e){
 			e.printStackTrace();			
 			request.setAttribute("indexMessage", message);
 			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto

@@ -1,8 +1,7 @@
 package handlers;
 
-import javax.jms.Session;
+
 import javax.persistence.NoResultException;
-import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
@@ -21,34 +20,50 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		String nuevoApellido2 = request.getParameter("apellido2");
 		String nuevaCiudad = request.getParameter("ciudad");
 		Integer nuevoTelefono =  Integer.parseInt(request.getParameter("phone")) ;
-
-		//Recuperamos el usuario de la sesion
+		
+		//Recuperamos el email del usuario de la sesion
  		HttpSession session = request.getSession(false);
-		Usuario usuario = (Usuario) session.getAttribute("entityUser");
+		Usuario usuarioSession = (Usuario) session.getAttribute("entityUser");
 		
-		//Actualizamos los datos del usuario.
-		if(nuevaContraseña!= null){
-			usuario.setContraseña(nuevaContraseña);
-		}
-		usuario.setNombre(nuevoNombre);
-		usuario.setApellido1(nuevoApellido1);
-		usuario.setApellido2(nuevoApellido2);
-		usuario.setCiudad(nuevaCiudad);
-		usuario.setTelefono(nuevoTelefono);
-		
-		//Actualizamos los datos en la BBDD
-		UserManager userManager = new UserManager();
+		//Buscamos al usuario en la BBDD
 		String message = "";
+		UserManager userManager = new UserManager();
+		Usuario usuarioBBDD = null;
 		try{
-			message = userManager.modificar(usuario);
+			usuarioBBDD = userManager.buscarPorEmail(usuarioSession.getEmail());
 		}
-		catch(RollbackException e){
- 			request.setAttribute("Message", message);
-			throw new Exception("Error en la modificación del usuario");
+		catch(NoResultException e){
+			message = "Error en la modificación del usuario";
+			throw new NoResultException("No se ha encontrado el usuario en la BBDD con ese email");
  		}
-		request.setAttribute("Message", message);
-		//Si todo ha ido bien, actualizamos el usuario de la session con los nuevos datos
-		session.setAttribute("entityUser", usuario);
+		finally{
+			request.setAttribute("Message", message);
+ 		}
+		
+		//Actualizamos los datos del usuarioBBDD acorde a las modificaciones solicitadas
+		if(nuevaContraseña!= null){
+			usuarioBBDD.setContraseña(nuevaContraseña);
+		}
+		usuarioBBDD.setNombre(nuevoNombre);
+		usuarioBBDD.setApellido1(nuevoApellido1);
+		usuarioBBDD.setApellido2(nuevoApellido2);
+		usuarioBBDD.setCiudad(nuevaCiudad);
+		usuarioBBDD.setTelefono(nuevoTelefono);
+		
+		//Actualizamos el usuario en la BBDD
+		try{
+			message = userManager.modificar(usuarioBBDD);
+		}
+		catch(Exception e){
+			message = "Error en la modificación del usuario";
+			throw new Exception("Error en la modificación del usuario al insertarlo en la BBDD");
+ 		}
+		finally{
+			request.setAttribute("Message", message);
+ 		}
+		
+		//Si todo ha ido bien, actualizamos el usuario de la session con el usuario enviado a la BBDD
+		session.setAttribute("entityUser", usuarioBBDD);
 		
 	}
 
