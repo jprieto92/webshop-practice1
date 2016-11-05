@@ -1,6 +1,8 @@
 package handlers;
 
 import javax.jms.Session;
+import javax.persistence.NoResultException;
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
@@ -34,12 +36,20 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		usuario.setCiudad(nuevaCiudad);
 		usuario.setTelefono(nuevoTelefono);
 		
-		//Actualizamo el usuario de la session con los nuevos datos
-		session.setAttribute("entityUser", usuario);
-		
 		//Actualizamos los datos en la BBDD
 		UserManager userManager = new UserManager();
-		userManager.modificar(usuario);
+		String message = "";
+		try{
+			message = userManager.modificar(usuario);
+		}
+		catch(RollbackException e){
+ 			request.setAttribute("Message", message);
+			throw new Exception("Error en la modificación del usuario");
+ 		}
+		request.setAttribute("Message", message);
+		//Si todo ha ido bien, actualizamos el usuario de la session con los nuevos datos
+		session.setAttribute("entityUser", usuario);
+		
 	}
 
 }

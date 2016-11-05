@@ -34,13 +34,14 @@
 </head>
 <body>
 
-<%@include file="includes/headerWithoutSession.jsp" %>
+<%@include file="includes/headerWithSession.jsp" %>
 
-<% String variable = (String) request.getAttribute("userProfileMessage"); %>
-<p>Me han pasado el siguiente mensaje: <%= variable %></p>
 
 <!--  Se recupera la entidad usuario de la sesión -->
 <% Usuario usuario = (Usuario) session.getAttribute("entityUser"); %>
+
+<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
+<% if(request.getAttribute("Message")!=null){out.println(request.getAttribute("Message"));} %>
 
 <!-- Register Section -->
     <section id="register">
@@ -51,6 +52,7 @@
                     <hr class="star-light">
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
