@@ -15,7 +15,7 @@
 <meta name="author" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Freelancer - Start Bootstrap Theme</title>
+<title>Mis Productos</title>
 <link href="css/my_style.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -59,16 +59,38 @@
 			<h2><%=producto.getTitulo() %></h2>
 			<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>">
 			
-			<form action="ControllerServlet" name="formEnviarMensajeProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="enviarMensajeProducto">
+			<form action="ControllerServlet" name="formEliminarProducto" novalidate method="post">
+				<input type="hidden" name="pAccion" value="eliminarProducto">
 				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Enviar mensaje</button>
+						<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
 					</div>
 				</div>
-			</form>							
+			</form>
+			
+			<form action="ControllerServlet" name="formModificarProducto" novalidate method="post">
+				<input type="hidden" name="pAccion" value="modificarProducto">
+				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+					</div>
+				</div>
+			</form>
+			
+			<form action="ControllerServlet" name="formCambiarDisponibilidadProducto" novalidate method="post">
+				<input type="hidden" name="pAccion" value="cambiarDisponibilidadProducto">
+				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<button type="submit" class="btn btn-success btn-lg">Cambiar disponibilidad</button>
+					</div>
+				</div>
+			</form>					
 
 		</div>
 

@@ -55,7 +55,7 @@ public class ProductManager {
     public List<Producto> buscarPorUsuario(Usuario usuario){
     	    	TypedQuery<Producto> consultaProductos = null;
     	    	try{
-    	    		consultaProductos = em.createNamedQuery(Usuario.BUSCAR_EMAIL, Producto.class);
+    	    		consultaProductos = em.createNamedQuery(Producto.BUSCAR_USUARIO_PROPIETARIO, Producto.class);
     	        	consultaProductos.setParameter("usuario", usuario);   	
     		    }catch(Exception e){
     		    	throw new NoResultException();		
@@ -67,7 +67,7 @@ public class ProductManager {
     public List<Producto> buscarTodos(){
     	TypedQuery<Producto> consultaProductos = null;
     	try{
-    		consultaProductos = em.createNamedQuery("Producto.findAll", Producto.class);
+    		consultaProductos = em.createNamedQuery(Producto.BUSCAR_TODOS, Producto.class);
 	    }catch(Exception e){
 	    	throw new NoResultException();		
 		}

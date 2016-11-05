@@ -11,7 +11,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "producto")
-@NamedQueries({ @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
+@NamedQueries({ 
+		@NamedQuery(name = Producto.BUSCAR_TODOS, query = "SELECT p FROM Producto p"),
 		@NamedQuery(name = Producto.BUSCAR_PRODUCT_ID, query = "SELECT p FROM Producto p where p.productId=:productId"),
 		@NamedQuery(name = Producto.BUSCAR_REALIZA_ENVIOS, query = "SELECT p FROM Producto p where p.envios=:envios"),
 		@NamedQuery(name = Producto.BUSCAR_FECHA_BAJA, query = "SELECT p FROM Producto p where p.fechaBaja=:fechaBaja"),
@@ -24,6 +25,7 @@ import java.util.Date;
 public class Producto implements Serializable {
 	
 	// Nombre de las búsquedas mapeadas
+	public static final String BUSCAR_TODOS = "Producto.findAll";
 	public static final String BUSCAR_PRODUCT_ID = "Producto.seleccionarProductId";
 	public static final String BUSCAR_REALIZA_ENVIOS = "Producto.seleccionarRealizaEnvios";
 	public static final String BUSCAR_FECHA_BAJA = "Producto.seleccionarFechaBaja";
@@ -32,6 +34,7 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_DISPONIBILIDAD = "Producto.seleccionarDisponibilidad";
 	public static final String BUSCAR_USUARIO_PROPIETARIO = "Producto.seleccionarUsuarioPropietario";
 	public static final String BUSCAR_TITULO = "Producto.seleccionarTitulo";
+	
 
 	private static final long serialVersionUID = 1L;
 	@Id
