@@ -1,15 +1,10 @@
 package handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
 import entitiesJPA.Categoria;
 import entitiesJPA.Disponibilidad;
-
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
 import entityManagers.ProductManager;

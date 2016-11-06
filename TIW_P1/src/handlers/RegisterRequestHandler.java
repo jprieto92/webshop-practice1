@@ -1,11 +1,6 @@
 package handlers;
 
-import java.sql.Date;
-import javax.persistence.RollbackException;
 import entitiesJPA.TipoUsuario;
-import entitiesJPA.Usuario;
-import entityManagers.UserManager;
-
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 

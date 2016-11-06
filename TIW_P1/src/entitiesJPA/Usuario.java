@@ -18,7 +18,6 @@ import java.util.List;
 		@NamedQuery(name = Usuario.BUSCAR_APELLIDO_2, query = "SELECT u FROM Usuario u where u.apellido2=:apellido2"),
 		@NamedQuery(name = Usuario.BUSCAR_CIUDAD, query = "SELECT u FROM Usuario u where u.ciudad=:ciudad"),
 		@NamedQuery(name = Usuario.BUSCAR_EMAIL, query = "SELECT u FROM Usuario u where u.email=:email"),
-		@NamedQuery(name = Usuario.BUSCAR_ESTADO, query = "SELECT u FROM Usuario u where u.estado=:estado"),
 		@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES, query = "SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña") })
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +28,6 @@ public class Usuario implements Serializable {
 		public static final String BUSCAR_APELLIDO_2 = "Usuario.seleccionarApellido2";
 		public static final String BUSCAR_CIUDAD = "Usuario.seleccionarCiudad";
 		public static final String BUSCAR_EMAIL = "Usuario.seleccionarEmail";
-		public static final String BUSCAR_ESTADO = "Usuario.seleccionarEstado";
 		public static final String BUSCAR_CREDENCIALES = "Usuario.comprobarCredenciales";
 	
 	@Id
@@ -43,15 +41,9 @@ public class Usuario implements Serializable {
 
 	private String contraseña;
 
-	private String estado;
-
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_alta")
 	private Date fechaAlta;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_baja")
-	private Date fechaBaja;
 
 	@Lob
 	@Column(name="imagen_perfil")
@@ -113,28 +105,12 @@ public class Usuario implements Serializable {
 		this.contraseña = contraseña;
 	}
 
-	public String getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public Date getFechaAlta() {
 		return this.fechaAlta;
 	}
 
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
-	}
-
-	public Date getFechaBaja() {
-		return this.fechaBaja;
-	}
-
-	public void setFechaBaja(Date fechaBaja) {
-		this.fechaBaja = fechaBaja;
 	}
 
 	public byte[] getImagenPerfil() {
