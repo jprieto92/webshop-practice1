@@ -14,7 +14,6 @@
 
 	<!--  Se recupera la entidad usuario de la sesión -->
 	<% Producto producto = (Producto) request.getAttribute("productoModificar");
-		request.setAttribute("idPModificar",producto.getProductId());
 	%>
 
 	<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
