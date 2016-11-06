@@ -10,6 +10,7 @@ import java.util.List;
  * The persistent class for the usuario database table.
  * 
  */
+
 @Entity
 @Table(name = "usuario")
 @NamedQueries({ @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
@@ -41,15 +42,9 @@ public class Usuario implements Serializable {
 
 	private String contraseña;
 
-	private String estado;
-
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_alta")
 	private Date fechaAlta;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_baja")
-	private Date fechaBaja;
 
 	@Lob
 	@Column(name="imagen_perfil")
@@ -111,28 +106,12 @@ public class Usuario implements Serializable {
 		this.contraseña = contraseña;
 	}
 
-	public String getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public Date getFechaAlta() {
 		return this.fechaAlta;
 	}
 
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
-	}
-
-	public Date getFechaBaja() {
-		return this.fechaBaja;
-	}
-
-	public void setFechaBaja(Date fechaBaja) {
-		this.fechaBaja = fechaBaja;
 	}
 
 	public byte[] getImagenPerfil() {

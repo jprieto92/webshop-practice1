@@ -3,6 +3,7 @@ package entitiesJPA;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -34,6 +35,7 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_DISPONIBILIDAD = "Producto.seleccionarDisponibilidad";
 	public static final String BUSCAR_USUARIO_PROPIETARIO = "Producto.seleccionarUsuarioPropietario";
 	public static final String BUSCAR_TITULO = "Producto.seleccionarTitulo";
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="product_id")
@@ -50,7 +52,7 @@ public class Producto implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_publicacion")
 	private Date fechaPublicacion;
-	
+
 	@Lob
 	private byte[] imagen;
 
@@ -66,15 +68,19 @@ public class Producto implements Serializable {
 	@JoinColumn(name="id_categoria")
 	private Categoria categoria;
 
+	//bi-directional many-to-one association to Disponibilidad
+	@ManyToOne
+	@JoinColumn(name="id_disponibilidad")
+	private Disponibilidad disponibilidad;
+
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="email_usuario_propietario")
 	private Usuario usuario;
 
-	//bi-directional many-to-one association to Disponibilidad
-	@ManyToOne
-	@JoinColumn(name="id_disponibilidad")
-	private Disponibilidad disponibilidad;
+	//bi-directional many-to-one association to Imagen
+	@OneToMany(mappedBy="producto")
+	private List<Imagen> imagens;
 
 	public Producto() {
 	}
@@ -118,7 +124,7 @@ public class Producto implements Serializable {
 	public void setFechaPublicacion(Date fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
-   
+
 	public byte[] getImagen() {
 		return this.imagen;
 	}
@@ -159,6 +165,14 @@ public class Producto implements Serializable {
 		this.categoria = categoria;
 	}
 
+	public Disponibilidad getDisponibilidad() {
+		return this.disponibilidad;
+	}
+
+	public void setDisponibilidad(Disponibilidad disponibilidad) {
+		this.disponibilidad = disponibilidad;
+	}
+
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -167,12 +181,26 @@ public class Producto implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Disponibilidad getDisponibilidad() {
-		return this.disponibilidad;
+	public List<Imagen> getImagens() {
+		return this.imagens;
 	}
 
-	public void setDisponibilidad(Disponibilidad disponibilidad) {
-		this.disponibilidad = disponibilidad;
+	public void setImagens(List<Imagen> imagens) {
+		this.imagens = imagens;
+	}
+
+	public Imagen addImagen(Imagen imagen) {
+		getImagens().add(imagen);
+		imagen.setProducto(this);
+
+		return imagen;
+	}
+
+	public Imagen removeImagen(Imagen imagen) {
+		getImagens().remove(imagen);
+		imagen.setProducto(null);
+
+		return imagen;
 	}
 
 }
