@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
 		public static final String BUSCAR_CIUDAD = "Usuario.seleccionarCiudad";
 		public static final String BUSCAR_EMAIL = "Usuario.seleccionarEmail";
 		public static final String BUSCAR_CREDENCIALES = "Usuario.comprobarCredenciales";
-	
+
 	@Id
 	private String email;
 
@@ -41,9 +41,15 @@ public class Usuario implements Serializable {
 
 	private String contraseña;
 
+	private String estado;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_alta")
 	private Date fechaAlta;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_baja")
+	private Date fechaBaja;
 
 	@Lob
 	@Column(name="imagen_perfil")
@@ -53,8 +59,8 @@ public class Usuario implements Serializable {
 
 	private int telefono;
 
-	// bi-directional many-to-one association to Producto
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	//bi-directional many-to-one association to Producto
+	@OneToMany(mappedBy="usuario")
 	private List<Producto> productos;
 
 	//bi-directional many-to-one association to TipoUsuario
@@ -105,12 +111,28 @@ public class Usuario implements Serializable {
 		this.contraseña = contraseña;
 	}
 
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public Date getFechaAlta() {
 		return this.fechaAlta;
 	}
 
 	public void setFechaAlta(Date fechaAlta) {
 		this.fechaAlta = fechaAlta;
+	}
+
+	public Date getFechaBaja() {
+		return this.fechaBaja;
+	}
+
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
 	}
 
 	public byte[] getImagenPerfil() {

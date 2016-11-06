@@ -35,8 +35,6 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_USUARIO_PROPIETARIO = "Producto.seleccionarUsuarioPropietario";
 	public static final String BUSCAR_TITULO = "Producto.seleccionarTitulo";
 
-
-	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="product_id")
 	private int productId;
@@ -52,7 +50,7 @@ public class Producto implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_publicacion")
 	private Date fechaPublicacion;
-
+	
 	@Lob
 	private byte[] imagen;
 
@@ -120,7 +118,7 @@ public class Producto implements Serializable {
 	public void setFechaPublicacion(Date fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
-
+   
 	public byte[] getImagen() {
 		return this.imagen;
 	}
