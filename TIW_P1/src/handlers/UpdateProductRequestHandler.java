@@ -18,13 +18,9 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 		int idP= Integer.parseInt(request.getParameter("idProducto"));
 		String tituloNuevo = request.getParameter("tituloProducto");
 		String descripcionNueva = request.getParameter("descripcionProducto");
-		//Se recogen las imagenes
-		Part filePart = request.getPart("imagen1Producto");
 		// El tamaño de un array en Java es máximo Integer.maxValue por lo tanto la manera que lo
 		// he hecho tenemos una limitación de maximo de 2 GB en el fichero si tiene que ser más grande
 		// hay que buscar otra manera.
-		byte[] data = new byte[(int) filePart.getSize()];
-		filePart.getInputStream().read(data, 0, data.length);
 				
 		
 
@@ -47,14 +43,16 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 		finally{
 			request.setAttribute("Message", message);
  		}
+		//Se recogen las imagenes
+		Part filePart = request.getPart("imagen1Producto");
+		if(filePart != null){
+			byte[] data = new byte[(int) filePart.getSize()];
+			filePart.getInputStream().read(data, 0, data.length);
+			productoBBDD.setImagen(data);
+		}
 		
-//		//Actualizamos los datos del usuarioBBDD acorde a las modificaciones solicitadas
-//		if(nuevaContraseña!= null){
-//			usuarioBBDD.setContraseña(nuevaContraseña);
-//		}
 		productoBBDD.setTitulo(tituloNuevo);
 		productoBBDD.setDescripccion(descripcionNueva);
-		productoBBDD.setImagen(data);
 		productoBBDD.setPrecio(Integer.parseInt(request.getParameter("precioProducto")));
 		productoBBDD.setPrecioNegociable((String) request.getParameter("precioNegociable"));
 		productoBBDD.setEnvios((String) request.getParameter("realizaEnviosProducto"));
