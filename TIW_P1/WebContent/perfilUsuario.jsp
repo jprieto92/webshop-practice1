@@ -63,7 +63,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label>Contraseña</label> <input type="password"
+							<p>Contraseña</p> <input type="password"
 								class="form-control" name="Nueva contraseña" id="pass"
 								name="pass" required
 								data-validation-required-message="Por favor, introduce tu contraseña.">
@@ -74,7 +74,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label> Verificar Contraseña</label> <input type="password"
+							<p> Verificar Contraseña</p> <input type="password"
 								class="form-control" name="Verficar Contraseña" id="verifypass"
 								name="verifypass" required
 								data-validation-required-message="Las contraseñas no coinciden">
@@ -85,7 +85,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label>Nombre</label> <input type="text" class="form-control"
+							<p>Nombre</p> <input type="text" class="form-control"
 								value="<%=usuario.getNombre()%>" id="Nombre" name="name"
 								required
 								data-validation-required-message="Por favor, introduce tu nombre.">
@@ -96,7 +96,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label>Apellido 1</label> <input type="text" class="form-control"
+							<p>Apellido 1</p> <input type="text" class="form-control"
 								value="<%=usuario.getApellido1()%>" id="Apellido 1"
 								name="apellido1" required
 								data-validation-required-message="Campo requerido.">
@@ -107,7 +107,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label>Apellido 2</label> <input type="text" class="form-control"
+							<p>Apellido 2</p> <input type="text" class="form-control"
 								value="<%=usuario.getApellido2()%>" id="Apellido 2"
 								name="apellido2" required
 								data-validation-required-message="Campo requerido.">
@@ -118,7 +118,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label>Ciudad</label> <input type="text" class="form-control"
+							<p>Ciudad</p> <input type="text" class="form-control"
 								value="<%=usuario.getCiudad()%>" id="Ciudad" name="ciudad"
 								required data-validation-required-message="Campo requerido.">
 							<p class="help-block text-danger"></p>
@@ -128,7 +128,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label>Teléfono</label> <input type="phone" class="form-control"
+							<p>Teléfono</p> <input type="phone" class="form-control"
 								value="<%=usuario.getTelefono()%>" id="phone" name="phone"
 								required data-validation-required-message="Campo opcional">
 							<p class="help-block text-danger"></p>

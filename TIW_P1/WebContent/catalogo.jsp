@@ -45,16 +45,26 @@
 <body>
 	<%@include file="includes/headerWithSession.jsp"%>
 
-	<section id="login">
 
-	<div class="completo">
-		<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Catálogo</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                		<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
 			for(Producto producto : listaProductos){%>
-
-		<div class="tresPorColumna">
-			<h2><%=producto.getTitulo() %></h2>
-			<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>">
+                
+                
+                <div class="col-sm-4 portfolio-item">
+                        <h4><%=producto.getTitulo() %></h4>
+			<div style="width:160px;height:160px;-webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;background:rgba(24,188,156,0.5);-webkit-box-shadow: #BFBEBF 7px 7px 7px;-moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;"><img style="height: 100px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>"></div>
 			
+			<p></p>
 			<form action="ControllerServlet" name="formEnviarMensajeProducto" novalidate method="post">
 				<input type="hidden" name="pAccion" value="enviarMensajeProducto">
 				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
@@ -64,11 +74,26 @@
 						<button type="submit" class="btn btn-success btn-lg">Enviar mensaje</button>
 					</div>
 				</div>
-			</form>							
+			</form>	
+                </div>
+             
+             		<%} %>
+            </div>
+        </div>
+    </section>
+
+
+
+	<section id="login">
+	<div class="completo">
+
+
+		<div class="tresPorColumna">
+									
 
 		</div>
 
-		<%} %>
+
 	</div>
 
 
