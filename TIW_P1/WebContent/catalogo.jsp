@@ -1,5 +1,5 @@
 <%@page import="entitiesJPA.Producto"%>
-<%@page import="utilidades.UtilidadesImagen" %>
+<%@page import="utilidades.UtilidadesImagen"%>
 <%@page import="java.util.List"%>
 <%@ page
 	import="java.util.List,java.util.ArrayList,org.apache.commons.codec.binary.StringUtils,org.apache.commons.codec.binary.Base64;"%>
@@ -24,7 +24,6 @@
 <link href="css/freelancer.min.css" rel="stylesheet">
 
 
-
 <!-- Custom Fonts -->
 <link href="vendor/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
@@ -47,59 +46,190 @@
 
 
 
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Catálogo</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-
-			<form action="ControllerServlet" name="formProductos" novalidate method="post">
+	<section id="portfolio">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>Catálogo</h2>
+				<hr class="star-primary">
+			</div>
+		</div>
+		
+		<div class="row">
+			<form action="ControllerServlet" name="formProductos" novalidate
+				method="post">
 				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda" value="busquedaPorTituloDescripccion">
+				<input type="hidden" name="tipoBusqueda"
+					value="busquedaPorTituloDescripccion">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">
-						<input type="text"
-								class="form-control" placeholder="Término de búsqueda" id="campoBusqueda"
-								name="campoBusqueda" required
-								data-validation-required-message="Please enter your email address.">
+						<input type="text" class="form-control"
+							placeholder="Término de búsqueda" id="campoBusqueda"
+							name="campoBusqueda" required
+							data-validation-required-message="Please enter your email address.">
 						<p></p>
 						<button type="submit" class="btn btn-success btn-lg">Buscar</button>
 					</div>
 				</div>
 			</form>
+		</div>
+
+		<div class="row">
+			<div id="success"></div>
+			<div class="row">
+				<div class="form-group col-xs-12">
+					<button type="button" class="btn btn-success btn-lg"
+						value="Mostrar" onclick="mostrar()">Búsqueda avanzada</button>
+				</div>
+			</div>
+		</div>
+
+		<!--  Div que contiene la búsqueda avanzada -->
+		<script type="text/javascript">
+			function mostrar() {
+				document.getElementById('oculto').style.display = 'block';
+			}
+		</script>
+		<div class="row" id="oculto" style='display: none;' style='border-style: solid double;'>
+
+			<div class="row">
+				<form action="ControllerServlet" name="formProductos" novalidate
+					method="post">
+					<input type="hidden" name="pAccion" value="buscarProductosAvanzada">
+					<input type="hidden" name="tipoBusqueda" value="busquedaPorCategoria">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<input type="text" class="form-control"
+								placeholder="Término de búsqueda" id="campoBusqueda"
+								name="campoBusqueda" required
+								data-validation-required-message="Introduzca un término de búsqueda.">
+							<p></p>
+							<button type="submit" class="btn btn-success btn-lg">Buscar
+								por categoría</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="row">
+				<form action="ControllerServlet" name="formProductos" novalidate
+					method="post">
+					<input type="hidden" name="pAccion" value="buscarProductosAvanzada">
+					<input type="hidden" name="tipoBusqueda" value="busquedaPorCiudad">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<input type="text" class="form-control"
+								placeholder="Término de búsqueda" id="campoBusqueda"
+								name="campoBusqueda" required
+								data-validation-required-message="Introduzca un término de búsqueda.">
+							<p></p>
+							<button type="submit" class="btn btn-success btn-lg">Buscar
+								por ciudad</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="row">
+				<form action="ControllerServlet" name="formProductos" novalidate
+					method="post">
+					<input type="hidden" name="pAccion" value="buscarProductosAvanzada">
+					<input type="hidden" name="tipoBusqueda" value="busquedaPorIdUsuario">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<input type="text" class="form-control"
+								placeholder="Término de búsqueda" id="campoBusqueda"
+								name="campoBusqueda" required
+								data-validation-required-message="Introduzca un término de búsqueda.">
+							<p></p>
+							<button type="submit" class="btn btn-success btn-lg">Buscar
+								por vendedor</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="row">
+				<form action="ControllerServlet" name="formProductos" novalidate
+					method="post">
+					<input type="hidden" name="pAccion" value="buscarProductosAvanzada">
+					<input type="hidden" name="tipoBusqueda" value="busquedaPorTitulo">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<input type="text" class="form-control"
+								placeholder="Término de búsqueda" id="campoBusqueda"
+								name="campoBusqueda" required
+								data-validation-required-message="Introduzca un término de búsqueda.">
+							<p></p>
+							<button type="submit" class="btn btn-success btn-lg">Buscar
+								por título</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="row">
+				<form action="ControllerServlet" name="formProductos" novalidate
+					method="post">
+					<input type="hidden" name="pAccion" value="buscarProductosAvanzada">
+					<input type="hidden" name="tipoBusqueda" value="busquedaPorDescripccion">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<input type="text" class="form-control"
+								placeholder="Término de búsqueda" id="campoBusqueda"
+								name="campoBusqueda" required
+								data-validation-required-message="Introduzca un término de búsqueda.">
+							<p></p>
+							<button type="submit" class="btn btn-success btn-lg">Buscar
+								por descripcción</button>
+						</div>
+					</div>
+				</form>
+			</div>
 
 		</div>
-            <div class="row">
-                		<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
+
+
+
+		<div class="row">
+				<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
 			for(Producto producto : listaProductos){%>
-                
-                
-                <div class="col-sm-4 portfolio-item">
-                        <h4><%=producto.getTitulo() %></h4>
-			<div style="width:160px;height:160px;-webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;background:rgba(24,188,156,0.5);-webkit-box-shadow: #BFBEBF 7px 7px 7px;-moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;"><img style="height: 100px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>"></div>
-			
-			<p></p>
-			<form action="ControllerServlet" name="formEnviarMensajeProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="enviarMensajeProducto">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Enviar mensaje</button>
+
+
+				<div class="col-sm-4 portfolio-item">
+					<h4><%=producto.getTitulo() %></h4>
+					<div
+						style="width: 160px; height: 160px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; background: rgba(24, 188, 156, 0.5); -webkit-box-shadow: #BFBEBF 7px 7px 7px; -moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;">
+						<img style="height: 160px;"
+							src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>">
 					</div>
+
+					<p></p>
+					<form action="ControllerServlet" name="formEnviarMensajeProducto"
+						novalidate method="post">
+						<input type="hidden" name="pAccion" value="enviarMensajeProducto">
+						<input type="hidden" name="idProducto"
+							value="<% out.print(producto.getProductId()); %>">
+						<div id="success"></div>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<button type="submit" class="btn btn-success btn-lg">Enviar
+									mensaje</button>
+							</div>
+						</div>
+					</form>
 				</div>
-			</form>	
-                </div>
-             
-             		<%} %>
-            </div>
-        </div>
-    </section>
+
+				<%} %>
+			</div>
+		</div>
+	</section>
 
 
 	<%@include file="includes/footer.jsp"%>

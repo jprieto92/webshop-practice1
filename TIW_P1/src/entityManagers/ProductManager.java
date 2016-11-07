@@ -186,15 +186,7 @@ public class ProductManager {
 		List<Producto> resultado;
 		String tipoQuery = null;
 		String parameter = null;
-		String parameter2 = null;
-		
-		//Para el caso en el que la busqueda es de todos los productos
-		if(tipoFiltrado==null){
-			tipoFiltrado = "busquedaTodos";
-		}
-		if(terminoFiltrado==null){
-			terminoFiltrado="";
-		}
+		String parameter2 = null;		
 		
 		//Se añade el caracter comodín a ambos lados del término de búsqueda
 		terminoFiltrado = "%"+terminoFiltrado+"%";
@@ -214,30 +206,27 @@ public class ProductManager {
 			break;
 		case "busquedaPorIdUsuario":
 			tipoQuery = Producto.BUSCAR_USUARIO_PROPIETARIO;
+			parameter = "titulo";
 			break;
 		case "busquedaPorTitulo":
 			tipoQuery = Producto.BUSCAR_TITULO;
+			parameter = "titulo";
 			break;
 		case "busquedaPorDescripccion":
 			tipoQuery = Producto.BUSCAR_DESCRIPCCION;
-			break;
-		case "busquedaTodos":
-			tipoQuery = Producto.BUSCAR_TODOS;
+			parameter = "descripccion";
 			break;
 		}
 		
 		EntityManager em = emf.createEntityManager();
 		try{
 			Query query = em.createNamedQuery(tipoQuery,Producto.class);
-			
-			//Si la query es distinta de buscar todos, se añadirá el primer parametro
-			if(!tipoFiltrado.equals("busquedaTodos")){
-				query.setParameter(parameter, terminoFiltrado);
-			}
-			//Solo en el caso de la query de busqueda por titulo y descripccion, tendrá un 2º parámetro
+			query.setParameter(parameter, terminoFiltrado);
+			//Solo en el caso de la query de busqueda por titulo y descripcción, tendrá un 2º parámetro
 			if(tipoFiltrado.equals("busquedaPorTituloDescripccion")){
 				query.setParameter(parameter2, terminoFiltrado);
 			}
+			
 			resultado = query.getResultList();
 		}catch(NoResultException e){
 			throw new NoResultException();		
