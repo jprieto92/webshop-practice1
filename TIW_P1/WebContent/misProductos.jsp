@@ -45,9 +45,7 @@
 <body>
 	<%@include file="includes/headerWithSession.jsp"%>
 	
-	<p>
-
-	</p>
+	<p></p>
 
 
 <section id="portfolio">

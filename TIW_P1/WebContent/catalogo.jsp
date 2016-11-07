@@ -83,23 +83,6 @@
     </section>
 
 
-
-	<section id="login">
-	<div class="completo">
-
-
-		<div class="tresPorColumna">
-									
-
-		</div>
-
-
-	</div>
-
-
-	</section>
-
-
 	<%@include file="includes/footer.jsp"%>
 </body>
 </html>
