@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="entitiesJPA.Producto"%>
     <%@page import="utilidades.UtilidadesImagen" %>
+    <%@page import="entitiesJPA.Categoria"%>
+	<%@page import="java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,6 +38,20 @@
 				<form name="sentMessage" action="ControllerServlet" id="contactForm" enctype="multipart/form-data"
 					novalidate method="post">
 					<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
+					
+					<div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Categoria</label>
+                                <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
+                                	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
+                                	for(Categoria categoria : listaCategorias){
+                                		out.println("<option value=\""+ categoria.getIdCategoria() + "\">"+categoria.getNombre()+"</option>");
+                                	}
+                                	%>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
@@ -54,6 +70,40 @@
 							<p>Descripcion</p> <input type="text" class="form-control"
 								value="<%out.print(producto.getDescripccion()); %>" id="descripcionProducto"
 								name="descripcionProducto" required
+								data-validation-required-message="Campo requerido.">
+							<p class="help-block text-danger"></p>
+						</div>
+					</div>
+					<div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <P>Realiza envios</P>
+                                <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
+                                	<option value="si">Si</option>
+                                	<option value="no">No</option>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>      
+                        
+                       <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <P>Precio negociable</P>
+                                <select class="form-control" id="precioNegociable" name ="precioNegociable">
+                                	<option value="si">Si</option>
+                                	<option value="no">No</option>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+					
+					
+					
+					<div class="row control-group">
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<p>Precio</p> <input type="text" class="form-control"
+								value="<%out.print(producto.getPrecio()); %>" id="precioProducto"
+								name="precioProducto" required
 								data-validation-required-message="Campo requerido.">
 							<p class="help-block text-danger"></p>
 						</div>

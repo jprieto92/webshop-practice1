@@ -4,6 +4,7 @@ import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import entitiesJPA.Categoria;
 import entitiesJPA.Producto;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
@@ -24,12 +25,9 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 		// hay que buscar otra manera.
 		byte[] data = new byte[(int) filePart.getSize()];
 		filePart.getInputStream().read(data, 0, data.length);
+				
 		
-		
-//		String nuevoApellido1 = request.getParameter("apellido1");
-//		String nuevoApellido2 = request.getParameter("apellido2");
-//		String nuevaCiudad = request.getParameter("ciudad");
-//		Integer nuevoTelefono =  Integer.parseInt(request.getParameter("phone")) ;
+
 //		
 //		//Recuperamos el email del usuario de la sesion
  		HttpSession session = request.getSession(false);
@@ -57,6 +55,14 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 		productoBBDD.setTitulo(tituloNuevo);
 		productoBBDD.setDescripccion(descripcionNueva);
 		productoBBDD.setImagen(data);
+		productoBBDD.setPrecio(Integer.parseInt(request.getParameter("precioProducto")));
+		productoBBDD.setPrecioNegociable((String) request.getParameter("precioNegociable"));
+		productoBBDD.setEnvios((String) request.getParameter("realizaEnviosProducto"));
+		
+		//Se asocia con la categoria (por ahora la ponemos por defecto de prueba)
+		Categoria categoria = new Categoria();
+		categoria.setIdCategoria(1);
+		productoBBDD.setCategoria(categoria);
 		
 //		//Actualizamos el usuario en la BBDD
 		try{
