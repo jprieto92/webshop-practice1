@@ -54,11 +54,27 @@ public class CategoriaManager {
     public List<Categoria> buscarTodas(){
     	TypedQuery<Categoria> consultaCategorias = null;
     	try{
-    		consultaCategorias = em.createNamedQuery("Categoria.findAll", Categoria.class);
+    		consultaCategorias = em.createNamedQuery(Categoria.BUSCAR_TODOS, Categoria.class);
 	    }catch(Exception e){
 	    	throw new NoResultException();		
 		}
     	return consultaCategorias.getResultList();
     }
+    
+  //Devuelve una disponibilidad dado su ID
+  	public Categoria buscarPorId(Integer idCategoria) throws NoResultException {
+  		Categoria resultado;
+  		EntityManager em = emf.createEntityManager();
+  		try{
+  			resultado = (Categoria) em.find(Categoria.class, idCategoria);
+  		}catch(NoResultException e){
+  			e.printStackTrace();
+  			throw new NoResultException();		
+  		}
+  		finally {
+  			em.close();
+  		}
+  		return resultado;
+  	}
     
 }

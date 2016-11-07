@@ -7,6 +7,7 @@ import entitiesJPA.Categoria;
 import entitiesJPA.Disponibilidad;
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
+import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
 
 
@@ -46,8 +47,10 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setDisponibilidad(disponibilidad);
 
 		//Se asocia con la categoria (por ahora la ponemos por defecto de prueba)
-		Categoria categoria = new Categoria();
-		categoria.setIdCategoria(1);
+		CategoriaManager categoriaManager= new CategoriaManager();
+		int idCategoria= Integer.parseInt(request.getParameter("categoriaProducto"));
+		Categoria categoria = categoriaManager.buscarPorId(idCategoria);		
+		//categoria.setIdCategoria(idCategoria);
 		productoAInsertar.setCategoria(categoria);
 		
 

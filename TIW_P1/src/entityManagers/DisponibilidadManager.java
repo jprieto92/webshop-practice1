@@ -56,7 +56,7 @@ public class DisponibilidadManager {
     public List<Disponibilidad> buscarTodas(){
     	TypedQuery<Disponibilidad> consultaDisponibilidades = null;
     	try{
-    		consultaDisponibilidades = em.createNamedQuery("Disponibilidad.findAll", Disponibilidad.class);
+    		consultaDisponibilidades = em.createNamedQuery(Disponibilidad.BUSCAR_TODOS, Disponibilidad.class);
 	    }catch(Exception e){
 	    	throw new NoResultException();		
 		}
@@ -68,7 +68,7 @@ public class DisponibilidadManager {
 		Disponibilidad resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
-			resultado = (Disponibilidad) em.find(Disponibilidad.class, idDisponibilidad);
+			resultado = em.find(Disponibilidad.class, idDisponibilidad);
 		}catch(NoResultException e){
 			e.printStackTrace();
 			throw new NoResultException();		

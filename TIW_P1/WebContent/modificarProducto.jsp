@@ -15,8 +15,7 @@
 
 
 	<!--  Se recupera la entidad usuario de la sesión -->
-	<% Producto producto = (Producto) request.getAttribute("productoModificar");
-	%>
+	<% Producto producto = (Producto) request.getAttribute("productoModificar"); %>
 
 	<!-- Register Section -->
 	<section id="register">
@@ -41,7 +40,12 @@
                                 <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                 	for(Categoria categoria : listaCategorias){
-                                		out.println("<option value=\""+ categoria.getIdCategoria() + "\">"+categoria.getNombre()+"</option>");
+                                		if(categoria.equals(producto.getCategoria())){
+                                			System.out.println("La categoria que voy a imprimir es:"+categoria.getNombre()+"");
+                                			out.println("<option value=\""+ categoria.getIdCategoria() + "\" selected >"+categoria.getNombre()+"</option>");
+                                		}else{
+                                			out.println("<option value=\""+ categoria.getIdCategoria() + "\">"+categoria.getNombre()+"</option>");
+                                		}                               		
                                 	}
                                 	%>
                                 </select>
@@ -72,10 +76,17 @@
 					</div>
 					<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <P>Realiza envios</P>
+                                <p>Realiza envios</p>
                                 <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
-                                	<option value="si">Si</option>
-                                	<option value="no">No</option>
+                                	<%if(producto.getEnvios().equals("SI")){
+                                		out.println("<option value=\"SI\" selected >SI</option>");
+                                		out.println("<option value=\"NO\" >NO</option>");
+                                		                   		
+                                	}else{
+                                		out.println("<option value=\"SI\" >SI</option>");
+                                		out.println("<option value=\"NO\" selected >NO</option>");
+                                	} %>
+             
                                 </select>
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -83,10 +94,16 @@
                         
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <P>Precio negociable</P>
+                                <p>Precio negociable</p>
                                 <select class="form-control" id="precioNegociable" name ="precioNegociable">
-                                	<option value="si">Si</option>
-                                	<option value="no">No</option>
+                                	<%if(producto.getPrecioNegociable().equals("SI")){
+                                		out.println("<option value=\"SI\" selected >SI</option>");
+                                		out.println("<option value=\"NO\" >NO</option>");
+                                		                   		
+                                	}else{
+                                		out.println("<option value=\"SI\" >SI</option>");
+                                		out.println("<option value=\"NO\" selected >NO</option>");
+                                	} %>
                                 </select>
                                 <p class="help-block text-danger"></p>
                             </div>

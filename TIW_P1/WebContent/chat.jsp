@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>Chat</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

@@ -6,6 +6,7 @@ import javax.servlet.http.Part;
 
 import entitiesJPA.Categoria;
 import entitiesJPA.Producto;
+import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
@@ -45,7 +46,9 @@ public class UpdateProductRequestHandler  extends ActionHandler{
  		}
 		//Se recogen las imagenes
 		Part filePart = request.getPart("imagen1Producto");
-		if(filePart != null){
+		System.out.println("hola guapa tienes whats app?"+filePart);
+		if(filePart.getSize() != 0){
+			
 			byte[] data = new byte[(int) filePart.getSize()];
 			filePart.getInputStream().read(data, 0, data.length);
 			productoBBDD.setImagen(data);
@@ -58,9 +61,16 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 		productoBBDD.setEnvios((String) request.getParameter("realizaEnviosProducto"));
 		
 		//Se asocia con la categoria (por ahora la ponemos por defecto de prueba)
-		Categoria categoria = new Categoria();
-		categoria.setIdCategoria(1);
+		//Categoria categoria = new Categoria();
+		//categoria.setIdCategoria(1);
+		//productoBBDD.setCategoria(categoria);
+		//Se asocia con la categoria (por ahora la ponemos por defecto de prueba)
+		CategoriaManager categoriaManager= new CategoriaManager();
+		int idCategoria= Integer.parseInt(request.getParameter("categoriaProducto"));
+		Categoria categoria = categoriaManager.buscarPorId(idCategoria);		
+		//categoria.setIdCategoria(idCategoria);
 		productoBBDD.setCategoria(categoria);
+		
 		
 //		//Actualizamos el usuario en la BBDD
 		try{
