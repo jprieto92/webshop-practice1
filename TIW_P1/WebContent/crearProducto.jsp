@@ -35,10 +35,6 @@
 <body>
 <%@include file="includes/headerWithSession.jsp" %>
 
-<% String variable = (String) request.getAttribute("createProductMessage"); %>
-<p>Me han pasado el siguiente mensaje: <%= variable %></p>
-
-
 <!-- Register Product Section -->
     <section id="registerProduct">
         <div class="container">

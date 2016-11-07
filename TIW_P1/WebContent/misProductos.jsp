@@ -44,10 +44,9 @@
 </head>
 <body>
 	<%@include file="includes/headerWithSession.jsp"%>
-
-	<% String variable = (String) request.getAttribute("catalogMessage"); %>
+	
 	<p>
-		Me han pasado el siguiente mensaje:<%= variable %>
+
 	</p>
 	<section id="login">
 
@@ -82,7 +81,7 @@
 			</form>
 			
 			<form action="ControllerServlet" name="formCambiarDisponibilidadProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="cambiarDisponibilidadProducto">
+				<input type="hidden" name="pAccion" value="ShowFormChangeAvailability">
 				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 				<div id="success"></div>
 				<div class="row">

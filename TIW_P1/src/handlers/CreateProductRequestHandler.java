@@ -56,7 +56,6 @@ public class CreateProductRequestHandler extends ActionHandler {
 		try {
 			gestorDatos.insertar(productoAInsertar);
 		}catch(RollbackException e){
-			e.printStackTrace();
 			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
 			request.setAttribute("createProductMessage", "Ha habido un error insertando el producto");
 			throw new Exception("Error en la creacion del producto");

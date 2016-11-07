@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
+import entitiesJPA.Disponibilidad;
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
 
@@ -146,7 +147,26 @@ public class ProductManager {
 		return resultado;
 	}
 
-
+	
+	//Devuelve una disponibilidad dado un idProducto
+	public Disponibilidad buscarDisponibilidadPorId(Integer idProducto) throws NoResultException {
+		Producto resultado;
+		EntityManager em = emf.createEntityManager();
+		System.out.println("prueba antes del try");
+		try{
+			Query query = em.createNamedQuery(Producto.BUSCAR_PRODUCT_ID,Producto.class);
+			query.setParameter("productId", idProducto);
+			resultado = (Producto) query.getSingleResult();
+		}catch(NoResultException e){
+			e.printStackTrace();
+			throw new NoResultException();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado.getDisponibilidad();
+	}
+	
 	public String darDeBaja(Integer idProducto) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		Producto productoBBDD = null;

@@ -18,9 +18,6 @@
 	<% Producto producto = (Producto) request.getAttribute("productoModificar");
 	%>
 
-	<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
-	<% if(null!=request.getAttribute("Message")){out.println(request.getAttribute("Message"));} %>
-
 	<!-- Register Section -->
 	<section id="register">
 	<div class="container">

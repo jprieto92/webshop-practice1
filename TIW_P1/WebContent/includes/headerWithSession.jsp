@@ -107,15 +107,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<img class="img-responsive" src="img/profileNew.png" alt="">
 				<div class="intro-text">
 					<span class="name">Shopify</span>
 					<hr class="star-light">
-					<span class="skills">Compra y vende todo lo que no uses</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	</header>
+	
+		<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
+	<% if(null!=request.getAttribute("Message")){out.println(request.getAttribute("Message"));} %>
+	
 </body>
 </html>

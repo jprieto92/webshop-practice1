@@ -33,9 +33,6 @@
 <body>
 <%@include file="includes/headerWithSession.jsp" %>
 
-<% String variable = (String) request.getAttribute("chatMessage"); %>
-<p>Me han pasado el siguiente mensaje: <%= variable %></p>
-
 <%@include file="includes/footer.jsp" %>
 </body>
 </html>

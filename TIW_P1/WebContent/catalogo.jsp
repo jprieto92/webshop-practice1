@@ -45,10 +45,6 @@
 <body>
 	<%@include file="includes/headerWithSession.jsp"%>
 
-	<% String variable = (String) request.getAttribute("catalogMessage"); %>
-	<p>
-		Me han pasado el siguiente mensaje:<%= variable %>
-	</p>
 	<section id="login">
 
 	<div class="completo">

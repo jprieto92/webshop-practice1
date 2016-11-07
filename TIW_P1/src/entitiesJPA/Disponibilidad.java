@@ -11,10 +11,16 @@ import java.util.List;
  */
 @Entity
 @Table(name="disponibilidad")
-@NamedQuery(name="Disponibilidad.findAll", query="SELECT d FROM Disponibilidad d")
+@NamedQueries({ 
+	@NamedQuery(name= Disponibilidad.BUSCAR_TODOS, query="SELECT d FROM Disponibilidad d"),
+	@NamedQuery(name = Disponibilidad.BUSCAR_DISPONIBILIDAD_ID, query = "SELECT d FROM Disponibilidad d where d.idDisponibilidad = :idDisponibilidad") })
 public class Disponibilidad implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+	// Nombre de las búsquedas mapeadas
+	public static final String BUSCAR_TODOS = "Disponibilidad.findAll";
+	public static final String BUSCAR_DISPONIBILIDAD_ID = "Disponibilidad.seleccionarProductId";
+	
 	@Id
 	@Column(name="id_disponibilidad")
 	private int idDisponibilidad;
@@ -74,6 +80,28 @@ public class Disponibilidad implements Serializable {
 		producto.setDisponibilidad(null);
 
 		return producto;
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+
+        Disponibilidad other = (Disponibilidad) obj;
+        
+		if(this.idDisponibilidad == other.getIdDisponibilidad()) return true;
+		
+		return false;
 	}
 
 }

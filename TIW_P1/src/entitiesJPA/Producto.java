@@ -16,7 +16,6 @@ import java.util.List;
 	@NamedQuery(name = Producto.BUSCAR_TODOS, query = "SELECT p FROM Producto p"),
 	@NamedQuery(name = Producto.BUSCAR_PRODUCT_ID, query = "SELECT p FROM Producto p where p.productId=:productId"),
 	@NamedQuery(name = Producto.BUSCAR_REALIZA_ENVIOS, query = "SELECT p FROM Producto p where p.envios=:envios"),
-	@NamedQuery(name = Producto.BUSCAR_FECHA_BAJA, query = "SELECT p FROM Producto p where p.fechaBaja=:fechaBaja"),
 	@NamedQuery(name = Producto.BUSCAR_FECHA_PUBLICACION, query = "SELECT p FROM Producto p where p.fechaPublicacion=:fechaPublicacion"),
 	@NamedQuery(name = Producto.BUSCAR_CATEGORIA, query = "SELECT p FROM Producto p where p.categoria=:categoria"),
 	@NamedQuery(name = Producto.BUSCAR_DISPONIBILIDAD, query = "SELECT p FROM Producto p where p.disponibilidad=:disponibilidad"),
@@ -29,7 +28,6 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_TODOS = "Producto.findAll";
 	public static final String BUSCAR_PRODUCT_ID = "Producto.seleccionarProductId";
 	public static final String BUSCAR_REALIZA_ENVIOS = "Producto.seleccionarRealizaEnvios";
-	public static final String BUSCAR_FECHA_BAJA = "Producto.seleccionarFechaBaja";
 	public static final String BUSCAR_FECHA_PUBLICACION = "Producto.seleccionarFechaPublicacion";
 	public static final String BUSCAR_CATEGORIA = "Producto.seleccionarCategoria";
 	public static final String BUSCAR_DISPONIBILIDAD = "Producto.seleccionarDisponibilidad";
@@ -44,10 +42,6 @@ public class Producto implements Serializable {
 	private String descripccion;
 
 	private String envios;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_baja")
-	private Date fechaBaja;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_publicacion")
@@ -107,14 +101,6 @@ public class Producto implements Serializable {
 
 	public void setEnvios(String envios) {
 		this.envios = envios;
-	}
-
-	public Date getFechaBaja() {
-		return this.fechaBaja;
-	}
-
-	public void setFechaBaja(Date fechaBaja) {
-		this.fechaBaja = fechaBaja;
 	}
 
 	public Date getFechaPublicacion() {
@@ -202,5 +188,6 @@ public class Producto implements Serializable {
 
 		return imagen;
 	}
+
 
 }

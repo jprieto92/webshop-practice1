@@ -6,10 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import entitiesJPA.Disponibilidad;
+import entitiesJPA.Producto;
 
 public class DisponibilidadManager {
 
@@ -60,5 +62,21 @@ public class DisponibilidadManager {
 		}
     	return consultaDisponibilidades.getResultList();
     }
+    
+	//Devuelve una disponibilidad dado su ID
+	public Disponibilidad buscarPorId(Integer idDisponibilidad) throws NoResultException {
+		Disponibilidad resultado;
+		EntityManager em = emf.createEntityManager();
+		try{
+			resultado = (Disponibilidad) em.find(Disponibilidad.class, idDisponibilidad);
+		}catch(NoResultException e){
+			e.printStackTrace();
+			throw new NoResultException();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+	}
     
 }

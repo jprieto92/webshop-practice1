@@ -46,11 +46,6 @@
 		<% if(variable!=null) out.println(variable); %>
 	</p>
 
-	<% String variable2 = (String) request.getAttribute("Message"); %>
-	<p>
-		<% if(variable2!=null) out.println(variable2); %>
-	</p>
-
 	<!-- Login Section -->
 	<section id="login">
 	<div class="container">

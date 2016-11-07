@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
 	private int telefono;
 
 	//bi-directional many-to-one association to Producto
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="usuario",  cascade = CascadeType.ALL)
 	private List<Producto> productos;
 
 	//bi-directional many-to-one association to TipoUsuario

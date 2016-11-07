@@ -44,9 +44,6 @@
 	<!--  Se recupera la entidad usuario de la sesión -->
 	<% Usuario usuario = (Usuario) session.getAttribute("entityUser"); %>
 
-	<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
-	<% if(request.getAttribute("Message")!=null){out.println(request.getAttribute("Message"));} %>
-
 	<!-- Register Section -->
 	<section id="register">
 	<div class="container">
