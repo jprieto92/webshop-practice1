@@ -72,10 +72,6 @@ public class Producto implements Serializable {
 	@JoinColumn(name="email_usuario_propietario")
 	private Usuario usuario;
 
-	//bi-directional many-to-one association to Imagen
-	@OneToMany(mappedBy="producto")
-	private List<Imagen> imagens;
-
 	public Producto() {
 	}
 
@@ -165,28 +161,6 @@ public class Producto implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public List<Imagen> getImagens() {
-		return this.imagens;
-	}
-
-	public void setImagens(List<Imagen> imagens) {
-		this.imagens = imagens;
-	}
-
-	public Imagen addImagen(Imagen imagen) {
-		getImagens().add(imagen);
-		imagen.setProducto(this);
-
-		return imagen;
-	}
-
-	public Imagen removeImagen(Imagen imagen) {
-		getImagens().remove(imagen);
-		imagen.setProducto(null);
-
-		return imagen;
 	}
 
 
