@@ -152,11 +152,8 @@ public class ProductManager {
 	public Disponibilidad buscarDisponibilidadPorId(Integer idProducto) throws NoResultException {
 		Producto resultado;
 		EntityManager em = emf.createEntityManager();
-		System.out.println("prueba antes del try");
 		try{
-			Query query = em.createNamedQuery(Producto.BUSCAR_PRODUCT_ID,Producto.class);
-			query.setParameter("productId", idProducto);
-			resultado = (Producto) query.getSingleResult();
+			resultado = em.find(Producto.class, idProducto);
 		}catch(NoResultException e){
 			e.printStackTrace();
 			throw new NoResultException();		
@@ -173,9 +170,7 @@ public class ProductManager {
 		try {
 			productoBBDD = em.find(Producto.class, idProducto);
 			em.getTransaction().begin();
-			System.out.println("Antes del remove");
 			em.remove(productoBBDD);
-			System.out.println("Despues del remove");
 			em.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -183,5 +178,73 @@ public class ProductManager {
 			throw ex;
 		}
 		return "El producto con id "+idProducto+" se ha dado de baja correctamente";
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	public List<Producto> buscarPor(String tipoFiltrado, String terminoFiltrado) throws NoResultException {
+		List<Producto> resultado;
+		String tipoQuery = null;
+		String parameter = null;
+		String parameter2 = null;
+		
+		//Para el caso en el que la busqueda es de todos los productos
+		if(tipoFiltrado==null){
+			tipoFiltrado = "busquedaTodos";
+		}
+		if(terminoFiltrado==null){
+			terminoFiltrado="";
+		}
+		
+		//Se añade el caracter comodín a ambos lados del término de búsqueda
+		terminoFiltrado = "%"+terminoFiltrado+"%";
+		
+		//Seleccionamos el tipo de query
+		switch(tipoFiltrado){
+		case "busquedaPorTituloDescripccion": 
+			tipoQuery = Producto.BUSCAR_TITULO_Y_DESCRIPCCION;
+			parameter = "titulo";
+			parameter2 = "descripccion";
+			break;
+		case "busquedaPorCategoria":
+			tipoQuery = Producto.BUSCAR_CATEGORIA;
+			break;
+		case "busquedaPorCiudad":
+//			tipoQuery = Producto.BUSCAR_CIUDAD;
+			break;
+		case "busquedaPorIdUsuario":
+			tipoQuery = Producto.BUSCAR_USUARIO_PROPIETARIO;
+			break;
+		case "busquedaPorTitulo":
+			tipoQuery = Producto.BUSCAR_TITULO;
+			break;
+		case "busquedaPorDescripccion":
+			tipoQuery = Producto.BUSCAR_DESCRIPCCION;
+			break;
+		case "busquedaTodos":
+			tipoQuery = Producto.BUSCAR_TODOS;
+			break;
+		}
+		
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(tipoQuery,Producto.class);
+			
+			//Si la query es distinta de buscar todos, se añadirá el primer parametro
+			if(!tipoFiltrado.equals("busquedaTodos")){
+				query.setParameter(parameter, terminoFiltrado);
+			}
+			//Solo en el caso de la query de busqueda por titulo y descripccion, tendrá un 2º parámetro
+			if(tipoFiltrado.equals("busquedaPorTituloDescripccion")){
+				query.setParameter(parameter2, terminoFiltrado);
+			}
+			resultado = query.getResultList();
+		}catch(NoResultException e){
+			throw new NoResultException();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
 	}
 }

@@ -15,7 +15,7 @@
 <meta name="author" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Freelancer - Start Bootstrap Theme</title>
+<title>Catálogo</title>
 <link href="css/my_style.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,6 +55,25 @@
                     <hr class="star-primary">
                 </div>
             </div>
+            <div class="row">
+
+			<form action="ControllerServlet" name="formProductos" novalidate method="post">
+				<input type="hidden" name="pAccion" value="buscarProductos">
+				<input type="hidden" name="tipoBusqueda" value="busquedaPorTituloDescripccion">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<input type="text"
+								class="form-control" placeholder="Término de búsqueda" id="campoBusqueda"
+								name="campoBusqueda" required
+								data-validation-required-message="Please enter your email address.">
+						<p></p>
+						<button type="submit" class="btn btn-success btn-lg">Buscar</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
             <div class="row">
                 		<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
 			for(Producto producto : listaProductos){%>

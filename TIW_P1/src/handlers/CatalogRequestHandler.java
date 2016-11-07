@@ -9,19 +9,23 @@ import entityManagers.ProductManager;
 
 public class CatalogRequestHandler extends ActionHandler {
 	
-	public void execute () throws Exception {
-		request.setAttribute("catalogMessage", "Si estás leyendo esto, es porque la petición ha sido leida por el manejador de catálogo.");
+	public void execute () throws Exception {		
+		String tipoFiltrado = request.getParameter("tipoBusqueda");
+		String terminoFiltrado = request.getParameter("campoBusqueda");
+
+		String message = "";
 		
 		List<Producto> productos;
 		ProductManager gestorDatos = new ProductManager();
 		try {
-			productos = gestorDatos.buscarTodos();
+			productos = gestorDatos.buscarPor(tipoFiltrado, terminoFiltrado);
 		}catch(NoResultException e){
-			e.printStackTrace();
-			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
-			request.setAttribute("catalogMessage", "Ha habido un error mostrando los productos");
+			message = "No existen productos que cumplan con el criterio de búsqueda";
 			throw new NoResultException("Error en la muestra de los productos en el catalogo");
 		}
+		finally{
+			request.setAttribute("Message", message);
+ 		}
 
 		request.setAttribute("listaDeProductos", productos);
 	}
