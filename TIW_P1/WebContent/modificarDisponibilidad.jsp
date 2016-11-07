@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Modificar producto</title>
+<title>Modificar disponibilidad</title>
 </head>
 <body>
 	<%@include file="includes/headerWithSession.jsp"%>

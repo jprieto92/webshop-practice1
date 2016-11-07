@@ -10,7 +10,7 @@
 <meta name="author" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Freelancer - Start Bootstrap Theme</title>
+<title>SHOPIFY</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -191,6 +191,13 @@
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
+					<div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls ">
+                                <label>Imagen perfil</label>
+                                <input type="file" class="form-control" placeholder="Imagen de perfil" id="imagenPerfil" name="imagenPerfil">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
 
 					<input type="hidden" name="pAccion" value="register"> <br>
 					<div id="success"></div>

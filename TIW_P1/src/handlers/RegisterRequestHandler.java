@@ -1,5 +1,7 @@
 package handlers;
 
+import javax.servlet.http.Part;
+
 import entitiesJPA.TipoUsuario;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
@@ -11,10 +13,18 @@ public class RegisterRequestHandler extends ActionHandler {
 		//Creamos un entidad con TipoUsuario con ID 1, que user normal
 		TipoUsuario tipoUsuario = new TipoUsuario();
 		tipoUsuario.setId_tipoUsuario(1);
-
-
+		
 		//Rellenamos la entidad usuario con los datos proporcionados en el formulario y datos de control
 		Usuario usuarioAInsertar  = new Usuario();
+		
+		//Se recogen las imagenes
+		Part filePart = request.getPart("imagen1Producto");
+		// El tamaño de un array en Java es máximo Integer.maxValue por lo tanto la manera que lo
+		// he hecho tenemos una limitación de maximo de 2 GB en el fichero si tiene que ser más grande
+		// hay que buscar otra manera.
+		byte[] data = new byte[(int) filePart.getSize()];
+		filePart.getInputStream().read(data, 0, data.length);
+		usuarioAInsertar.setImagenPerfil(data);		
 		usuarioAInsertar.setApellido1((String)request.getParameter("apellido1"));
 		usuarioAInsertar.setApellido2((String)request.getParameter("apellido2"));
 		usuarioAInsertar.setNombre((String)request.getParameter("name"));

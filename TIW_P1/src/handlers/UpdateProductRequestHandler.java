@@ -6,6 +6,7 @@ import javax.servlet.http.Part;
 
 import entitiesJPA.Categoria;
 import entitiesJPA.Producto;
+import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
@@ -18,13 +19,9 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 		int idP= Integer.parseInt(request.getParameter("idProducto"));
 		String tituloNuevo = request.getParameter("tituloProducto");
 		String descripcionNueva = request.getParameter("descripcionProducto");
-		//Se recogen las imagenes
-		Part filePart = request.getPart("imagen1Producto");
 		// El tamaño de un array en Java es máximo Integer.maxValue por lo tanto la manera que lo
 		// he hecho tenemos una limitación de maximo de 2 GB en el fichero si tiene que ser más grande
 		// hay que buscar otra manera.
-		byte[] data = new byte[(int) filePart.getSize()];
-		filePart.getInputStream().read(data, 0, data.length);
 				
 		
 
@@ -47,22 +44,33 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 		finally{
 			request.setAttribute("Message", message);
  		}
+		//Se recogen las imagenes
+		Part filePart = request.getPart("imagen1Producto");
+		System.out.println("hola guapa tienes whats app?"+filePart);
+		if(filePart.getSize() != 0){
+			
+			byte[] data = new byte[(int) filePart.getSize()];
+			filePart.getInputStream().read(data, 0, data.length);
+			productoBBDD.setImagen(data);
+		}
 		
-//		//Actualizamos los datos del usuarioBBDD acorde a las modificaciones solicitadas
-//		if(nuevaContraseña!= null){
-//			usuarioBBDD.setContraseña(nuevaContraseña);
-//		}
 		productoBBDD.setTitulo(tituloNuevo);
 		productoBBDD.setDescripccion(descripcionNueva);
-		productoBBDD.setImagen(data);
 		productoBBDD.setPrecio(Integer.parseInt(request.getParameter("precioProducto")));
 		productoBBDD.setPrecioNegociable((String) request.getParameter("precioNegociable"));
 		productoBBDD.setEnvios((String) request.getParameter("realizaEnviosProducto"));
 		
 		//Se asocia con la categoria (por ahora la ponemos por defecto de prueba)
-		Categoria categoria = new Categoria();
-		categoria.setIdCategoria(1);
+		//Categoria categoria = new Categoria();
+		//categoria.setIdCategoria(1);
+		//productoBBDD.setCategoria(categoria);
+		//Se asocia con la categoria (por ahora la ponemos por defecto de prueba)
+		CategoriaManager categoriaManager= new CategoriaManager();
+		int idCategoria= Integer.parseInt(request.getParameter("categoriaProducto"));
+		Categoria categoria = categoriaManager.buscarPorId(idCategoria);		
+		//categoria.setIdCategoria(idCategoria);
 		productoBBDD.setCategoria(categoria);
+		
 		
 //		//Actualizamos el usuario en la BBDD
 		try{
