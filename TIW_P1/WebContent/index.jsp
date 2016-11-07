@@ -100,7 +100,7 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2>Registro</h2>
-				<hr class="star-light">
+				<hr class="star-primary">
 			</div>
 		</div>
 		<div class="row">
@@ -135,7 +135,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label> Verificar Contraseña</label> <input type="password"
-								class="form-control" placeholder="VerficiarContraseña"
+								class="form-control" placeholder="Verficar Contraseña"
 								id="verifypass" name="verifypass" required
 								data-validation-required-message="Por favor, introduce otra vez tu contraseña.">
 							<p class="help-block text-danger"></p>

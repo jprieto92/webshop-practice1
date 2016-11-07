@@ -37,8 +37,7 @@
 					<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 					
 					<div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Categoria</label>
+                                <p>Categoria</p>
                                 <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                 	for(Categoria categoria : listaCategorias){
