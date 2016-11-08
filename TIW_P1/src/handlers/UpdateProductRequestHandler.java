@@ -46,7 +46,6 @@ public class UpdateProductRequestHandler  extends ActionHandler{
  		}
 		//Se recogen las imagenes
 		Part filePart = request.getPart("imagen1Producto");
-		System.out.println("hola guapa tienes whats app?"+filePart);
 		if(filePart.getSize() != 0){
 			
 			byte[] data = new byte[(int) filePart.getSize()];
