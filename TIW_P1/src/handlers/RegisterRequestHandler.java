@@ -18,13 +18,12 @@ public class RegisterRequestHandler extends ActionHandler {
 		Usuario usuarioAInsertar  = new Usuario();
 		
 		//Se recogen las imagenes
-		Part filePart = request.getPart("imagen1Producto");
-		// El tamaño de un array en Java es máximo Integer.maxValue por lo tanto la manera que lo
-		// he hecho tenemos una limitación de maximo de 2 GB en el fichero si tiene que ser más grande
-		// hay que buscar otra manera.
-		byte[] data = new byte[(int) filePart.getSize()];
-		filePart.getInputStream().read(data, 0, data.length);
-		usuarioAInsertar.setImagenPerfil(data);		
+		Part filePart = request.getPart("imagenPerfil");
+		if(filePart.getSize() != 0){			
+			byte[] data = new byte[(int) filePart.getSize()];
+			filePart.getInputStream().read(data, 0, data.length);
+			usuarioAInsertar.setImagenPerfil(data);;
+		}	
 		usuarioAInsertar.setApellido1((String)request.getParameter("apellido1"));
 		usuarioAInsertar.setApellido2((String)request.getParameter("apellido2"));
 		usuarioAInsertar.setNombre((String)request.getParameter("name"));

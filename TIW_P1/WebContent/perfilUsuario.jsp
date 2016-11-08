@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entitiesJPA.Usuario"%>
+<%@page import="utilidades.UtilidadesImagen" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,7 +60,22 @@
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 				<form name="sentMessage" action="ControllerServlet" id="contactForm"
-					novalidate method="post">
+					novalidate method="post" enctype="multipart/form-data">
+					
+					<div class="row control-group">
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagenPerfil(usuario)); %>">
+						</div>
+					</div>
+					
+					<div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls ">
+                                <input type="file" class="form-control" placeholder="Imagen de perfil" id="imagenPerfil" name="imagenPerfil" >
+                                <p class="help-block text-danger"></p>
+                            </div>
+                    </div>
+					
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">

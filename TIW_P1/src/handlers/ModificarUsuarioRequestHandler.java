@@ -3,6 +3,8 @@ package handlers;
 
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
@@ -43,6 +45,12 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		//Actualizamos los datos del usuarioBBDD acorde a las modificaciones solicitadas
 		if(nuevaContraseña!= null){
 			usuarioBBDD.setContraseña(nuevaContraseña);
+		}
+		Part filePart = request.getPart("imagenPerfil");
+		if(filePart.getSize() != 0){			
+			byte[] data = new byte[(int) filePart.getSize()];
+			filePart.getInputStream().read(data, 0, data.length);
+			usuarioBBDD.setImagenPerfil(data);;
 		}
 		usuarioBBDD.setNombre(nuevoNombre);
 		usuarioBBDD.setApellido1(nuevoApellido1);
