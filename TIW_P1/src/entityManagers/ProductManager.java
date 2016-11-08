@@ -114,15 +114,26 @@ public class ProductManager {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Producto> buscarTodos() throws NoResultException {
+	public List<Producto> buscarTodos() throws Exception {
 		List<Producto> resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
 			Query query = em.createNamedQuery(Producto.BUSCAR_TODOS,Producto.class);
 			resultado = query.getResultList();
-		}catch(NoResultException e){
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen productos.");
+			}
+		}catch(IllegalStateException e){
 			e.printStackTrace();
-			throw new NoResultException();		
+			throw new IllegalStateException("Error en los parámetros de la query de Producto.buscarPor");		
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
 		}
 		finally {
 			em.close();
@@ -182,7 +193,7 @@ public class ProductManager {
 
 	
 	@SuppressWarnings("unchecked")
-	public List<Producto> buscarPor(String tipoFiltrado, String terminoFiltrado) throws NoResultException {
+	public List<Producto> buscarPor(String tipoFiltrado, String terminoFiltrado) throws Exception {
 		List<Producto> resultado;
 		String tipoQuery = null;
 		String parameter = null;
@@ -202,11 +213,12 @@ public class ProductManager {
 			tipoQuery = Producto.BUSCAR_CATEGORIA;
 			break;
 		case "busquedaPorCiudad":
-//			tipoQuery = Producto.BUSCAR_CIUDAD;
+			tipoQuery = Producto.BUSCAR__POR_CIUDAD;
+			parameter = "ciudad";
 			break;
-		case "busquedaPorIdUsuario":
-			tipoQuery = Producto.BUSCAR_USUARIO_PROPIETARIO;
-			parameter = "titulo";
+		case "busquedaPorNombreUsuario":
+			tipoQuery = Producto.BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE;
+			parameter = "nombre";
 			break;
 		case "busquedaPorTitulo":
 			tipoQuery = Producto.BUSCAR_TITULO;
@@ -226,10 +238,21 @@ public class ProductManager {
 			if(tipoFiltrado.equals("busquedaPorTituloDescripccion")){
 				query.setParameter(parameter2, terminoFiltrado);
 			}
-			
 			resultado = query.getResultList();
-		}catch(NoResultException e){
-			throw new NoResultException();		
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen productos que cumplan con el criterio de búsqueda.");
+			}
+		}catch(IllegalStateException e){
+			e.printStackTrace();
+			throw new IllegalStateException("Error en los parámetros de la query de Producto.buscarPor");		
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
 		}
 		finally {
 			em.close();

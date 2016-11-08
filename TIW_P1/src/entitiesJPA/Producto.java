@@ -21,9 +21,14 @@ import java.util.Date;
 	//Los parámetros deben contener % a cada uno de los lados
 	@NamedQuery(name = Producto.BUSCAR_DESCRIPCCION, query = "SELECT p FROM Producto p where p.descripccion LIKE :descripccion"),
 	@NamedQuery(name = Producto.BUSCAR_TITULO_Y_DESCRIPCCION, query = "SELECT p FROM Producto p where p.titulo LIKE :titulo OR p.descripccion LIKE :descripccion"),
-	@NamedQuery(name = Producto.BUSCAR_TITULO, query = "SELECT p FROM Producto p where p.titulo LIKE :titulo") })
-public class Producto implements Serializable {
+	@NamedQuery(name = Producto.BUSCAR_TITULO, query = "SELECT p FROM Producto p where p.titulo LIKE :titulo"),
+	@NamedQuery(name = Producto.BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE u.nombre  LIKE :nombre"),
+	@NamedQuery(name = Producto.BUSCAR__POR_CIUDAD, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE u.ciudad  LIKE :ciudad")
 
+})
+public class Producto implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	// Nombre de las búsquedas mapeadas
 	public static final String BUSCAR_TODOS = "Producto.findAll";
 	public static final String BUSCAR_REALIZA_ENVIOS = "Producto.seleccionarRealizaEnvios";
@@ -34,7 +39,9 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_DESCRIPCCION = "Producto.seleccionarDescripccion";
 	public static final String BUSCAR_TITULO_Y_DESCRIPCCION = "Producto.seleccionarTituloYDescripccion";
 	public static final String BUSCAR_TITULO = "Producto.seleccionarTitulo";
-	private static final long serialVersionUID = 1L;
+	
+	public static final String BUSCAR__POR_CIUDAD = "Producto.seleccionarPorCiudad";
+	public static final String BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE = "Producto.seleccionarPorNombreUsuario";
 
 	@Id
 	@Column(name="product_id")

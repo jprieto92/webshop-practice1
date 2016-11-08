@@ -137,7 +137,7 @@
 				<form action="ControllerServlet" name="formProductos" novalidate
 					method="post">
 					<input type="hidden" name="pAccion" value="buscarProductosAvanzada">
-					<input type="hidden" name="tipoBusqueda" value="busquedaPorIdUsuario">
+					<input type="hidden" name="tipoBusqueda" value="busquedaPorNombreUsuario">
 					<div id="success"></div>
 					<div class="row">
 						<div class="form-group col-xs-12">
@@ -199,6 +199,7 @@
 
 		<div class="row">
 				<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
+				if(listaProductos!=null){
 			for(Producto producto : listaProductos){%>
 
 
@@ -226,7 +227,7 @@
 					</form>
 				</div>
 
-				<%} %>
+				<%}} %>
 			</div>
 		</div>
 	</section>
