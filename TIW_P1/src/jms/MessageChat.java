@@ -1,6 +1,8 @@
 package jms;
 
-public class MessageChat {
+import java.io.Serializable;
+
+public class MessageChat implements Serializable {
 	private String author;	 // Autor del mensaje
 	private String receiver; // Receptor destinatario del mensaje
 	private String reason;	 // Motivo del mensaje
@@ -12,6 +14,7 @@ public class MessageChat {
 		this.author = author;
 		this.receiver = receiver;
 		this.text = text;
+		this.reason="";
 	}
 
 	public String getAuthor() {
@@ -60,6 +63,18 @@ public class MessageChat {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+	
+	public void escrituraJMS(MessageChat mensaje)
+	{
+		
+		
+	}
+	
+	public MessageChat lecturaJMS(String destinatario){
+		MessageChat mensaje = null;
+		
+		return mensaje;
 	}
 	
 	
