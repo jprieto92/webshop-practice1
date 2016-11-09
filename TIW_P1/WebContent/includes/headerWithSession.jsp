@@ -119,5 +119,6 @@
 		<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
 	<% if(null!=request.getAttribute("Message")){out.println(request.getAttribute("Message"));} %>
 	
+	
 </body>
 </html>
