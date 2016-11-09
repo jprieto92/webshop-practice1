@@ -16,6 +16,7 @@ import java.util.Date;
 	@NamedQuery(name = Producto.BUSCAR_REALIZA_ENVIOS, query = "SELECT p FROM Producto p where p.envios=:envios"),
 	@NamedQuery(name = Producto.BUSCAR_FECHA_PUBLICACION, query = "SELECT p FROM Producto p where p.fechaPublicacion=:fechaPublicacion"),
 	@NamedQuery(name = Producto.BUSCAR_CATEGORIA, query = "SELECT p FROM Producto p where p.categoria=:categoria"),
+	@NamedQuery(name = Producto.BUSCAR_CATEGORIA_LIKE, query = "SELECT p FROM Producto p where p.categoria.nombre LIKE :categoria"),
 	@NamedQuery(name = Producto.BUSCAR_DISPONIBILIDAD, query = "SELECT p FROM Producto p where p.disponibilidad=:disponibilidad"),
 	@NamedQuery(name = Producto.BUSCAR_USUARIO_PROPIETARIO, query = "SELECT p FROM Producto p where p.usuario=:usuario"),
 	//Los parámetros deben contener % a cada uno de los lados
@@ -34,6 +35,7 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_REALIZA_ENVIOS = "Producto.seleccionarRealizaEnvios";
 	public static final String BUSCAR_FECHA_PUBLICACION = "Producto.seleccionarFechaPublicacion";
 	public static final String BUSCAR_CATEGORIA = "Producto.seleccionarCategoria";
+	public static final String BUSCAR_CATEGORIA_LIKE = "Producto.seleccionarCategoriaLike";
 	public static final String BUSCAR_DISPONIBILIDAD = "Producto.seleccionarDisponibilidad";
 	public static final String BUSCAR_USUARIO_PROPIETARIO = "Producto.seleccionarUsuarioPropietario";
 	public static final String BUSCAR_DESCRIPCCION = "Producto.seleccionarDescripccion";

@@ -14,12 +14,14 @@ import java.util.List;
 
 @NamedQueries({ 
 	@NamedQuery(name = Categoria.BUSCAR_TODOS, query="SELECT c FROM Categoria c"),
+	@NamedQuery(name = Categoria.BUSCAR_TODOS_SOLO_ID_Y_NOMBRE, query="SELECT c.idCategoria, c.nombre FROM Categoria c")
 	})
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// Nombre de las búsquedas mapeadas
 	public static final String BUSCAR_TODOS = "Categoria.findAll";
+	public static final String BUSCAR_TODOS_SOLO_ID_Y_NOMBRE = "Categoria.todos_solo_id_nombre";
 	@Id
 	@Column(name="id_categoria")
 	private int idCategoria;

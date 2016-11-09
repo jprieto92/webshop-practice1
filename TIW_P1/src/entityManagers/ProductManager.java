@@ -7,9 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
-import javax.persistence.TypedQuery;
-
 import entitiesJPA.Disponibilidad;
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
@@ -92,20 +89,32 @@ public class ProductManager {
 			em.close();
 		}
 		return resultado;
-	}*/
+	}
+	 * @throws Exception */
 	
 	//Devuelve una lista de productos dado una entidad usuario
 	@SuppressWarnings("unchecked")
-	public List<Producto> buscarPorUsuario(Usuario usuario) throws NoResultException {
+	
+	
+	
+	public List<Producto> buscarPorUsuario(Usuario usuario) throws Exception {
 		List<Producto> resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
 			Query query = em.createNamedQuery(Producto.BUSCAR_USUARIO_PROPIETARIO,Producto.class);
 			query.setParameter("usuario", usuario);
 			resultado = query.getResultList();
-		}catch(NoResultException e){
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen productos.");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
 			e.printStackTrace();
-			throw new NoResultException();		
+			throw new Exception();		
 		}
 		finally {
 			em.close();
@@ -124,9 +133,6 @@ public class ProductManager {
 			if(resultado.size()==0){
 				throw new NoResultException("No existen productos.");
 			}
-		}catch(IllegalStateException e){
-			e.printStackTrace();
-			throw new IllegalStateException("Error en los parámetros de la query de Producto.buscarPor");		
 		}
 		catch(NoResultException e){
 			throw new NoResultException(e.getMessage());		
@@ -143,14 +149,22 @@ public class ProductManager {
 	
 	
 	//Devuelve un producto dado un ID de producto
-	public Producto buscarPorId(Integer idProducto) throws NoResultException {
+	public Producto buscarPorId(Integer idProducto) throws Exception {
 		Producto resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
 			resultado = (Producto) em.find(Producto.class, idProducto);
-		}catch(NoResultException e){
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado==null){
+				throw new NoResultException("No existe disponibilidad dado el id de producto.");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
 			e.printStackTrace();
-			throw new NoResultException();		
+			throw new Exception();		
 		}
 		finally {
 			em.close();
@@ -160,14 +174,22 @@ public class ProductManager {
 
 	
 	//Devuelve una disponibilidad dado un idProducto
-	public Disponibilidad buscarDisponibilidadPorId(Integer idProducto) throws NoResultException {
+	public Disponibilidad buscarDisponibilidadPorId(Integer idProducto) throws Exception {
 		Producto resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
 			resultado = em.find(Producto.class, idProducto);
-		}catch(NoResultException e){
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado==null){
+				throw new NoResultException("No existe disponibilidad dado el id de producto.");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
 			e.printStackTrace();
-			throw new NoResultException();		
+			throw new Exception();		
 		}
 		finally {
 			em.close();
@@ -210,7 +232,8 @@ public class ProductManager {
 			parameter2 = "descripccion";
 			break;
 		case "busquedaPorCategoria":
-			tipoQuery = Producto.BUSCAR_CATEGORIA;
+			tipoQuery = Producto.BUSCAR_CATEGORIA_LIKE;
+			parameter = "categoria";
 			break;
 		case "busquedaPorCiudad":
 			tipoQuery = Producto.BUSCAR__POR_CIUDAD;
