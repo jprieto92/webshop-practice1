@@ -26,7 +26,7 @@ public class ShowFormModificarProductoRequestHandler extends ActionHandler {
 			productoBBDD =  gestorProducto.buscarPorId(Integer.parseInt(idProducto));
 		}
 		catch(NoResultException e){
-			message.concat(" ."+"No existe el producto");
+			message = message+" ."+"No existe el producto";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -38,7 +38,7 @@ public class ShowFormModificarProductoRequestHandler extends ActionHandler {
 			categoriasBBDD =  gestorCategorias.buscarTodas();
 		}
 		catch(NoResultException e){
-			message.concat(" ."+"No existen categorias");
+			message = message+" ."+"No existen categorias";
 			throw new NoResultException(message);
 		}
 		finally{

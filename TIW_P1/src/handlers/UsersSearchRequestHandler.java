@@ -9,7 +9,7 @@ public class UsersSearchRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
 		if(message == null){
 			message = "";
 		}
@@ -22,7 +22,7 @@ public class UsersSearchRequestHandler extends ActionHandler {
 		try {
 			usuarios = gestorDatosUsuario.buscarPorNombre(terminoFiltrado);
 		}catch(NoResultException e){
-			message.concat(" ."+e.getMessage()) ;
+			message = message+" ."+e.getMessage();
 			throw new NoResultException(message);
 		}
 		finally{

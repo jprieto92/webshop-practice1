@@ -13,7 +13,7 @@ public class SentMessageRequestHandler extends ActionHandler {
 		
 		
 		//	}catch(NoResultException e){
-		//		message.concat(" ."+e.getMessage()) ;
+		//		message = message+" ."+e.getMessage();
 		//		throw new NoResultException(e.getMessage());
 		//	}
 		//	finally{

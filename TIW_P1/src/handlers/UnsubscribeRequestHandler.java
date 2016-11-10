@@ -1,13 +1,12 @@
 package handlers;
 
-import javax.servlet.http.HttpSession;
 import entityManagers.UserManager;
 
 public class UnsubscribeRequestHandler extends ActionHandler {
 
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
 		if(message == null){
 			message = "";
 		}
@@ -23,7 +22,7 @@ public class UnsubscribeRequestHandler extends ActionHandler {
 			message = userManager.darDeBaja(emailUsuario);
 		}
 		catch(Exception e){
-			message.concat(" ."+"Error en la baja del usuario");
+			message = message+" ."+"Error en la baja del usuario";
 			throw new Exception(message);
 		}
 		finally{

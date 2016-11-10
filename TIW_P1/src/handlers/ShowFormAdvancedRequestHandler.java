@@ -19,7 +19,7 @@ public class ShowFormAdvancedRequestHandler extends ActionHandler {
 		try{
 			categoriasBBDD =  gestorCategorias.buscarTodas();
 		}catch(NoResultException e){
-			message.concat(" ."+"No existen categorias");
+			message = message+" ."+"No existen categorias";
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

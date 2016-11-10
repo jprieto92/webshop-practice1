@@ -1,14 +1,12 @@
 package handlers;
 
 import javax.persistence.NoResultException;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
 import entitiesJPA.Categoria;
 import entitiesJPA.Producto;
 import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
-import entityManagers.UserManager;
+
 
 public class UpdateProductRequestHandler  extends ActionHandler{
 
@@ -34,7 +32,7 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 			productoBBDD = productManager.buscarPorId(idP);
 		}
 		catch(NoResultException e){
-			message.concat("Error en la modificación del producto");
+			message = message+" ."+"Error en la modificación del producto";
 			throw new NoResultException(message);
  		}
 		finally{
@@ -48,7 +46,7 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 			categoria = categoriaManager.buscarPorId(idCategoria);
 		}
 		catch(Exception e){
-			message.concat(" ."+e.getMessage()) ;
+			message = message+" ."+e.getMessage();
 			throw new Exception(message);
  		}
 		finally{
@@ -75,7 +73,7 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 			message = productManager.modificar(productoBBDD);
 		}
 		catch(Exception e){
-			message.concat(" ."+"Error en la actualización del producto");
+			message = message+" ."+"Error en la actualización del producto";
 			throw new Exception(message);
  		}
 		finally{

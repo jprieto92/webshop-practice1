@@ -21,7 +21,7 @@ public class ShowFormMostrarProducto  extends ActionHandler{
 			productoBBDD =  gestorProducto.buscarPorId(Integer.parseInt(idProducto));
 		}
 		catch(NoResultException e){
-			message.concat(" ."+"No exisgte el producto") ;
+			message = message+" ."+"No exisgte el producto";
 			throw new NoResultException(message);
 		}
 		finally{

@@ -22,7 +22,7 @@ public class ShowFormModificarUsuarioRequestHandler  extends ActionHandler{
 			usuarioBBDD = userManager.buscarPorEmail(emailUsuario);
 
 		}catch(NoResultException e){
-			message.concat(" ."+e.getMessage());
+			message = message+" ."+e.getMessage();
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

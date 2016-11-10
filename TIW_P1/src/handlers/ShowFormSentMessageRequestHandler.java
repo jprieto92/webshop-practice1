@@ -1,15 +1,11 @@
 package handlers;
 
-import java.util.List;
+
 
 import javax.persistence.NoResultException;
-
-import entitiesJPA.Categoria;
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
-import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
-import entityManagers.UserManager;
 import handlers.ActionHandler;
 
 public class ShowFormSentMessageRequestHandler extends ActionHandler {
@@ -33,7 +29,7 @@ public class ShowFormSentMessageRequestHandler extends ActionHandler {
 			destinatario = productoBBDD.getUsuario();	
 		}
 		catch(NoResultException e){
-			message.concat(" ."+"No se puede obtener el propietario o producto");
+			message = message+" ."+"No se puede obtener el propietario o producto";
 			throw new NoResultException(message);
 		}
 		request.setAttribute("destinatario", destinatario);

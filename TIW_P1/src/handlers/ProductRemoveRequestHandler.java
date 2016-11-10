@@ -8,7 +8,7 @@ public class ProductRemoveRequestHandler  extends ActionHandler{
 	@Override
 	public void execute() throws Exception {		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
 		if(message == null){
 			message = "";
 		}
@@ -19,9 +19,9 @@ public class ProductRemoveRequestHandler  extends ActionHandler{
 		//Se borra el producto de la BBDD
 		ProductManager gestorDatos = new ProductManager();
 		try {
-			message = gestorDatos.darDeBaja(idProducto);
+			message = message+" ."+gestorDatos.darDeBaja(idProducto);
 		}catch(NoResultException e){
-			message = e.getMessage();
+			message = message+" ."+e.getMessage();
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

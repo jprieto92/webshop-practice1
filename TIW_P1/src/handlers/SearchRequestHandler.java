@@ -23,7 +23,7 @@ public class SearchRequestHandler extends ActionHandler {
 		try {
 			productos = gestorDatos.buscarPor(tipoFiltrado, terminoFiltrado);
 		}catch(NoResultException e){
-			message.concat(" ."+e.getMessage()) ;
+			message = message+" ."+e.getMessage();
 			throw new NoResultException(e.getMessage());
 		}
 		finally{
