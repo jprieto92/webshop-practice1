@@ -11,10 +11,6 @@ public class ProductRemoveAdminRequestHandler  extends ActionHandler{
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = "";
 		
-		//Se recupera el email del usuario de la sesion
-		HttpSession session = request.getSession(false);
-		String emailUsuarioSession =  (String) session.getAttribute("userEmailSession");
-		
 		//Se recupera el id del producto
 		Integer idProducto = Integer.parseInt(request.getParameter("idProducto"));
 		

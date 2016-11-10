@@ -111,7 +111,7 @@
 
 				<form action="ControllerAdminServlet" name="formModificarProducto"
 					novalidate method="post">
-					<input type="hidden" name="pAccion" value="modificarUsuarioAdmin">
+					<input type="hidden" name="pAccion" value="mostrarPerfilAdmin">
 					<input type="hidden" name="idUsuario"
 						value="<%out.print(usuario.getEmail());%>">
 					<div id="success"></div>
@@ -132,8 +132,7 @@
 							<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
 						</div>
 					</div>
-				</form>
-
+				</form>		
 			</div>
 
 			<%

@@ -43,7 +43,7 @@
 
 
 	<!--  Se recupera la entidad usuario de la sesión -->
-	<% Usuario usuario = (Usuario) session.getAttribute("entityUser"); %>
+	<% Usuario usuario = (Usuario) request.getAttribute("userEntity"); %>
 
 	<!-- Register Section -->
 	<section id="register">
@@ -59,7 +59,7 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-				<form name="sentMessage" action="ControllerServlet" id="contactForm"
+				<form name="sentMessage" action="ControllerAdminServlet" id="contactForm"
 					novalidate method="post" enctype="multipart/form-data">
 					
 					<div class="row control-group">
@@ -157,36 +157,6 @@
 					<div class="row">
 						<div class="form-group col-xs-12">
 							<button type="submit" class="btn btn-success btn-lg">Modificar</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	</section>
-
-	<!-- Unsubscribe Section -->
-	<section id="unsubscribe">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h2>Dar de baja usuario</h2>
-				<hr class="star-light">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2">
-				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-				<form name="sentMessage" action="ControllerServlet" id="contactForm"
-					novalidate method="post">
-					<input type="hidden" name="pAccion" value="darBajaUsuario">
-					<br>
-					<div id="success"></div>
-					<div class="row">
-						<div class="form-group col-xs-12">
-							<button type="submit" class="btn btn-success btn-lg">Dar
-								de baja</button>
 						</div>
 					</div>
 				</form>
