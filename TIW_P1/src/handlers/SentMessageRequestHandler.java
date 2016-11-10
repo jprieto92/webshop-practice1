@@ -1,6 +1,7 @@
 package handlers;
 
 import handlers.ActionHandler;
+import jms.InteraccionMQ;
 import jms.MessageChat;
 
 public class SentMessageRequestHandler extends ActionHandler {
@@ -26,7 +27,10 @@ public class SentMessageRequestHandler extends ActionHandler {
 		String mensaje= request.getParameter("mensaje");
 		MessageChat mensajejms = new MessageChat(emisor, destinatario, mensaje);
 		//mensajejms.escrituraJMS(mensajejms);
-	    System.out.println("El mensaje a enviar es: " +  mensaje);
+		System.out.println("El mensaje a enviar es: " +  mensaje);
+	    //InteraccionMQ mq=new InteraccionMQ();
+	    InteraccionMQ mq = new InteraccionMQ();
+		mq.escrituraMQ("Hola mundo","javi");
 	}
 
 }

@@ -41,7 +41,7 @@
 <%Producto producto = (Producto)request.getAttribute("productoMensaje");
   Usuario destinatario = (Usuario)request.getAttribute("destinatario");
   HttpSession sesion = request.getSession(false);
-  Usuario usuarioSession = (Usuario) session.getAttribute("entityUser");%>
+  String usuarioSession = (String) session.getAttribute("userEmailSession");%>
 <!-- Register Product Section -->
     <section id="MessageSection">
         <div class="container">
@@ -78,11 +78,11 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
-                        
                         <input type="hidden" id="destinatario" name="destinatario" value="<%out.print(request.getAttribute("destinatario"));%>">                                                
                         <input type="hidden" id="producto" name="producto" value="<%out.print(producto.getProductId());%>">
-                        <input type="hidden" id="emisor" name="emisor" value="<%out.print(usuarioSession.getEmail());%>">
+                        <input type="hidden" id="emisor" name="emisor" value="<%out.print(usuarioSession);%>">
                         <input type="hidden" name="pAccion" value="sendMessage">
+                        
                         <br>
                         <div id="success"></div>
                         <div class="row">
