@@ -119,6 +119,18 @@
 							</div>
 						</div>
 					</form>
+					<form action="ControllerServlet" name="formMostrarProducto"
+						novalidate method="post">
+						<input type="hidden" name="pAccion" value="mostrarProducto">
+						<input type="hidden" name="idProducto"
+							value="<% out.print(producto.getProductId()); %>">
+						<div id="success"></div>
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<button type="submit" class="btn btn-success btn-lg">M&aacute;s informaci&oacute;n</button>
+							</div>
+						</div>
+					</form>
 				</div>
 
 				<%}} %>
