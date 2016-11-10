@@ -1,4 +1,4 @@
-package handlers;
+package handlers.admin;
 
 
 import javax.persistence.NoResultException;
@@ -6,6 +6,7 @@ import javax.servlet.http.Part;
 
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
+import handlers.ActionHandler;
 
 public class ModificarUsuarioAdminRequestHandler extends ActionHandler {
 

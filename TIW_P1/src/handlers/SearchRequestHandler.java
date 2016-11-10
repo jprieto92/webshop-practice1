@@ -8,12 +8,11 @@ import entityManagers.ProductManager;
 public class SearchRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = (String) request.getAttribute("Message");
 		
 		String tipoFiltrado = request.getParameter("tipoBusqueda");
 		String terminoFiltrado = request.getParameter("campoBusqueda");
-	
-		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
 
 		List<Producto> productos = null;
 		ProductManager gestorDatos = new ProductManager();
@@ -21,7 +20,7 @@ public class SearchRequestHandler extends ActionHandler {
 		try {
 			productos = gestorDatos.buscarPor(tipoFiltrado, terminoFiltrado);
 		}catch(NoResultException e){
-			message = e.getMessage();
+			message.concat(" ."+e.getMessage()) ;
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

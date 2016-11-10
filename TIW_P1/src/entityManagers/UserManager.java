@@ -7,8 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
 
 
@@ -91,6 +89,34 @@ public class UserManager {
 			Query query = em.createNamedQuery(Usuario.BUSCAR_EMAIL,Usuario.class);
 			query.setParameter("email", email);
 			resultado = (Usuario) query.getSingleResult();
+		}
+		catch(NoResultException e){
+			e.printStackTrace();
+			throw new NoResultException("No existe el usuario en la BBDD");		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+	}
+	
+	/** Devuelve el id del tipo de usuario dado un email de usuario
+	 * 
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer obtenerIdTipoUsuario(String email) throws Exception {
+		Integer resultado;
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(Usuario.DEVOLVER_TIPO_USUARIO_DADO_EMAIL,Usuario.class);
+			query.setParameter("email", email);
+			resultado = (Integer) query.getSingleResult();
 		}
 		catch(NoResultException e){
 			e.printStackTrace();

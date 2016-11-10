@@ -1,16 +1,22 @@
 package handlers;
 
-import javax.persistence.NoResultException;
-
-import entitiesJPA.Producto;
-import entitiesJPA.Usuario;
-import entityManagers.ProductManager;
 import handlers.ActionHandler;
 import jms.MessageChat;
 
 public class SentMessageRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
-		request.setAttribute("createProductMessage", "Si estás leyendo esto, es porque vamos a escribir en la cola.");
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = (String) request.getAttribute("Message");
+		
+		
+		//	}catch(NoResultException e){
+		//		message.concat(" ."+e.getMessage()) ;
+		//		throw new NoResultException(e.getMessage());
+		//	}
+		//	finally{
+
+		
+		request.setAttribute("Message", "Si estás leyendo esto, es porque vamos a escribir en la cola.");
 		String idProducto= request.getParameter("producto");
 		String destinatario= request.getParameter("destinatario");
 		String emisor= request.getParameter("emisor");

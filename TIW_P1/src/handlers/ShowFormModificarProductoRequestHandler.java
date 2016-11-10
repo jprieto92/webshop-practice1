@@ -3,9 +3,6 @@ package handlers;
 import java.util.List;
 
 import javax.persistence.NoResultException;
-
-import com.sun.xml.ws.runtime.dev.Session;
-
 import entitiesJPA.Categoria;
 import entitiesJPA.Producto;
 import entityManagers.CategoriaManager;
@@ -13,8 +10,11 @@ import entityManagers.ProductManager;
 
 public class ShowFormModificarProductoRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = (String) request.getAttribute("Message");
+		
 		String idProducto= request.getParameter("idProducto");
-		CategoriaManager gestorCategorias = new CategoriaManager();
+
 		List<Categoria> categoriasBBDD;
 		
 		ProductManager gestorProducto = new ProductManager();
@@ -23,14 +23,25 @@ public class ShowFormModificarProductoRequestHandler extends ActionHandler {
 			productoBBDD =  gestorProducto.buscarPorId(Integer.parseInt(idProducto));
 		}
 		catch(NoResultException e){
-			throw new NoResultException("No existe el producto que se busca");
+			message.concat(" ."+"No existe el producto");
+			throw new NoResultException(message);
 		}
+		finally{
+			request.setAttribute("Message", message);
+		}
+		
+		CategoriaManager gestorCategorias = new CategoriaManager();
 		try{
 			categoriasBBDD =  gestorCategorias.buscarTodas();
 		}
 		catch(NoResultException e){
-			throw new NoResultException("No existen categorías");
+			message.concat(" ."+"No existen categorias");
+			throw new NoResultException(message);
 		}
+		finally{
+			request.setAttribute("Message", message);
+		}	
+		
 		request.setAttribute("listaDeCategorias", categoriasBBDD);
 		request.setAttribute("productoModificar", productoBBDD);
 	}

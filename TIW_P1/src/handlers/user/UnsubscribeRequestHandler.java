@@ -1,7 +1,8 @@
-package handlers;
+package handlers.user;
 
 import javax.servlet.http.HttpSession;
 import entityManagers.UserManager;
+import handlers.ActionHandler;
 
 public class UnsubscribeRequestHandler extends ActionHandler {
 

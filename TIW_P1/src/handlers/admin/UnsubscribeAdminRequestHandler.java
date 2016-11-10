@@ -1,6 +1,7 @@
-package handlers;
+package handlers.admin;
 
 import entityManagers.UserManager;
+import handlers.ActionHandler;
 
 public class UnsubscribeAdminRequestHandler extends ActionHandler {
 

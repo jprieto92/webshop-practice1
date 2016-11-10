@@ -1,4 +1,4 @@
-package handlers;
+package handlers.user;
 
 
 import javax.persistence.NoResultException;
@@ -7,17 +7,17 @@ import javax.servlet.http.Part;
 
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
+import handlers.ActionHandler;
 
 public class ModificarUsuarioRequestHandler extends ActionHandler {
 
 	@Override
 	public void execute() throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
 		
-		//Se recupera el email del usuario de la sesion
-		HttpSession session = request.getSession(false);
-		String emailUsuarioSession =  (String) session.getAttribute("userEmailSession");
+		//Se recupera el email del usuario a modificar
+		String emailUsuario =  (String) request.getAttribute("emailUserModificar");
 		
 		//Recogemos los datos del formulario
 		String nuevaContraseña = request.getParameter("pass");
@@ -31,11 +31,11 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		UserManager userManager = new UserManager();
 		Usuario usuarioBBDD = null;
 		try{
-			usuarioBBDD = userManager.buscarPorEmail(emailUsuarioSession);
+			usuarioBBDD = userManager.buscarPorEmail(emailUsuario);
 
 		}catch(NoResultException e){
-			message = e.getMessage();
-			throw new NoResultException(e.getMessage());
+			message.concat(" ."+e.getMessage());
+			throw new NoResultException(message);
 		}
 		finally{
 			request.setAttribute("Message", message);

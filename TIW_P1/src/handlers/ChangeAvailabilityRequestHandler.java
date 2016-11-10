@@ -1,10 +1,7 @@
 package handlers;
 
-import java.util.List;
-
 import javax.persistence.NoResultException;
 import javax.persistence.RollbackException;
-
 import entitiesJPA.Disponibilidad;
 import entitiesJPA.Producto;
 import entityManagers.DisponibilidadManager;
@@ -14,13 +11,11 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 
 	@Override
 	public void execute() throws Exception {
-		request.setAttribute("createProductMessage", "Si estás leyendo esto, es porque la petición ha sido leida por el manejador de ShowFormCreateProductHandler.");
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = (String) request.getAttribute("Message");
 		
 		Integer idNuevaDisponibilidad = Integer.parseInt(request.getParameter("disponibilidadProducto"));
 		Integer idProducto = Integer.parseInt(request.getParameter("idProducto"));
-		
-		//Variable donde imprimiremos el mensaje de respuesta, ya sea de error o satisfactorio
-		String message = "";
 		
 		//Se obtiene el producto a modificar de la BBDD
 		ProductManager productManager= new ProductManager();
@@ -29,8 +24,12 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 			productoBBDD =  productManager.buscarPorId(idProducto);
 		}
 		catch(NoResultException e){
-			throw new NoResultException("No existe el producto con el id "+idProducto);
+			message.concat(" ."+"No existe el producto con el id "+idProducto);
+			throw new NoResultException(message);
 		}
+		finally{
+			request.setAttribute("Message", message);
+ 		}
 		
 		//Se obtiene la disponibilidad de la BBDD
 		DisponibilidadManager disponiblidadManager= new DisponibilidadManager();
@@ -39,9 +38,12 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 			disponibilidadBBDD =  disponiblidadManager.buscarPorId(idNuevaDisponibilidad);
 		}
 		catch(NoResultException e){
-			throw new NoResultException("No existe la disponibilidad con el id "+idNuevaDisponibilidad);
+			message.concat(" ."+"No existe la disponibilidad con el id "+idNuevaDisponibilidad) ;
+			throw new NoResultException(message);
 		}
-		
+		finally{
+			request.setAttribute("Message", message);
+ 		}
 		//Se cambia la disponiblidad del producto
 		productoBBDD.setDisponibilidad(disponibilidadBBDD);
 		
@@ -50,8 +52,8 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 			message = productManager.modificar(productoBBDD);
 		}catch(RollbackException e){
 			//Hay que lanzar una excepcion, para saber que no se ha modificado y asi mandarle a otro manejador distinto
-			message = "Error en la modificación del producto con id "+idProducto;
-			throw new Exception("Error en la modificación del producto");
+			message.concat(" ."+"Error en la modificación del producto con id "+idProducto) ;
+			throw new Exception(message);
 		}
 		finally{
 			request.setAttribute("Message", message);

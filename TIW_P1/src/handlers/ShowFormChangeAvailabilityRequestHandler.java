@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
-import entitiesJPA.Categoria;
+
 import entitiesJPA.Disponibilidad;
-import entitiesJPA.Producto;
-import entityManagers.CategoriaManager;
 import entityManagers.DisponibilidadManager;
 import entityManagers.ProductManager;
 
@@ -15,7 +13,8 @@ public class ShowFormChangeAvailabilityRequestHandler  extends ActionHandler{
 
 	@Override
 	public void execute() throws Exception {
-		request.setAttribute("createProductMessage", "Si estás leyendo esto, es porque la petición ha sido leida por el manejador de ShowFormCreateProductHandler.");
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = (String) request.getAttribute("Message");
 		
 		//Se recoge la idProducto de la peticion
 		int idProducto = Integer.parseInt(request.getParameter("idProducto"));
@@ -36,8 +35,12 @@ public class ShowFormChangeAvailabilityRequestHandler  extends ActionHandler{
 			disponibilidadesBBDD =  gestorDisponibilidades.buscarTodas();
 		}
 		catch(NoResultException e){
-			throw new NoResultException("No existen disponibilidades");
+			message.concat(" ."+"No existen disponibilidades") ;
+			throw new NoResultException(message);
 		}		
+		finally{
+			request.setAttribute("Message", message);
+		}
 		
 		request.setAttribute("listaDeDisponibilidades", disponibilidadesBBDD);
 		request.setAttribute("idProducto", idProducto);

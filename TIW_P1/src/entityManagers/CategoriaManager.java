@@ -7,77 +7,117 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
-import javax.persistence.TypedQuery;
-
 import entitiesJPA.Categoria;
-import entitiesJPA.Producto;
+
 
 
 public class CategoriaManager {
 
 	private EntityManagerFactory emf;
-	public EntityManager em;
-	
-    /**
-     * Default constructor. 
-     */
-    public CategoriaManager() {
-        emf = Persistence.createEntityManagerFactory("tiwUnitPersistence");
-		em = emf.createEntityManager();
-    }
-	
-    public void insertar(Categoria categoria) {
-    	try{
-	    	em.getTransaction().begin();
-	    	em.persist(categoria);
-	    	em.getTransaction().commit();
-	    }catch(Exception e){
-			e.printStackTrace();
-			System.out.println("Lanzando excepcion en la clase CategoriaManager");
-			throw new RollbackException(e);
-			 		
-		}
-    }
-    
-    public void modificar(Categoria categoria) {
-    	try{
-	    	em.getTransaction().begin();
-	    	em.merge(categoria);
-	    	em.getTransaction().commit();
 
-	    }catch(Exception e){
-			e.printStackTrace();
-			throw new RollbackException(e);
+	public CategoriaManager(String unidadDePersistencia)
+	{
+		emf = Persistence.createEntityManagerFactory(unidadDePersistencia);
+	}
+
+	public CategoriaManager()
+	{
+		emf = Persistence.createEntityManagerFactory("tiwUnitPersistence");
+	} 
+	
+	public String insertar(Categoria categoria) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			em.persist(categoria);
+			em.getTransaction().commit();
+		} catch (Exception ex) {
+			try {
+				if (em.getTransaction().isActive()) {
+					em.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				ex.printStackTrace();
+				throw e;
+			}
+			throw ex;
+		} finally {
+			em.close();
 		}
-    }
+		return "La categoria "+categoria.getIdCategoria()+" se ha insertado correctamente";
+	}
     
-    //Devuelve todas los tipos de usuario
-    public List<Categoria> buscarTodas(){
-    	TypedQuery<Categoria> consultaCategorias = null;
-    	try{
-    		consultaCategorias = em.createNamedQuery(Categoria.BUSCAR_TODOS, Categoria.class);
-	    }catch(Exception e){
-	    	throw new NoResultException();		
+	public String modificar(Categoria categoria) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			em.merge(categoria);
+			em.getTransaction().commit();
+		} catch (Exception ex) {
+			try {
+				if (em.getTransaction().isActive()) {
+					em.getTransaction().rollback();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			em.close();
 		}
-    	return consultaCategorias.getResultList();
+		return "La categoria "+categoria.getIdCategoria()+" se ha modificado correctamente";
+	} 
+    
+    //Devuelve todas los tipos de categoria
+    @SuppressWarnings("unchecked")
+	public List<Categoria> buscarTodas() throws Exception{
+		List<Categoria> resultado;
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(Categoria.BUSCAR_TODOS,Categoria.class);
+			resultado = query.getResultList();
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen categorias.");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+    	
     }
     
   //Devuelve una disponibilidad dado su ID
-  	public Categoria buscarPorId(Integer idCategoria) throws NoResultException {
-  		
-  		
+  	public Categoria buscarPorId(Integer idCategoria) throws Exception {
   		Categoria resultado;
   		EntityManager em = emf.createEntityManager();
   		try{
   			resultado = (Categoria) em.find(Categoria.class, idCategoria);
-  		}catch(NoResultException e){
-  			e.printStackTrace();
-  			throw new NoResultException();		
-  		}
-  		finally {
-  			em.close();
-  		}
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado==null){
+				throw new NoResultException("No existe la categoria dado el id "+idCategoria);
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
   		return resultado;
   	}
     

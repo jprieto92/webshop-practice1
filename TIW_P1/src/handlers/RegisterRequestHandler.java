@@ -9,7 +9,9 @@ import entityManagers.UserManager;
 //Manejador de la accion "registro".
 public class RegisterRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
-
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = (String) request.getAttribute("Message");
+		
 		//Creamos un entidad con TipoUsuario con ID 1, que user normal
 		TipoUsuario tipoUsuario = new TipoUsuario();
 		tipoUsuario.setId_tipoUsuario(1);
@@ -36,15 +38,14 @@ public class RegisterRequestHandler extends ActionHandler {
 
 		//Gestora de la persistencia de los datos de usuario
 		UserManager gestorDatos = new UserManager();
-		String message = "";
 		try {
-			message = gestorDatos.insertar(usuarioAInsertar);
-			request.setAttribute("indexMessage", message);
+			message.concat(gestorDatos.insertar(usuarioAInsertar));
 		}catch(Exception e){
-			e.printStackTrace();			
-			request.setAttribute("indexMessage", message);
-			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
-			throw new Exception("Error en la creacion del usuario");
+			message.concat(" ."+"Error en la creacion del usuario");
+			throw new Exception(message);
+		}
+		finally{
+			request.setAttribute("Message", message);
 		}
 
 	}

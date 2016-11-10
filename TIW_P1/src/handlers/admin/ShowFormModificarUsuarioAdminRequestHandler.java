@@ -1,8 +1,9 @@
-package handlers;
+package handlers.admin;
 
 import javax.persistence.NoResultException;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
+import handlers.ActionHandler;
 
 public class ShowFormModificarUsuarioAdminRequestHandler  extends ActionHandler{
 	public void execute () throws Exception {

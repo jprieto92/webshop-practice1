@@ -1,7 +1,6 @@
 package handlers;
 
 import javax.persistence.NoResultException;
-import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import entitiesJPA.Categoria;
@@ -17,7 +16,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
 		
 		//Se recupera el email del usuario de la sesion
 		HttpSession session = request.getSession(false);
@@ -40,6 +39,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setPrecio(Integer.parseInt(request.getParameter("precioProducto")));
 		productoAInsertar.setPrecioNegociable((String) request.getParameter("precioNegociable"));
 		productoAInsertar.setTitulo((String) request.getParameter("tituloProducto"));
+		
 		//Se establece a quien pertenece el producto. Para ello se busca en la BBDD
 		//Buscamos al usuario en la BBDD
 		UserManager userManager = new UserManager();
@@ -48,7 +48,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 			usuarioBBDD = userManager.buscarPorEmail(emailUsuarioSession);
 
 		}catch(NoResultException e){
-			message = e.getMessage();
+			message.concat(" ."+e.getMessage()) ;
 			throw new NoResultException(e.getMessage());
 		}
 		finally{
@@ -73,10 +73,10 @@ public class CreateProductRequestHandler extends ActionHandler {
 		//Gestora de la persistencia de los datos de producto
 		ProductManager gestorDatos = new ProductManager();
 		try {
-			message = gestorDatos.insertar(productoAInsertar);
+			message.concat(" ."+gestorDatos.insertar(productoAInsertar));
 		}catch(Exception e){
 			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
-			message = "Error en la creacion del producto";			
+			message.concat(" ."+"Error en la creacion del producto");			
 			throw new Exception(message);
 		}
 		finally{

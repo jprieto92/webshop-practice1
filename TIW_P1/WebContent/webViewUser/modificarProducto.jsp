@@ -139,7 +139,7 @@
 
 
 
-					<input type="hidden" name="pAccion" value="actualizarProducto">
+					<input type="hidden" name="pAccion" value="comprobarUsuarioActualizarProducto">
 					<br>
 					<div id="success"></div>
 					<div class="row">

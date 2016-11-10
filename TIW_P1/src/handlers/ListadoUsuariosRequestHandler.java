@@ -9,9 +9,8 @@ import entityManagers.UserManager;
 public class ListadoUsuariosRequestHandler extends ActionHandler {
 	 
  	public void execute () throws Exception {
-
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
 
 		List<Usuario> usuarios = null;
 		UserManager gestorDatosUsuario = new UserManager();
@@ -19,8 +18,8 @@ public class ListadoUsuariosRequestHandler extends ActionHandler {
 		try {
 			usuarios = gestorDatosUsuario.buscarTodos();
 		}catch(NoResultException e){
-			message = e.getMessage();
-			throw new NoResultException(e.getMessage());
+			message.concat(" ."+e.getMessage()) ;
+			throw new NoResultException(message);
 		}
 		finally{
 			request.setAttribute("Message", message);

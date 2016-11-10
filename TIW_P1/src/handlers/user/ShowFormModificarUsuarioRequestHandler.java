@@ -1,17 +1,13 @@
-package handlers;
-
-import java.util.List;
+package handlers.user;
 
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
-
-import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
-import entityManagers.ProductManager;
+import entityManagers.UserManager;
+import handlers.ActionHandler;
 
-public class MyProductsRequestHandler extends ActionHandler {
-	
-	public void execute () throws Exception {		
+public class ShowFormModificarUsuarioRequestHandler  extends ActionHandler{
+	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
 		
@@ -19,19 +15,21 @@ public class MyProductsRequestHandler extends ActionHandler {
 		HttpSession session = request.getSession(false);
 		String emailUsuarioSession =  (String) session.getAttribute("userEmailSession");
 		
-		List<Producto> productos;
-		ProductManager gestorDatos = new ProductManager();
-		try {
-			productos = gestorDatos.buscarPorUsuario(emailUsuarioSession);
+		//Buscamos al usuario en la BBDD
+		UserManager userManager = new UserManager();
+		Usuario usuarioBBDD = null;
+		try{
+			usuarioBBDD = userManager.buscarPorEmail(emailUsuarioSession);
+
 		}catch(NoResultException e){
-			message.concat(" ."+e.getMessage()) ;
+			message = e.getMessage();
 			throw new NoResultException(e.getMessage());
 		}
 		finally{
 			request.setAttribute("Message", message);
 		}
-
-		request.setAttribute("listaDeProductos", productos);
+		
+		// Se añaden a la petición el usuario
+		request.setAttribute("userEntity", usuarioBBDD);
 	}
-
 }

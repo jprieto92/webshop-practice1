@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import entitiesJPA.Disponibilidad;
 import entitiesJPA.Producto;
-import entitiesJPA.Usuario;
 
 public class ProductManager {
 
@@ -77,36 +76,12 @@ public class ProductManager {
 	}  
 	
 	/**
-	//Devuelve una lista de productos dado un email de usuario
-	@SuppressWarnings("unchecked")
-	public List<Producto> buscarPorIdUsuario(String email) throws NoResultException {
-		List<Producto> resultado;
-		EntityManager em = emf.createEntityManager();
-		try{
-			Query query = em.createNamedQuery(Producto.BUSCAR_USUARIO_PROPIETARIO,Producto.class);
-			query.setParameter("usuario", usuario);
-			resultado = query.getResultList();
-		}catch(NoResultException e){
-			e.printStackTrace();
-			throw new NoResultException();		
-		}
-		finally {
-			em.close();
-		}
-		return resultado;
-	}
-	 * @throws Exception */
-	
-	//Devuelve una lista de productos dado una entidad usuario
-	@SuppressWarnings("unchecked")
-	
-	
-	/**
 	 * Busca todos los productos dado un email del usuario
 	 * @param emailUsuario
 	 * @return List<Producto>
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Producto> buscarPorUsuario(String emailUsuario) throws Exception {
 		List<Producto> resultado;
 		EntityManager em = emf.createEntityManager();
