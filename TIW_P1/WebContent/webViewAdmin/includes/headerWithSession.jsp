@@ -93,7 +93,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="intro-text">
-					<span class="name">Shopify</span>
+					<span class="name">Shopify - Web-Admin</span>
 					<hr class="star-light">
 				</div>
 			</div>

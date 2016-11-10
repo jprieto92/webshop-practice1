@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
  
- public class LoginRequestHandler extends ActionHandler {
+ public class LoginUserRequestHandler extends ActionHandler {
  
  	public void execute () throws Exception {
 		
