@@ -1,5 +1,5 @@
 <%@page import="entitiesJPA.Producto"%>
-<%@page import="utilidades.UtilidadesImagen" %>
+<%@page import="utilidades.UtilidadesImagen"%>
 <%@page import="java.util.List"%>
 <%@ page
 	import="java.util.List,java.util.ArrayList,org.apache.commons.codec.binary.StringUtils,org.apache.commons.codec.binary.Base64;"%>
@@ -44,66 +44,117 @@
 </head>
 <body>
 	<%@include file="includes/headerWithSession.jsp"%>
-	
+
 	<p></p>
 
 
-<section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Mis productos</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                		<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
+	<section id="portfolio">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>Gestión de productos</h2>
+				<hr class="star-primary">
+			</div>
+		</div>
+		
+		<!-- Búsquedas -->
+		<div class="row">
+			<form action="ControllerAdminServlet" name="formProductos" novalidate
+				method="post">
+				<input type="hidden" name="pAccion" value="buscarProductosAdmin">
+				<input type="hidden" name="tipoBusqueda"
+					value="busquedaPorTituloDescripccion">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<input type="text" class="form-control"
+							placeholder="Término de búsqueda" id="campoBusqueda"
+							name="campoBusqueda" required
+							data-validation-required-message="Please enter your email address.">
+						<p></p>
+						<button type="submit" class="btn btn-success btn-lg">Buscar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="row">
+			<form action="ControllerAdminServlet" name="formProductos" novalidate
+				method="post">
+				<input type="hidden" name="pAccion" value="ShowFormAdvancedSearchAdmin">
+				<input type="hidden" name="tipoBusqueda"
+					value="busquedaPorTituloDescripccion">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">						
+						<button type="submit" class="btn btn-success btn-lg">Búsqueda avanzada</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		
+		<div class="row">
+			<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
+			if(listaProductos!=null){
 			for(Producto producto : listaProductos){%>
-                
-                
-                <div class="col-sm-4 portfolio-item">
-                        <h4><%=producto.getTitulo() %></h4>
-			<div style="width:160px;height:160px;-webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;background:rgba(24,188,156,0.5);-webkit-box-shadow: #BFBEBF 7px 7px 7px;-moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;"><img style="height: 160px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>"></div>
-			
-			<p></p>
-			<form action="ControllerServlet" name="formEliminarProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="eliminarProducto">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
-					</div>
+
+
+			<div class="col-sm-4 portfolio-item">
+				<h4><%=producto.getTitulo() %></h4>
+				<div
+					style="width: 160px; height: 160px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; background: rgba(24, 188, 156, 0.5); -webkit-box-shadow: #BFBEBF 7px 7px 7px; -moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;">
+					<img style="height: 160px;"
+						src="<% out.print(UtilidadesImagen.mostrarImagen(producto.getImagen())); %>">
 				</div>
-			</form>
-			
-			<form action="ControllerServlet" name="formModificarProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="modificarProducto">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+
+				<p></p>
+				<form action="ControllerAdminServlet" name="formEliminarProducto"
+					novalidate method="post">
+					<input type="hidden" name="pAccion" value="eliminarProductoAdmin">
+					<input type="hidden" name="idProducto"
+						value="<% out.print(producto.getProductId()); %>">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
+						</div>
 					</div>
-				</div>
-			</form>
-			
-			<form action="ControllerServlet" name="formCambiarDisponibilidadProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="ShowFormChangeAvailability">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Cambiar disponibilidad</button>
+				</form>
+
+				<form action="ControllerAdminServlet" name="formModificarProducto"
+					novalidate method="post">
+					<input type="hidden" name="pAccion" value="modificarProductoAdmin">
+					<input type="hidden" name="idProducto"
+						value="<% out.print(producto.getProductId()); %>">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+						</div>
 					</div>
-				</div>
-			</form>	
-                </div>
-             
-             		<%} %>
-            </div>
-        </div>
-    </section>
+				</form>
+
+				<form action="ControllerAdminServlet"
+					name="formCambiarDisponibilidadProducto" novalidate method="post">
+					<input type="hidden" name="pAccion"
+						value="ShowFormChangeAvailabilityAdmin"> <input
+						type="hidden" name="idProducto"
+						value="<% out.print(producto.getProductId()); %>">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Cambiar
+								disponibilidad</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<%}} %>
+		</div>
+	</div>
+	</section>
 
 
 

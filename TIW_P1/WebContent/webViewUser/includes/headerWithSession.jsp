@@ -80,7 +80,7 @@
 						de Usuario</a>
 					<form action="ControllerServlet" name="userProfileSubmitForm"
 						novalidate method="post">
-						<input type="hidden" name="pAccion" value="modificarPerfil">
+						<input type="hidden" name="pAccion" value="mostrarPerfil">
 					</form></li>
 				<li class="page-scroll"><a
 					HREF="javascript:document.createProductSubmitForm.submit()">Crear

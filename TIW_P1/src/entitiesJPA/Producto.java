@@ -19,12 +19,14 @@ import java.util.Date;
 	@NamedQuery(name = Producto.BUSCAR_CATEGORIA_LIKE, query = "SELECT p FROM Producto p where p.categoria.nombre LIKE :categoria"),
 	@NamedQuery(name = Producto.BUSCAR_DISPONIBILIDAD, query = "SELECT p FROM Producto p where p.disponibilidad=:disponibilidad"),
 	@NamedQuery(name = Producto.BUSCAR_USUARIO_PROPIETARIO, query = "SELECT p FROM Producto p where p.usuario=:usuario"),
+	@NamedQuery(name = Producto.BUSCAR_USUARIO_PROPIETARIO_POR_EMAIL, query = "SELECT p FROM Producto p where p.usuario.email=:emailUsuario"),
 	//Los parámetros deben contener % a cada uno de los lados
 	@NamedQuery(name = Producto.BUSCAR_DESCRIPCCION, query = "SELECT p FROM Producto p where p.descripccion LIKE :descripccion"),
 	@NamedQuery(name = Producto.BUSCAR_TITULO_Y_DESCRIPCCION, query = "SELECT p FROM Producto p where p.titulo LIKE :titulo OR p.descripccion LIKE :descripccion"),
 	@NamedQuery(name = Producto.BUSCAR_TITULO, query = "SELECT p FROM Producto p where p.titulo LIKE :titulo"),
 	@NamedQuery(name = Producto.BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE u.nombre  LIKE :nombre"),
-	@NamedQuery(name = Producto.BUSCAR__POR_CIUDAD, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE u.ciudad  LIKE :ciudad")
+	@NamedQuery(name = Producto.BUSCAR__POR_CIUDAD, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE u.ciudad  LIKE :ciudad"),
+	@NamedQuery(name = Producto.COMPROBAR_PERTENENCIA_PRODUCTO, query = "SELECT p.productId FROM Producto p JOIN p.usuario u WHERE u.email = :emailUser AND p.productId = :productId")
 
 })
 public class Producto implements Serializable {
@@ -38,12 +40,15 @@ public class Producto implements Serializable {
 	public static final String BUSCAR_CATEGORIA_LIKE = "Producto.seleccionarCategoriaLike";
 	public static final String BUSCAR_DISPONIBILIDAD = "Producto.seleccionarDisponibilidad";
 	public static final String BUSCAR_USUARIO_PROPIETARIO = "Producto.seleccionarUsuarioPropietario";
+	public static final String BUSCAR_USUARIO_PROPIETARIO_POR_EMAIL = "Producto.seleccionarUsuarioPropietarioPorEmail";
 	public static final String BUSCAR_DESCRIPCCION = "Producto.seleccionarDescripccion";
 	public static final String BUSCAR_TITULO_Y_DESCRIPCCION = "Producto.seleccionarTituloYDescripccion";
 	public static final String BUSCAR_TITULO = "Producto.seleccionarTitulo";
-	
 	public static final String BUSCAR__POR_CIUDAD = "Producto.seleccionarPorCiudad";
 	public static final String BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE = "Producto.seleccionarPorNombreUsuario";
+	public static final String COMPROBAR_PERTENENCIA_PRODUCTO = "Producto.comprobarPertenenciaProductoAUsuario";
+
+	
 
 	@Id
 	@Column(name="product_id")

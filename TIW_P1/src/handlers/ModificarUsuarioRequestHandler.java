@@ -12,8 +12,12 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 
 	@Override
 	public void execute() throws Exception {
-		// TODO Auto-generated method stub
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = "";
 		
+		//Se recupera el email del usuario de la sesion
+		HttpSession session = request.getSession(false);
+		String emailUsuarioSession =  (String) session.getAttribute("userEmailSession");
 		
 		//Recogemos los datos del formulario
 		String nuevaContraseña = request.getParameter("pass");
@@ -23,35 +27,34 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		String nuevaCiudad = request.getParameter("ciudad");
 		Integer nuevoTelefono =  Integer.parseInt(request.getParameter("phone")) ;
 		
-		//Recuperamos el email del usuario de la sesion
- 		HttpSession session = request.getSession(false);
-		Usuario usuarioSession = (Usuario) session.getAttribute("entityUser");
-		
 		//Buscamos al usuario en la BBDD
-		String message = "";
 		UserManager userManager = new UserManager();
 		Usuario usuarioBBDD = null;
 		try{
-			usuarioBBDD = userManager.buscarPorEmail(usuarioSession.getEmail());
+			usuarioBBDD = userManager.buscarPorEmail(emailUsuarioSession);
+
+		}catch(NoResultException e){
+			message = e.getMessage();
+			throw new NoResultException(e.getMessage());
 		}
-		catch(NoResultException e){
-			message = "Error en la modificación del usuario";
-			throw new NoResultException("No se ha encontrado el usuario en la BBDD con ese email");
- 		}
 		finally{
 			request.setAttribute("Message", message);
- 		}
+		}
 		
 		//Actualizamos los datos del usuarioBBDD acorde a las modificaciones solicitadas
+		
+		//Si la constraseña no ha variado, no se modifica
 		if(nuevaContraseña!= null){
 			usuarioBBDD.setContraseña(nuevaContraseña);
 		}
+		//Si la imagen no ha variado, no se modifica
 		Part filePart = request.getPart("imagenPerfil");
 		if(filePart.getSize() != 0){			
 			byte[] data = new byte[(int) filePart.getSize()];
 			filePart.getInputStream().read(data, 0, data.length);
 			usuarioBBDD.setImagenPerfil(data);;
 		}
+		//El resto de parametros siempre se modifican, puesto que los campos ya tienen un valor por defecto
 		usuarioBBDD.setNombre(nuevoNombre);
 		usuarioBBDD.setApellido1(nuevoApellido1);
 		usuarioBBDD.setApellido2(nuevoApellido2);
@@ -64,14 +67,11 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		}
 		catch(Exception e){
 			message = "Error en la modificación del usuario";
-			throw new Exception("Error en la modificación del usuario al insertarlo en la BBDD");
+			throw new Exception(message);
  		}
 		finally{
 			request.setAttribute("Message", message);
  		}
-		
-		//Si todo ha ido bien, actualizamos el usuario de la session con el usuario enviado a la BBDD
-		session.setAttribute("entityUser", usuarioBBDD);
 		
 	}
 

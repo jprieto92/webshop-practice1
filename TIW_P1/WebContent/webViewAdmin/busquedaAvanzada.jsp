@@ -22,9 +22,9 @@
 			</div>
 		</div>
 		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
+			<form action="ControllerAdminServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
+				<input type="hidden" name="pAccion" value="buscarProductosAdmin">
 				<input type="hidden" name="tipoBusqueda"
 					value="busquedaPorCategoria">
 				<div id="success"></div>
@@ -47,9 +47,9 @@
 		</div>
 
 		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
+			<form action="ControllerAdminServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
+				<input type="hidden" name="pAccion" value="buscarProductosAdmin">
 				<input type="hidden" name="tipoBusqueda" value="busquedaPorCiudad">
 				<div id="success"></div>
 				<div class="row">
@@ -67,9 +67,9 @@
 		</div>
 
 		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
+			<form action="ControllerAdminServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
+				<input type="hidden" name="pAccion" value="buscarProductosAdmin">
 				<input type="hidden" name="tipoBusqueda" value="busquedaPorNombreUsuario">
 				<div id="success"></div>
 				<div class="row">
@@ -87,9 +87,9 @@
 		</div>
 
 		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
+			<form action="ControllerAdminServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
+				<input type="hidden" name="pAccion" value="buscarProductosAdmin">
 				<input type="hidden" name="tipoBusqueda" value="busquedaPorTitulo">
 				<div id="success"></div>
 				<div class="row">
@@ -109,7 +109,7 @@
 		<div class="row">
 			<form action="ControllerServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
+				<input type="hidden" name="pAccion" value="buscarProductosAvanzadaAdmin">
 				<input type="hidden" name="tipoBusqueda" value="busquedaPorDescripccion">
 				<div id="success"></div>
 				<div class="row">

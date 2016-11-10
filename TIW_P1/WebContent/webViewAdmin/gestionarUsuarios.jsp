@@ -1,5 +1,4 @@
-<%@page import="entitiesJPA.Producto"%>
-<%@page import="entitiesJPA.Categoria"%>
+<%@page import="entitiesJPA.Usuario"%>
 <%@page import="utilidades.UtilidadesImagen"%>
 <%@page import="java.util.List"%>
 <%@ page
@@ -16,13 +15,14 @@
 <meta name="author" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Catálogo</title>
+<title>Gestionar Usuarios</title>
 <link href="css/my_style.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Theme CSS -->
 <link href="css/freelancer.min.css" rel="stylesheet">
+
 
 
 <!-- Custom Fonts -->
@@ -45,23 +45,23 @@
 <body>
 	<%@include file="includes/headerWithSession.jsp"%>
 
+	<p></p>
 
 
 	<section id="portfolio">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h2>Catálogo</h2>
+				<h2>Gestión de Usuarios</h2>
 				<hr class="star-primary">
 			</div>
 		</div>
-		
+
+		<!-- Búsquedas -->
 		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
+			<form action="ControllerAdminServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda"
-					value="busquedaPorTituloDescripccion">
+				<input type="hidden" name="pAccion" value="buscarUsuariosAdmin">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">
@@ -76,55 +76,74 @@
 			</form>
 		</div>
 
+
 		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
-				method="post">
-				<input type="hidden" name="pAccion" value="ShowFormAdvancedSearch">
-				<input type="hidden" name="tipoBusqueda"
-					value="busquedaPorTituloDescripccion">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">						
-						<button type="submit" class="btn btn-success btn-lg">Búsqueda avanzada</button>
-					</div>
+			<%
+				List<Usuario> listaUsuarios = (List<Usuario>) request.getAttribute("listaDeUsuarios");
+			if(listaUsuarios!=null){	
+			for (Usuario usuario : listaUsuarios) {
+			%>
+
+
+			<div class="col-sm-4 portfolio-item">
+				<h4><%=usuario.getNombre() + usuario.getApellido1() + usuario.getApellido2()%></h4>
+				<div
+					style="width: 160px; height: 160px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; background: rgba(24, 188, 156, 0.5); -webkit-box-shadow: #BFBEBF 7px 7px 7px; -moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;">
+					<img style="height: 160px;"
+						src="<%out.print(UtilidadesImagen.mostrarImagen(usuario.getImagenPerfil()));%>">
 				</div>
-			</form>
-		</div>
 
-		<div class="row">
-				<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
-				if(listaProductos!=null){
-			for(Producto producto : listaProductos){%>
+				<p></p>
 
-
-				<div class="col-sm-4 portfolio-item">
-					<h4><%=producto.getTitulo() %></h4>
-					<div
-						style="width: 160px; height: 160px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; background: rgba(24, 188, 156, 0.5); -webkit-box-shadow: #BFBEBF 7px 7px 7px; -moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;">
-						<img style="height: 160px;"
-							src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>">
-					</div>
-
-					<p></p>
-					<form action="ControllerServlet" name="formEnviarMensajeProducto"
-						novalidate method="post">
-						<input type="hidden" name="pAccion" value="enviarMensajeProducto">
-						<input type="hidden" name="idProducto"
-							value="<% out.print(producto.getProductId()); %>">
-						<div id="success"></div>
-						<div class="row">
-							<div class="form-group col-xs-12">
-								<button type="submit" class="btn btn-success btn-lg">Enviar
-									mensaje</button>
-							</div>
+				<form action="ControllerAdminServlet"
+					name="formCambiarDisponibilidadProducto" novalidate method="post">
+					<input type="hidden" name="pAccion"
+						value="MostrarDatosUsuarioAdmin"> <input type="hidden"
+						name="idUsuario" value="<%out.print(usuario.getEmail());%>">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Mostrar
+								Datos</button>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 
-				<%}} %>
+				<form action="ControllerAdminServlet" name="formModificarProducto"
+					novalidate method="post">
+					<input type="hidden" name="pAccion" value="modificarUsuarioAdmin">
+					<input type="hidden" name="idUsuario"
+						value="<%out.print(usuario.getEmail());%>">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+						</div>
+					</div>
+				</form>
+				<form action="ControllerAdminServlet" name="formEliminarProducto"
+					novalidate method="post">
+					<input type="hidden" name="pAccion" value="eliminarUsuarioAdmin">
+					<input type="hidden" name="idUsuario"
+						value="<%out.print(usuario.getEmail());%>">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
+						</div>
+					</div>
+				</form>
+
 			</div>
+
+			<%
+				}}
+			%>
 		</div>
+	</div>
 	</section>
+
+
 
 
 	<%@include file="includes/footer.jsp"%>

@@ -12,19 +12,23 @@ import entityManagers.ProductManager;
 public class MyProductsRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		
-		//Recuperamos el email del usuario de la sesion
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = "";
+		
+		//Se recupera el email del usuario de la sesion
 		HttpSession session = request.getSession(false);
-		Usuario usuarioSession = (Usuario) session.getAttribute("entityUser");
+		String emailUsuarioSession =  (String) session.getAttribute("userEmailSession");
 		
 		List<Producto> productos;
 		ProductManager gestorDatos = new ProductManager();
 		try {
-			productos = gestorDatos.buscarPorUsuario(usuarioSession);
+			productos = gestorDatos.buscarPorUsuario(emailUsuarioSession);
 		}catch(NoResultException e){
-			e.printStackTrace();
-			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
-			request.setAttribute("catalogMessage", "Ha habido un error mostrando los productos");
-			throw new NoResultException("El usuario "+usuarioSession.getNombre()+" "+usuarioSession.getApellido1()+" "+usuarioSession.getApellido2()+" no tiene productos");
+			message = e.getMessage();
+			throw new NoResultException(e.getMessage());
+		}
+		finally{
+			request.setAttribute("Message", message);
 		}
 
 		request.setAttribute("listaDeProductos", productos);

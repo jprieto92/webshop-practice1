@@ -125,7 +125,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto)); %>">
+							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto.getImagen())); %>">
 						</div>
 					</div>
 					

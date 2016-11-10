@@ -75,7 +75,7 @@
 						</div>
 					</div>
 
-					<input type="hidden" name="pAccion" value="login"> <br>
+					<input type="hidden" name="pAccion" value="loginAdmin"> <br>
 					<div id="success"></div>
 					<div class="row">
 						<div class="form-group col-xs-12">

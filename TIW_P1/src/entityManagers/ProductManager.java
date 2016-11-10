@@ -25,7 +25,12 @@ public class ProductManager {
 		emf = Persistence.createEntityManagerFactory("tiwUnitPersistence");
 	}  
 	
-	
+	/**
+	 * Inserta un producto en la BBDD.
+	 * @param producto entity
+	 * @return String message
+	 * @throws Exception
+	 */
 	public String insertar(Producto producto) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		try {
@@ -96,17 +101,22 @@ public class ProductManager {
 	@SuppressWarnings("unchecked")
 	
 	
-	
-	public List<Producto> buscarPorUsuario(Usuario usuario) throws Exception {
+	/**
+	 * Busca todos los productos dado un email del usuario
+	 * @param emailUsuario
+	 * @return List<Producto>
+	 * @throws Exception
+	 */
+	public List<Producto> buscarPorUsuario(String emailUsuario) throws Exception {
 		List<Producto> resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
-			Query query = em.createNamedQuery(Producto.BUSCAR_USUARIO_PROPIETARIO,Producto.class);
-			query.setParameter("usuario", usuario);
+			Query query = em.createNamedQuery(Producto.BUSCAR_USUARIO_PROPIETARIO_POR_EMAIL,Producto.class);
+			query.setParameter("emailUsuario", emailUsuario);
 			resultado = query.getResultList();
 			//Si no existen coincidencias, se lanza una excepción
 			if(resultado.size()==0){
-				throw new NoResultException("No existen productos.");
+				throw new NoResultException("El usuario con email"+emailUsuario+" no tiene productos");
 			}
 		}
 		catch(NoResultException e){
@@ -195,6 +205,32 @@ public class ProductManager {
 			em.close();
 		}
 		return resultado.getDisponibilidad();
+	}
+	
+	/**
+	 * Comprueba que dado un product id, comprueba si le pertenece a un user a través de su email
+	 * @param idProducto
+	 * @return
+	 * @throws Exception
+	 */
+	public void comprobarPertenenciaProducto(Integer idProducto, String email) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(Producto.COMPROBAR_PERTENENCIA_PRODUCTO,Producto.class);
+			query.setParameter("emailUser", email);
+			query.setParameter("productId", idProducto);
+			query.getSingleResult();
+		}
+		catch(NoResultException e){
+			throw new NoResultException("El producto "+idProducto+" no pertenece al usuario con email "+email);		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
 	}
 	
 	public String darDeBaja(Integer idProducto) throws Exception {

@@ -42,8 +42,10 @@
 	<%@include file="includes/headerWithSession.jsp"%>
 
 
-	<!--  Se recupera la entidad usuario de la sesión -->
-	<% Usuario usuario = (Usuario) session.getAttribute("entityUser"); %>
+	<!--  Se recuperan los datos necesarios -->
+	<%
+		Usuario userEntity = (Usuario) request.getAttribute("userEntity");
+	%>
 
 	<!-- Register Section -->
 	<section id="register">
@@ -65,7 +67,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagenPerfil(usuario)); %>">
+							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(userEntity.getImagenPerfil())); %>">
 						</div>
 					</div>
 					
@@ -102,7 +104,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p>Nombre</p> <input type="text" class="form-control"
-								value="<%=usuario.getNombre()%>" id="Nombre" name="name"
+								value="<%=userEntity.getNombre()%>" id="Nombre" name="name"
 								required
 								data-validation-required-message="Por favor, introduce tu nombre.">
 							<p class="help-block text-danger"></p>
@@ -113,7 +115,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p>Apellido 1</p> <input type="text" class="form-control"
-								value="<%=usuario.getApellido1()%>" id="Apellido 1"
+								value="<%=userEntity.getApellido1()%>" id="Apellido 1"
 								name="apellido1" required
 								data-validation-required-message="Campo requerido.">
 							<p class="help-block text-danger"></p>
@@ -124,7 +126,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p>Apellido 2</p> <input type="text" class="form-control"
-								value="<%=usuario.getApellido2()%>" id="Apellido 2"
+								value="<%=userEntity.getApellido2()%>" id="Apellido 2"
 								name="apellido2" required
 								data-validation-required-message="Campo requerido.">
 							<p class="help-block text-danger"></p>
@@ -135,7 +137,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p>Ciudad</p> <input type="text" class="form-control"
-								value="<%=usuario.getCiudad()%>" id="Ciudad" name="ciudad"
+								value="<%=userEntity.getCiudad()%>" id="Ciudad" name="ciudad"
 								required data-validation-required-message="Campo requerido.">
 							<p class="help-block text-danger"></p>
 						</div>
@@ -145,7 +147,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p>Teléfono</p> <input type="phone" class="form-control"
-								value="<%=usuario.getTelefono()%>" id="phone" name="phone"
+								value="<%=userEntity.getTelefono()%>" id="phone" name="phone"
 								required data-validation-required-message="Campo opcional">
 							<p class="help-block text-danger"></p>
 						</div>

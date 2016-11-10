@@ -13,23 +13,28 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuario")
-@NamedQueries({ @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-		@NamedQuery(name = Usuario.BUSCAR_NOMBRE, query = "SELECT u FROM Usuario u where u.nombre=:nombre"),
-		@NamedQuery(name = Usuario.BUSCAR_APELLIDO_1, query = "SELECT u FROM Usuario u where u.apellido1=:apellido1"),
-		@NamedQuery(name = Usuario.BUSCAR_APELLIDO_2, query = "SELECT u FROM Usuario u where u.apellido2=:apellido2"),
-		@NamedQuery(name = Usuario.BUSCAR_CIUDAD, query = "SELECT u FROM Usuario u where u.ciudad=:ciudad"),
-		@NamedQuery(name = Usuario.BUSCAR_EMAIL, query = "SELECT u FROM Usuario u where u.email=:email"),
-		@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES, query = "SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña AND u.tipoUsuario.id_tipoUsuario=:idTipoUsuario") })
+	@NamedQueries({ 
+	@NamedQuery(name = Usuario.BUSCAR_TODOS, query = "SELECT u FROM Usuario u"),
+	@NamedQuery(name = Usuario.BUSCAR_NOMBRE, query = "SELECT u FROM Usuario u where u.nombre LIKE :nombre"),
+	@NamedQuery(name = Usuario.BUSCAR_APELLIDO_1, query = "SELECT u FROM Usuario u where u.apellido1=:apellido1"),
+	@NamedQuery(name = Usuario.BUSCAR_APELLIDO_2, query = "SELECT u FROM Usuario u where u.apellido2=:apellido2"),
+	@NamedQuery(name = Usuario.BUSCAR_CIUDAD, query = "SELECT u FROM Usuario u where u.ciudad=:ciudad"),
+	@NamedQuery(name = Usuario.BUSCAR_EMAIL, query = "SELECT u FROM Usuario u where u.email=:email"),
+	@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES, query = "SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña AND u.tipoUsuario.id_tipoUsuario=:idTipoUsuario"),
+	@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES_SOLO_ID, query = "SELECT u.email FROM Usuario u where u.email=:email AND u.contraseña=:contraseña AND u.tipoUsuario.id_tipoUsuario=:idTipoUsuario") })
+
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	// Nombre de las búsquedas mapeadas
-		public static final String BUSCAR_NOMBRE = "Usuario.seleccionarNombre";
-		public static final String BUSCAR_APELLIDO_1 = "Usuario.seleccionarApellido1";
-		public static final String BUSCAR_APELLIDO_2 = "Usuario.seleccionarApellido2";
-		public static final String BUSCAR_CIUDAD = "Usuario.seleccionarCiudad";
-		public static final String BUSCAR_EMAIL = "Usuario.seleccionarEmail";
-		public static final String BUSCAR_CREDENCIALES = "Usuario.comprobarCredenciales";
+	public static final String BUSCAR_TODOS = "Usuario.seleccionarTodos";
+	public static final String BUSCAR_NOMBRE = "Usuario.seleccionarNombre";
+	public static final String BUSCAR_APELLIDO_1 = "Usuario.seleccionarApellido1";
+	public static final String BUSCAR_APELLIDO_2 = "Usuario.seleccionarApellido2";
+	public static final String BUSCAR_CIUDAD = "Usuario.seleccionarCiudad";
+	public static final String BUSCAR_EMAIL = "Usuario.seleccionarEmail";
+	public static final String BUSCAR_CREDENCIALES = "Usuario.comprobarCredenciales";
+	public static final String BUSCAR_CREDENCIALES_SOLO_ID = "Usuario.comprobarCredencialesSoloId";
 
 	@Id
 	private String email;

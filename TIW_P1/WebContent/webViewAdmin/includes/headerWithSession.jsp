@@ -57,28 +57,32 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li class="page-scroll"><a
-					HREF="javascript:document.catalogSubmitForm.submit()">Gestionar usuarios</a>
-					<form action="ControllerServlet" name="catalogSubmitForm"
+					HREF="javascript:document.misProductosSubmitForm.submit()">Gestionar
+						productos</a>
+					<form action="ControllerAdminServlet" name="misProductosSubmitForm"
 						novalidate method="post">
-						<input type="hidden" name="pAccion" value="catalog">
+						<input type="hidden" name="pAccion" value="gestionarProductos">
 					</form></li>
 				<li class="page-scroll"><a
-					HREF="javascript:document.misProductosSubmitForm.submit()">Gestionar productos</a>
-					<form action="ControllerServlet" name="misProductosSubmitForm"
+					HREF="javascript:document.catalogSubmitForm.submit()">Gestionar
+						usuarios</a>
+					<form action="ControllerAdminServlet" name="catalogSubmitForm"
 						novalidate method="post">
-						<input type="hidden" name="pAccion" value="misProductos">
+						<input type="hidden" name="pAccion" value="gestionarUsuarios">
 					</form></li>
+
 				<li class="page-scroll"><a
-					HREF="javascript:document.misMensajesSubmitForm.submit()">Contactar con usuarios</a>
-					<form action="ControllerServlet" name="misMensajesSubmitForm" novalidate
-						method="post">
-						<input type="hidden" name="pAccion" value="misMensajes">
+					HREF="javascript:document.misMensajesSubmitForm.submit()">Contactar
+						con usuarios</a>
+					<form action="ControllerAdminServlet" name="misMensajesSubmitForm"
+						novalidate method="post">
+						<input type="hidden" name="pAccion" value="">
 					</form></li>
 				<li class="page-scroll"><a
 					HREF="javascript:document.logoutSubmitForm.submit()">Logout</a>
-					<form action="ControllerServlet" name="logoutSubmitForm" novalidate
+					<form action="ControllerAdminServlet" name="logoutSubmitForm" novalidate
 						method="post">
-						<input type="hidden" name="pAccion" value="logout">
+						<input type="hidden" name="pAccion" value="logoutAdmin">
 					</form></li>
 
 			</ul>
@@ -100,10 +104,14 @@
 		</div>
 	</div>
 	</header>
-	
-		<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
-	<% if(null!=request.getAttribute("Message")){out.println(request.getAttribute("Message"));} %>
-	
-	
+
+	<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
+	<%
+		if (null != request.getAttribute("Message")) {
+			out.println(request.getAttribute("Message"));
+		}
+	%>
+
+
 </body>
 </html>

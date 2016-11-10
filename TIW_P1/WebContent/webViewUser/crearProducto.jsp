@@ -75,7 +75,7 @@
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Descripción</label>
                                 <!-- <textarea name="message" class="form-control" cols="40" rows="6" id="descripcion" name="descripcion" required data-validation-required-message="Por favor, introduce una descripcción."></textarea>-->
-                                <input type="text" class="form-control" placeholder="Titulo" id="descripcion" name ="descripcion" required data-validation-required-message="Por favor, introduce una descripcción.">
+                                <input type="text" class="form-control" placeholder="Descripcción" id="descripcion" name ="descripcion" required data-validation-required-message="Por favor, introduce una descripcción.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                         
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Realiza envios</label>
+                                <p>Realiza envios</p>
                                 <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
                                 	<option value="si">Si</option>
                                 	<option value="no">No</option>
@@ -102,7 +102,7 @@
                         
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Precio negociable</label>
+                                <p>Precio negociable</p>
                                 <select class="form-control" id="precioNegociable" name ="precioNegociable">
                                 	<option value="si">Si</option>
                                 	<option value="no">No</option>
@@ -114,7 +114,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Precio</label>
-                                <input type="text" class="form-control" placeholder="Precio del producto" id="precioProducto" name ="precioProducto" required data-validation-required-message="Inserte un precio para el producto.">
+                                <input type="text" class="form-control" placeholder="Precio del producto en euros" id="precioProducto" name ="precioProducto" required data-validation-required-message="Inserte un precio para el producto.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

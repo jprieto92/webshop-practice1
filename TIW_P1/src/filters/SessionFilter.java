@@ -10,7 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //Filtro que comprobará en todas las peticiones si el usuario está logado, si no lo está, le mandará a la página de login, en caso contrario, la petición proseguirá su curso.
@@ -44,7 +43,6 @@ public class SessionFilter implements Filter {
 
 		System.out.println("El filtro está actuando");
 		HttpServletRequest requestHttp = (HttpServletRequest) request;
-		HttpServletResponse reponseHttp = (HttpServletResponse) response;
 		
 		//Vemos si tiene sesion creada. Si no la tiene, no la creamos.
 		HttpSession session = requestHttp.getSession(false);
@@ -60,7 +58,7 @@ public class SessionFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		//Si la sesión es nula o el entityUser es nulo, significa que no hay sesión creada.
-		else if (session == null || session.getAttribute("entityUser") == null) {
+		else if (session == null || session.getAttribute("userEmailSession") == null) {
 			System.out.println("No hay sesion abierta");
 			// Volvemos a presentar los productos
 			miR = requestHttp.getRequestDispatcher("/webViewUser/index.jsp");

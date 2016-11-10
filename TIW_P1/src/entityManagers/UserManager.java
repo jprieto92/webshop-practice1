@@ -1,10 +1,14 @@
 package entityManagers;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
 
 
@@ -44,7 +48,13 @@ public class UserManager {
 		}
 		return "El usuario "+usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2()+" "+" se ha insertado correctamente";
 	}
-
+	
+	/**
+	 * Actualiza un usuario dado su entidad
+	 * @param usuario
+	 * @return String message
+	 * @throws Exception
+	 */
 	public String modificar(Usuario usuario) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		try {
@@ -68,23 +78,71 @@ public class UserManager {
 		return "El usuario "+usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2()+" "+" se ha modificado correctamente";
 	}   
 
-	public Usuario buscarPorEmail(String email) throws NoResultException {
+	/**
+	 * Dado un email de usuario, busca la entidad usuario
+	 * @param email
+	 * @return Usuario entity
+	 * @throws Exception
+	 */
+	public Usuario buscarPorEmail(String email) throws Exception {
 		Usuario resultado;
 		EntityManager em = emf.createEntityManager();
 		try{
 			Query query = em.createNamedQuery(Usuario.BUSCAR_EMAIL,Usuario.class);
 			query.setParameter("email", email);
 			resultado = (Usuario) query.getSingleResult();
-		}catch(Exception e){
+		}
+		catch(NoResultException e){
 			e.printStackTrace();
-			throw new NoResultException();		
-		}finally {
+			throw new NoResultException("No existe el usuario en la BBDD");		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
 			em.close();
 		}
 		return resultado;
 	}
+	
+	/**
+	 * Proporciona una lista de usuarios dado coincidencias por su nombre
+	 * @param nombre_usuario
+	 * @return List<Usuario>
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarPorNombre(String nombre) throws Exception {
+		List<Usuario> resultado;
+		EntityManager em = emf.createEntityManager();
+		
+		//Caracteres comodín
+		nombre = "%"+nombre+"%";
+		try{
+			Query query = em.createNamedQuery(Usuario.BUSCAR_NOMBRE,Usuario.class);
+			query.setParameter("nombre", nombre);
+			resultado = query.getResultList();
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen usuarios.");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+	}
+	
 
-	public Usuario comprobarCredenciales(String email, String contraseña, Integer idTipoUser) throws NoResultException {
+	public Usuario comprobarCredenciales(String email, String contraseña, Integer idTipoUser) throws Exception {
 		Usuario resultado;
 		EntityManager em = emf.createEntityManager();
 		
@@ -95,9 +153,14 @@ public class UserManager {
 			query.setParameter("contraseña", contraseña);
 			query.setParameter("idTipoUsuario", idTipoUser);
 			resultado = (Usuario) query.getSingleResult();
-		}catch(NoResultException e){
+		}
+		catch(NoResultException e){
 			e.printStackTrace();
-			throw new NoResultException();		
+			throw new NoResultException("Ha habido un error con las credenciales. Inserte su usuario y contraseña nuevamente");		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
 		}
 		finally {
 			em.close();
@@ -105,6 +168,41 @@ public class UserManager {
 		return resultado;
 	}
 
+	/**
+	 * Método para comprobar si las credenciales pasadas son correctas. También verifica si el usuario es user o admin.
+	 * @param email
+	 * @param contraseña
+	 * @param idTipoUser
+	 * @return String con el email (campo clave) del usuario
+	 * @throws Exception
+	 */
+	public String comprobarCredencialesDevuelveEmail(String email, String contraseña, Integer idTipoUser) throws Exception {
+		String resultado;
+		EntityManager em = emf.createEntityManager();
+		
+		
+		try{
+			Query query = em.createNamedQuery(Usuario.BUSCAR_CREDENCIALES_SOLO_ID,String.class);
+			query.setParameter("email", email);
+			query.setParameter("contraseña", contraseña);
+			query.setParameter("idTipoUsuario", idTipoUser);
+			resultado =  (String) query.getSingleResult();
+		}
+		catch(NoResultException e){
+			e.printStackTrace();
+			throw new NoResultException("Ha habido un error con las credenciales. Inserte su usuario y contraseña nuevamente");		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+	}
+
+	
 	public String darDeBaja(String email) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		Usuario usuarioBBDD = null;
@@ -122,4 +220,31 @@ public class UserManager {
 		}
 		return "El usuario "+usuarioBBDD.getNombre()+" "+usuarioBBDD.getApellido1()+" "+usuarioBBDD.getApellido2()+" "+" se ha dado de baja correctamente";
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarTodos() throws Exception {
+		List<Usuario> resultado;
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(Usuario.BUSCAR_TODOS,Usuario.class);
+			resultado = query.getResultList();
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen usuarios.");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+	}
+	
+	
 }

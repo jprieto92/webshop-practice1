@@ -13,8 +13,6 @@ import entityManagers.ProductManager;
 
 public class ShowFormModificarProductoRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
-		request.setAttribute("createProductMessage", "Si estás leyendo esto, es porque vamos a modificar un producto.");
-	
 		String idProducto= request.getParameter("idProducto");
 		CategoriaManager gestorCategorias = new CategoriaManager();
 		List<Categoria> categoriasBBDD;

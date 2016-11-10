@@ -4,7 +4,7 @@ import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 import entityManagers.ProductManager;
 
-public class ProductRemoveRequestHandler  extends ActionHandler{
+public class ProductRemoveAdminRequestHandler  extends ActionHandler{
 
 	@Override
 	public void execute() throws Exception {		
@@ -18,19 +18,9 @@ public class ProductRemoveRequestHandler  extends ActionHandler{
 		//Se recupera el id del producto
 		Integer idProducto = Integer.parseInt(request.getParameter("idProducto"));
 		
-		//Se comprueba que el producto pertenece al usuario
-		ProductManager gestorDatos = new ProductManager();
-		try {
-			gestorDatos.comprobarPertenenciaProducto(idProducto, emailUsuarioSession);
-		}catch(NoResultException e){
-			message = e.getMessage();
-			throw new NoResultException(e.getMessage());
-		}
-		finally{
-			request.setAttribute("Message", message);
-		}
-		
 		//Se borra el producto de la BBDD
+		ProductManager gestorDatos = new ProductManager();
+
 		try {
 			message = gestorDatos.darDeBaja(idProducto);
 		}catch(NoResultException e){

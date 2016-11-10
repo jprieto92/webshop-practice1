@@ -2,24 +2,23 @@ package handlers;
 
 import java.util.List;
 import javax.persistence.NoResultException;
-import entitiesJPA.Producto;
-import entityManagers.ProductManager;
+import entitiesJPA.Usuario;
+import entityManagers.UserManager;
 
-public class SearchRequestHandler extends ActionHandler {
+public class UsersSearchRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		
 		
-		String tipoFiltrado = request.getParameter("tipoBusqueda");
 		String terminoFiltrado = request.getParameter("campoBusqueda");
 	
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = "";
 
-		List<Producto> productos = null;
-		ProductManager gestorDatos = new ProductManager();
+		List<Usuario> usuarios = null;
+		UserManager gestorDatosUsuario = new UserManager();
 		
 		try {
-			productos = gestorDatos.buscarPor(tipoFiltrado, terminoFiltrado);
+			usuarios = gestorDatosUsuario.buscarPorNombre(terminoFiltrado);
 		}catch(NoResultException e){
 			message = e.getMessage();
 			throw new NoResultException(e.getMessage());
@@ -28,7 +27,7 @@ public class SearchRequestHandler extends ActionHandler {
 			request.setAttribute("Message", message);
  		}
 		
-		request.setAttribute("listaDeProductos", productos);
+		request.setAttribute("listaDeUsuarios", usuarios);
 		
 	}
 
