@@ -14,9 +14,9 @@ import handlers.HandlerProxy;
 /**
  * Servlet implementation class ControllerServlet
  */
-@WebServlet("/ControllerServlet")
+@WebServlet("/ControllerAdminServlet")
 @MultipartConfig
-public class ControllerServlet extends HttpServlet {
+public class ControllerAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected javax.servlet.ServletConfig config = null;
@@ -24,7 +24,7 @@ public class ControllerServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerServlet() {
+    public ControllerAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,9 +48,9 @@ public class ControllerServlet extends HttpServlet {
 		//Se recoege la accion enviada desde el cliente
 		action = request.getParameter("pAccion");
 		
-		//Si la accion es nula (primera petición del cliente), se establece la acción catalog
+		//Si la accion es nula (primera petición del cliente), se establece la acción indexAdmin
 		if(action == null){
-			action = "catalog";
+			request.getRequestDispatcher("/webViewAdmin/index.jsp").forward(request, response);
 		}
 		
 		//Se llama al manejador de acciones
@@ -68,5 +68,6 @@ public class ControllerServlet extends HttpServlet {
 	}
 
 }
+
 
 

@@ -63,7 +63,7 @@ public class SessionFilter implements Filter {
 		else if (session == null || session.getAttribute("entityUser") == null) {
 			System.out.println("No hay sesion abierta");
 			// Volvemos a presentar los productos
-			miR = requestHttp.getRequestDispatcher("index.jsp");
+			miR = requestHttp.getRequestDispatcher("/webViewUser/index.jsp");
 			miR.forward(request, response);
 		}
 		System.out.println("Hay sesion abierta");
