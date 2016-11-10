@@ -40,6 +40,7 @@ public class ObtenerUsuarioRequestHandler extends ActionHandler {
 		//Si el tipo de usuario es admin, estableceremos el email de usuario a modificar a partir del idProducto
 		if(tipoUsuarioId==2){
 			emailUserModificar = (String) request.getParameter("idUsuario");
+			System.out.println("El usuario que se ha seleccionado desde el handler obtenerUsuario tiene el email: "+emailUserModificar);
 		}
 		//Si se trata de cualquier otro user, se obtendrá de la session
 		else{

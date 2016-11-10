@@ -150,7 +150,7 @@
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
-
+					<input type="hidden" name="idUsuario" value="<%out.print(usuario.getEmail());%>">
 					<input type="hidden" name="pAccion" value="comprobarUsuariomodificarPerfilAdmin">
 					<br>
 					<div id="success"></div>

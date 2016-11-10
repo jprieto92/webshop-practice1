@@ -114,6 +114,7 @@
 					<input type="hidden" name="pAccion" value="comprobarUsuarioMostrarPerfilAdmin">
 					<input type="hidden" name="idUsuario"
 						value="<%out.print(usuario.getEmail());%>">
+						<%System.out.println("Se va a proceder a modificar el usuario con email:"+usuario.getEmail()+" desde gestionarUsuarios.JSP"); %>
 					<div id="success"></div>
 					<div class="row">
 						<div class="form-group col-xs-12">

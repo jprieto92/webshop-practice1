@@ -17,9 +17,10 @@ public class ListadoUsuariosRequestHandler extends ActionHandler {
 		
 		List<Usuario> usuarios = null;
 		UserManager gestorDatosUsuario = new UserManager();
-
+		
+		//Se buscan todos los usuarios que no sean administradores
 		try {
-			usuarios = gestorDatosUsuario.buscarTodos();
+			usuarios = gestorDatosUsuario.buscarTodosUsers();
 		}catch(NoResultException e){
 			message = message+" ."+e.getMessage();
 			throw new NoResultException(message);

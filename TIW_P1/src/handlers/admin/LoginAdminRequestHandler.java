@@ -13,7 +13,6 @@ import handlers.ActionHandler;
 		if(message == null){
 			message = "";
 		}
-		System.out.println("El mensaje inicial es: "+message);
 		
 		//Recuperacion campos formulario login
  		String email = (String) request.getParameter("emailLogin");
@@ -33,7 +32,6 @@ import handlers.ActionHandler;
  		}
 		finally{
 			request.setAttribute("Message", message);
-			System.out.println("El mensaje puesto en la petición es: "+message);
 		}
  		//Si existe el usuario, se procede a crear la sesion
  		HttpSession session = request.getSession(true);

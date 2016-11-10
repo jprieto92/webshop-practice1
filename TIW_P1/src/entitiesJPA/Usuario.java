@@ -22,7 +22,9 @@ import java.util.List;
 	@NamedQuery(name = Usuario.BUSCAR_EMAIL, query = "SELECT u FROM Usuario u where u.email=:email"),
 	@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES, query = "SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña AND u.tipoUsuario.id_tipoUsuario=:idTipoUsuario"),
 	@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES_SOLO_ID, query = "SELECT u.email FROM Usuario u where u.email=:email AND u.contraseña=:contraseña AND u.tipoUsuario.id_tipoUsuario=:idTipoUsuario"),
-	@NamedQuery(name = Usuario.DEVOLVER_TIPO_USUARIO_DADO_EMAIL, query = "SELECT u.tipoUsuario.id_tipoUsuario FROM Usuario u where u.email=:email") })
+	@NamedQuery(name = Usuario.DEVOLVER_TIPO_USUARIO_DADO_EMAIL, query = "SELECT u.tipoUsuario.id_tipoUsuario FROM Usuario u where u.email=:email"),
+	@NamedQuery(name = Usuario.BUSCAR_USUARIOS_USERS, query = "SELECT u FROM Usuario u where u.tipoUsuario.id_tipoUsuario = 1") 
+	})
 
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,7 @@ public class Usuario implements Serializable {
 	public static final String BUSCAR_CREDENCIALES = "Usuario.comprobarCredenciales";
 	public static final String BUSCAR_CREDENCIALES_SOLO_ID = "Usuario.comprobarCredencialesSoloId";
 	public static final String DEVOLVER_TIPO_USUARIO_DADO_EMAIL = "Usuario.devuelveIdTipoUsuarioDadoEmail";
+	public static final String BUSCAR_USUARIOS_USERS = "Usuario.buscaTodosUsuariosTipoUser";
 
 	@Id
 	private String email;

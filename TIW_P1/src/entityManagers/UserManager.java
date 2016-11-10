@@ -272,5 +272,30 @@ public class UserManager {
 		return resultado;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarTodosUsers() throws Exception {
+		List<Usuario> resultado;
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(Usuario.BUSCAR_USUARIOS_USERS,Usuario.class);
+			resultado = query.getResultList();
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen usuarios.");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+	}
+	
 	
 }
