@@ -19,7 +19,7 @@ import java.util.List;
 		@NamedQuery(name = Usuario.BUSCAR_APELLIDO_2, query = "SELECT u FROM Usuario u where u.apellido2=:apellido2"),
 		@NamedQuery(name = Usuario.BUSCAR_CIUDAD, query = "SELECT u FROM Usuario u where u.ciudad=:ciudad"),
 		@NamedQuery(name = Usuario.BUSCAR_EMAIL, query = "SELECT u FROM Usuario u where u.email=:email"),
-		@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES, query = "SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña") })
+		@NamedQuery(name = Usuario.BUSCAR_CREDENCIALES, query = "SELECT u FROM Usuario u where u.email=:email AND u.contraseña=:contraseña AND u.tipoUsuario.id_tipoUsuario=:idTipoUsuario") })
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

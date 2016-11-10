@@ -84,13 +84,16 @@ public class UserManager {
 		return resultado;
 	}
 
-	public Usuario comprobarCredenciales(String email, String contraseña) throws NoResultException {
+	public Usuario comprobarCredenciales(String email, String contraseña, Integer idTipoUser) throws NoResultException {
 		Usuario resultado;
 		EntityManager em = emf.createEntityManager();
+		
+		
 		try{
 			Query query = em.createNamedQuery(Usuario.BUSCAR_CREDENCIALES,Usuario.class);
 			query.setParameter("email", email);
 			query.setParameter("contraseña", contraseña);
+			query.setParameter("idTipoUsuario", idTipoUser);
 			resultado = (Usuario) query.getSingleResult();
 		}catch(NoResultException e){
 			e.printStackTrace();

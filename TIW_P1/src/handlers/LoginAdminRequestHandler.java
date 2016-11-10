@@ -17,7 +17,8 @@ import entityManagers.UserManager;
 		UserManager gestorDatosUsuario = new UserManager();
 		Usuario usuarioBBDD;
 		try{
-			usuarioBBDD = gestorDatosUsuario.comprobarCredenciales(email, pass);
+			//Se le pasa el 2 como id de tipo de usuario, que corresponde a admin
+			usuarioBBDD = gestorDatosUsuario.comprobarCredenciales(email, pass, 2);
 		}
 		catch(NoResultException e){
  			request.setAttribute("indexMessage", "Ha habido un error con las credenciales. Inserte su usuario y contraseña nuevamente");
