@@ -153,7 +153,7 @@
 						</div>
 					</div>
 
-					<input type="hidden" name="pAccion" value="modificarPerfil">
+					<input type="hidden" name="pAccion" value="ObtenerUsuarioModificarPerfil">
 					<br>
 					<div id="success"></div>
 					<div class="row">
@@ -182,7 +182,7 @@
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 				<form name="sentMessage" action="ControllerServlet" id="contactForm"
 					novalidate method="post">
-					<input type="hidden" name="pAccion" value="darBajaUsuario">
+					<input type="hidden" name="pAccion" value="ComprobarUsuarioDarBajaUsuario">
 					<br>
 					<div id="success"></div>
 					<div class="row">

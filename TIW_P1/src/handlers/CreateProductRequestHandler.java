@@ -17,6 +17,9 @@ public class CreateProductRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
 		
 		//Se recupera el email del usuario de la sesion
 		HttpSession session = request.getSession(false);
@@ -29,7 +32,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setEnvios((String) request.getParameter("realizaEnviosProducto"));
 		productoAInsertar.setFechaPublicacion(new java.util.Date());
 		
-		
+
 		//Se recogen las imagenes
 		Part filePart = request.getPart("imagen1Producto");
 	    byte[] data = new byte[(int) filePart.getSize()];
@@ -39,7 +42,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		productoAInsertar.setPrecio(Integer.parseInt(request.getParameter("precioProducto")));
 		productoAInsertar.setPrecioNegociable((String) request.getParameter("precioNegociable"));
 		productoAInsertar.setTitulo((String) request.getParameter("tituloProducto"));
-		
+
 		//Se establece a quien pertenece el producto. Para ello se busca en la BBDD
 		//Buscamos al usuario en la BBDD
 		UserManager userManager = new UserManager();
@@ -69,7 +72,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		//categoria.setIdCategoria(idCategoria);
 		productoAInsertar.setCategoria(categoria);
 		
-
+		System.out.println("hola 5");
 		//Gestora de la persistencia de los datos de producto
 		ProductManager gestorDatos = new ProductManager();
 		try {
@@ -82,6 +85,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 		finally{
 			request.setAttribute("Message", message);
 		}
+		System.out.println("hola 6");
 	}
 
 }

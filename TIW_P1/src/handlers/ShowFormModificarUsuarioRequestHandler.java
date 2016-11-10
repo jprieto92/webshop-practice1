@@ -1,18 +1,20 @@
-package handlers.admin;
+package handlers;
 
 import javax.persistence.NoResultException;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
-import handlers.ActionHandler;
 
-public class ShowFormModificarUsuarioAdminRequestHandler  extends ActionHandler{
+public class ShowFormModificarUsuarioRequestHandler  extends ActionHandler{
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
 		
-		//Se recupera el email del parametro
-		String emailUsuario =  (String) request.getParameter("idUsuario");
-		System.out.println("El email del usuario que se ha querido modificar es: "+emailUsuario);
+		//Se recupera el email del usuario a modificar
+		String emailUsuario =  (String) request.getAttribute("emailUserModificar");
+		
 		//Buscamos al usuario en la BBDD
 		UserManager userManager = new UserManager();
 		Usuario usuarioBBDD = null;
@@ -20,7 +22,7 @@ public class ShowFormModificarUsuarioAdminRequestHandler  extends ActionHandler{
 			usuarioBBDD = userManager.buscarPorEmail(emailUsuario);
 
 		}catch(NoResultException e){
-			message = e.getMessage();
+			message.concat(" ."+e.getMessage());
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

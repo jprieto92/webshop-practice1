@@ -8,10 +8,13 @@ import handlers.ActionHandler;
  public class LoginAdminRequestHandler extends ActionHandler {
  
  	public void execute () throws Exception {
-		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
- 		
+		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
+		System.out.println("El mensaje inicial es: "+message);
+		
 		//Recuperacion campos formulario login
  		String email = (String) request.getParameter("emailLogin");
  		String pass = (String) request.getParameter("passLogin");
@@ -25,11 +28,12 @@ import handlers.ActionHandler;
 			emailAdminBBDD = gestorDatosUsuario.comprobarCredencialesDevuelveEmail(email, pass, 2);
 		}
 		catch(NoResultException e){
-			message = e.getMessage();
-			throw new NoResultException(e.getMessage());
+			message.concat(" ."+e.getMessage());
+			throw new NoResultException(message);
  		}
 		finally{
 			request.setAttribute("Message", message);
+			System.out.println("El mensaje puesto en la petición es: "+message);
 		}
  		//Si existe el usuario, se procede a crear la sesion
  		HttpSession session = request.getSession(true);

@@ -11,7 +11,10 @@ public class CatalogRequestHandler extends ActionHandler {
 	public void execute () throws Exception {		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
-
+		if(message == null){
+			message = "";
+		}
+		
 		List<Producto> productos = null;
 		ProductManager gestorDatos = new ProductManager();
 

@@ -11,6 +11,9 @@ public class RegisterRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
 		
 		//Creamos un entidad con TipoUsuario con ID 1, que user normal
 		TipoUsuario tipoUsuario = new TipoUsuario();

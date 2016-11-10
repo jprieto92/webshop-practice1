@@ -16,6 +16,9 @@ public class ShowFormSentMessageRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
 		
 		request.setAttribute("Message", "Si estás leyendo esto, es porque vamos a mandar un mensaje.");
 		

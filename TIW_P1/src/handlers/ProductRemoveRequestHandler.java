@@ -9,6 +9,9 @@ public class ProductRemoveRequestHandler  extends ActionHandler{
 	public void execute() throws Exception {		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = "";
+		if(message == null){
+			message = "";
+		}
 		
 		//Se recupera el id del producto
 		Integer idProducto = Integer.parseInt(request.getParameter("idProducto"));

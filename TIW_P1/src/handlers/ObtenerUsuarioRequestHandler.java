@@ -3,8 +3,6 @@ package handlers;
 
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 import handlers.ActionHandler;
 
@@ -13,7 +11,10 @@ public class ObtenerUsuarioRequestHandler extends ActionHandler {
 	@Override
 	public void execute() throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
 		
 		//Se recupera el email del usuario de la sesion
 		HttpSession session = request.getSession(false);
@@ -27,14 +28,26 @@ public class ObtenerUsuarioRequestHandler extends ActionHandler {
 			tipoUsuarioId = userManager.obtenerIdTipoUsuario(emailUsuarioSession);
 
 		}catch(NoResultException e){
-			message = e.getMessage();
-			throw new NoResultException(e.getMessage());
+			message.concat(" ."+e.getMessage());
+			throw new NoResultException(message);
 		}
 		finally{
 			request.setAttribute("Message", message);
 		}
 		
+		String emailUserModificar;
 		
+		//Si el tipo de usuario es admin, estableceremos el email de usuario a modificar a partir del idProducto
+		if(tipoUsuarioId==2){
+			emailUserModificar = (String) request.getParameter("idUsuario");
+		}
+		//Si se trata de cualquier otro user, se obtendrá de la session
+		else{
+			emailUserModificar = emailUsuarioSession;
+		}
+		
+		//Se añade a la petición el email del usuario a tratar
+		request.setAttribute("emailUserModificar", emailUserModificar);
 	}
 
 }

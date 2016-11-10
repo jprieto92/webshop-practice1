@@ -151,7 +151,7 @@
 						</div>
 					</div>
 
-					<input type="hidden" name="pAccion" value="modificarPerfilAdmin">
+					<input type="hidden" name="pAccion" value="comprobarUsuariomodificarPerfilAdmin">
 					<br>
 					<div id="success"></div>
 					<div class="row">

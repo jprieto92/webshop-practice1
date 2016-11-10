@@ -9,9 +9,11 @@ import handlers.ActionHandler;
  public class LoginUserRequestHandler extends ActionHandler {
  
  	public void execute () throws Exception {
-		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
-		String message = "";
+		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
  		
 		//Recuperacion campos formulario login
  		String email = (String) request.getParameter("emailLogin");
@@ -24,10 +26,9 @@ import handlers.ActionHandler;
 		try{
 			//Se le pasa el 1 como id de tipo de usuario, que corresponde a user
 			emailUserBBDD = gestorDatosUsuario.comprobarCredencialesDevuelveEmail(email, pass, 1);
-
 		}
 		catch(NoResultException e){
-			message = e.getMessage();
+			message.concat(" ."+e.getMessage());
 			throw new NoResultException(e.getMessage());
  		}
 		finally{

@@ -98,7 +98,7 @@
 				<form action="ControllerAdminServlet"
 					name="formCambiarDisponibilidadProducto" novalidate method="post">
 					<input type="hidden" name="pAccion"
-						value="MostrarDatosUsuarioAdmin"> <input type="hidden"
+						value="comprobarUsuarioMostrarDatosUsuarioAdmin"> <input type="hidden"
 						name="idUsuario" value="<%out.print(usuario.getEmail());%>">
 					<div id="success"></div>
 					<div class="row">
@@ -111,7 +111,7 @@
 
 				<form action="ControllerAdminServlet" name="formModificarProducto"
 					novalidate method="post">
-					<input type="hidden" name="pAccion" value="mostrarPerfilAdmin">
+					<input type="hidden" name="pAccion" value="comprobarUsuarioMostrarPerfilAdmin">
 					<input type="hidden" name="idUsuario"
 						value="<%out.print(usuario.getEmail());%>">
 					<div id="success"></div>
@@ -123,7 +123,7 @@
 				</form>
 				<form action="ControllerAdminServlet" name="formEliminarProducto"
 					novalidate method="post">
-					<input type="hidden" name="pAccion" value="eliminarUsuarioAdmin">
+					<input type="hidden" name="pAccion" value="comprobarUsuarioEliminarUsuarioAdmin">
 					<input type="hidden" name="idUsuario"
 						value="<%out.print(usuario.getEmail());%>">
 					<div id="success"></div>

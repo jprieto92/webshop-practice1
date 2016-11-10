@@ -1,14 +1,31 @@
 package handlers;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
 public class LogoutRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
+		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
+		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
 		
 		//Se recupera la sesión. (Si no existe, no se crea una nueva).
  		HttpSession session = request.getSession(true);
  		
  		//Se invalida la sesión
- 		session.invalidate();
+
+ 		
+		try{
+	 		session.invalidate();
+		}catch(IllegalStateException e){
+			message.concat(" ."+"Ha habido un problema al cerrar la sesión");
+			throw new NoResultException(message);
+		}
+		finally{
+			request.setAttribute("Message", message);
+		}
+ 		
 	}
 }

@@ -13,6 +13,9 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 	public void execute() throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
+		if(message == null){
+			message = "";
+		}
 		
 		Integer idNuevaDisponibilidad = Integer.parseInt(request.getParameter("disponibilidadProducto"));
 		Integer idProducto = Integer.parseInt(request.getParameter("idProducto"));

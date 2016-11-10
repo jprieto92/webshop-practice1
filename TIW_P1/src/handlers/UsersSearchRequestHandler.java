@@ -10,6 +10,9 @@ public class UsersSearchRequestHandler extends ActionHandler {
 	public void execute () throws Exception {		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = "";
+		if(message == null){
+			message = "";
+		}
 		
 		String terminoFiltrado = request.getParameter("campoBusqueda");
 

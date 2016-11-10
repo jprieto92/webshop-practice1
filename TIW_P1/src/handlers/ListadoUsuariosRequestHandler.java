@@ -11,7 +11,10 @@ public class ListadoUsuariosRequestHandler extends ActionHandler {
  	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
-
+		if(message == null){
+			message = "";
+		}
+		
 		List<Usuario> usuarios = null;
 		UserManager gestorDatosUsuario = new UserManager();
 
