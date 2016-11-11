@@ -32,7 +32,7 @@ public class ShowFormSentMessageRequestHandler extends ActionHandler {
 			message = message+" ."+"No se puede obtener el propietario o producto";
 			throw new NoResultException(message);
 		}
-		request.setAttribute("destinatario", destinatario);
+		request.setAttribute("destinatario", destinatario.getEmail());
 		request.setAttribute("productoMensaje", productoBBDD);
 	}
 

@@ -62,30 +62,19 @@ public class InteraccionMQ {
 
 	}
 
-	public String lecturaMQ(int opción, String strSelectorPasado) {
+	public String lecturaMQ(String strSelectorPasado) {
 
 		StringBuffer mSB = new StringBuffer(64);
 		try {
 			contextoInicial = new javax.naming.InitialContext();
 
-			
-				factory = (javax.jms.ConnectionFactory) contextoInicial
-						.lookup(InformacionProperties.getQCF());
-				cola = (javax.jms.Queue) contextoInicial
-						.lookup(InformacionProperties.getQueue());
-				
-
-			Qcon = factory.createConnection();
-			
-			QSes = Qcon.createSession(false,
-					javax.jms.QueueSession.AUTO_ACKNOWLEDGE);
+			factory = (javax.jms.ConnectionFactory) contextoInicial.lookup(InformacionProperties.getQCF());
+			cola = (javax.jms.Queue) contextoInicial.lookup(InformacionProperties.getQueue());
+			Qcon = factory.createConnection();			
+			QSes = Qcon.createSession(false,javax.jms.QueueSession.AUTO_ACKNOWLEDGE);
 
 			String sSelector = "JMSCorrelationID = '" + strSelectorPasado.trim() + "'";
-
-			
 			Mcon = QSes.createConsumer(cola, sSelector);
-				
-			
 			Qcon.start();
 			Message mensaje = null;
 			mSB.append("</br>Estos son los mensajes leidos con el selector "
@@ -96,6 +85,7 @@ public class InteraccionMQ {
 					if (mensaje instanceof TextMessage) {
 						TextMessage m = (TextMessage) mensaje;
 						mSB.append("       Mensaje: " + m.getText() + " </br>");
+						System.out.println(m.getText());
 					} else {
 						// JHC ************ No es del tipo correcto
 						break;
@@ -105,7 +95,7 @@ public class InteraccionMQ {
 					mSB.append("No hay mas Mensajes </br>");
 					break;
 				}
-
+                System.out.println(mSB);
 			}
 			this.Mcon.close();
 			this.QSes.close();
