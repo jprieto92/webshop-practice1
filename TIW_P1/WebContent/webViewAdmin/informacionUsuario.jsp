@@ -18,19 +18,19 @@
 	<% Usuario usuario = (Usuario) request.getAttribute("userEntity"); %>
 
 
-<section id="portfolio">
+	<section id="portfolio">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h2>Información detallada de <%=usuario.getNombre()%> <%=usuario.getApellido1()%> <%=usuario.getApellido2()%></h2>
+				<h2>
+					Información detallada de
+					<%=usuario.getNombre()%>
+					<%=usuario.getApellido1()%>
+					<%=usuario.getApellido2()%></h2>
 				<hr class="star-primary">
 			</div>
 		</div>
 
-		
-
-		
-		</div>
 	</div>
 	</section>
 

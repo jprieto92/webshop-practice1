@@ -7,15 +7,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Mostrar Producto</title>
+<title>Mostrar mi producto</title>
 </head>
 <body>
 
 	
 	<%@include file="includes/headerWithSession.jsp"%>
-<%Producto producto = (Producto) request.getAttribute("productoMostrar"); 
-	Usuario usuario = (Usuario) request.getAttribute("usuarioMostrar");
-	out.print(usuario.getNombre());%>
+<%Producto producto = (Producto) request.getAttribute("idProducto"); 
+	Usuario usuario = (Usuario) request.getAttribute("usuarioMostrar");%>
 <section id="portfolio">
 	<div class="container">
 		<div class="row">
@@ -80,6 +79,38 @@
 
 			</div>
 		</div>
+				<form action="ControllerServlet" name="formModificarProducto" novalidate method="post">
+				<input type="hidden" name="pAccion" value="modificarProducto">
+				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+					</div>
+				</div>
+			</form>
+				<form action="ControllerServlet" name="formCambiarDisponibilidadProducto" novalidate method="post">
+				<input type="hidden" name="pAccion" value="ShowFormChangeAvailability">
+				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<button type="submit" class="btn btn-success btn-lg">Cambiar disponibilidad</button>
+					</div>
+				</div>
+			</form>	
+			
+			<form action="ControllerServlet" name="formEliminarProducto" novalidate method="post">
+				<input type="hidden" name="pAccion" value="comprobarUsuarioEliminarProducto">
+				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
+					</div>
+				</div>
+			</form>
+		
 		
 		<div style="float:left;">
 			<div class="row">
@@ -88,32 +119,22 @@
 					Propietario
 				</h2>
 				<hr class="star-primary">
-				
 				<p>
 					<%out.print(usuario.getNombre());%>
 				</p>
 
 
 			</div>
+			
 			<div class="col-lg-12 text-center">
 				<h4>Correo del propietario</h4>
 				<p>
 					<%out.print(usuario.getEmail());%>
 				</p>
 			</div>
-			<form action="ControllerServlet" name="formModificarProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="enviarMensajeProducto">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Enviar mensaje</button>
-					</div>
-				</div>
-			</form>
-			
+			</div>
 		</div>
-		</div>
+		
 	</div>
 	</section>
     <%@include file="includes/footer.jsp"%>

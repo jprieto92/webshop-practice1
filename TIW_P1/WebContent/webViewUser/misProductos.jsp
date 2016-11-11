@@ -65,39 +65,18 @@
                         <h4><%=producto.getTitulo() %></h4>
 			<div style="width:160px;height:160px;-webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;background:rgba(24,188,156,0.5);-webkit-box-shadow: #BFBEBF 7px 7px 7px;-moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;"><img style="height: 160px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto.getImagen())); %>"></div>
 			
-			<p></p>
-			<form action="ControllerServlet" name="formEliminarProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="comprobarUsuarioEliminarProducto">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
-					</div>
-				</div>
-			</form>
-			
 			<form action="ControllerServlet" name="formModificarProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="modificarProducto">
+				<input type="hidden" name="pAccion" value="mostrarMiProducto">
 				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+						<button type="submit" class="btn btn-success btn-lg">M&aacute;s informaci&oacute;n</button>
 					</div>
 				</div>
 			</form>
 			
-			<form action="ControllerServlet" name="formCambiarDisponibilidadProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="ShowFormChangeAvailability">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Cambiar disponibilidad</button>
-					</div>
-				</div>
-			</form>	
+	
                 </div>
              
              		<%} %>
