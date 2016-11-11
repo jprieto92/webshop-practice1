@@ -27,6 +27,7 @@ public class ChatRequestHandler extends ActionHandler {
 		HttpSession sesion = request.getSession(false);
 		String usuarioSession = (String) sesion.getAttribute("userEmailSession");
 		String conversacion = (String) request.getAttribute("conversacion");
+		System.out.println("ID : " + conversacion);
 		InteraccionMQ mq = new InteraccionMQ();
 		List<MessageChat> listaMensajes = new ArrayList<MessageChat>();
         listaMensajes = mq.lecturaMQ(conversacion);

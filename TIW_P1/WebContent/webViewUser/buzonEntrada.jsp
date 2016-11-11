@@ -72,7 +72,7 @@
 							</form>
                         </div>
                         <%}}%>
-                        <input type="hidden" name="pAccion" value="catalog">
+                        <input type="hidden" name="pAccion" value="misMensajes">
                         <br>
                         <div id="success"></div>
                         <div class="row">

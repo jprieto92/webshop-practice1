@@ -24,107 +24,97 @@
 		<div class="row">
 			<form action="ControllerServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda"
-					value="busquedaPorCategoria">
+
+				<!-- Parámetro que leerá el Controller Servlet -->
+				<input type="hidden" name="pAccion" value="buscarProductosAvanzada">
+
+
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">
-						<label>Categoria</label> <select class="form-control"
-							id="categoriaProducto" name="campoBusqueda">
-							<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
-                                	for(Categoria categoria : listaCategorias){
-                                		out.println("<option value=\""+ categoria.getNombre() + "\">"+categoria.getNombre()+"</option>");
-                                	}
-                                	%>
-						</select>
-						<p></p>
-						<button type="submit" class="btn btn-success btn-lg">Buscar
-							por categoría</button>
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<p>Categoria</p> <select class="form-control"
+								id="categoriaProducto" name="campoBusquedaCategoria">
+								<option value="">Escoge categoría</option>
+								<%
+									List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
+									for (Categoria categoria : listaCategorias) {
+										out.println(
+												"<option value=\"" + categoria.getNombre() + "\">" + categoria.getNombre() + "</option>");
+									}
+								%>
+							</select>
+							<p></p>
+						</div>
 					</div>
 				</div>
+
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<label>Ciudad</label> <input type="text" class="form-control"
+								placeholder="Introduzca un nombre de ciudad"
+								id="campoBusquedaCiudad" name="campoBusquedaCiudad" required
+								data-validation-required-message="Introduzca un nombre de ciudad">
+							<p></p>
+						</div>
+					</div>
+				</div>
+
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<label>Título de producto</label> <input type="text"
+								class="form-control"
+								placeholder="Introduzca un título de producto"
+								id="campoBusquedaTitulo" name="campoBusquedaTitulo" required
+								data-validation-required-message="Introduzca un título de producto">
+							<p></p>
+						</div>
+					</div>
+				</div>
+
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<label>Descripcción de producto</label> <input type="text"
+								class="form-control"
+								placeholder="Introduzca una descripcción de producto"
+								id="campoBusquedaDescripccion" name="campoBusquedaDescripccion"
+								required
+								data-validation-required-message="Introduzca una descripcción de producto">
+							<p></p>
+						</div>
+					</div>
+				</div>
+
+				<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<label>Email del vendedor</label> <input type="text"
+								class="form-control"
+								placeholder="Introduzca un email de vendedor"
+								id="campoBusquedaEmailVendedor"
+								name="campoBusquedaEmailVendedor" required
+								data-validation-required-message="Introduzca un email de vendedor">
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-success btn-lg">Buscar</button>
 			</form>
 		</div>
 
-		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
-				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda" value="busquedaPorCiudad">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<input type="text" class="form-control"
-							placeholder="Término de búsqueda" id="campoBusqueda"
-							name="campoBusqueda" required
-							data-validation-required-message="Introduzca un término de búsqueda.">
-						<p></p>
-						<button type="submit" class="btn btn-success btn-lg">Buscar
-							por ciudad</button>
-					</div>
-				</div>
-			</form>
-		</div>
 
-		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
-				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda" value="busquedaPorNombreUsuario">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<input type="text" class="form-control"
-							placeholder="Término de búsqueda" id="campoBusqueda"
-							name="campoBusqueda" required
-							data-validation-required-message="Introduzca un término de búsqueda.">
-						<p></p>
-						<button type="submit" class="btn btn-success btn-lg">Buscar
-							por vendedor</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
-		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
-				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda" value="busquedaPorTitulo">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<input type="text" class="form-control"
-							placeholder="Término de búsqueda" id="campoBusqueda"
-							name="campoBusqueda" required
-							data-validation-required-message="Introduzca un término de búsqueda.">
-						<p></p>
-						<button type="submit" class="btn btn-success btn-lg">Buscar
-							por título</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
-		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
-				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda" value="busquedaPorDescripccion">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<input type="text" class="form-control"
-							placeholder="Término de búsqueda" id="campoBusqueda"
-							name="campoBusqueda" required
-							data-validation-required-message="Introduzca un término de búsqueda.">
-						<p></p>
-						<button type="submit" class="btn btn-success btn-lg">Buscar
-							por descripcción</button>
-					</div>
-				</div>
-			</form>
-		</div>
 	</div>
 	</section>
 

@@ -59,9 +59,7 @@
 		<div class="row">
 			<form action="ControllerServlet" name="formProductos" novalidate
 				method="post">
-				<input type="hidden" name="pAccion" value="buscarProductos">
-				<input type="hidden" name="tipoBusqueda"
-					value="busquedaPorTituloDescripccion">
+				<input type="hidden" name="pAccion" value="buscarProductosSimple">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">
@@ -80,8 +78,6 @@
 			<form action="ControllerServlet" name="formProductos" novalidate
 				method="post">
 				<input type="hidden" name="pAccion" value="ShowFormAdvancedSearch">
-				<input type="hidden" name="tipoBusqueda"
-					value="busquedaPorTituloDescripccion">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">						
@@ -111,13 +107,8 @@
 						<input type="hidden" name="pAccion" value="enviarMensajeProducto">
 						<input type="hidden" name="idProducto"
 							value="<% out.print(producto.getProductId()); %>">
-						<div id="success"></div>
-						<div class="row">
-							<div class="form-group col-xs-12">
-								<button type="submit" class="btn btn-success btn-lg">Enviar
-									mensaje</button>
-							</div>
-						</div>
+			
+						
 					</form>
 					<form action="ControllerServlet" name="formMostrarProducto"
 						novalidate method="post">
