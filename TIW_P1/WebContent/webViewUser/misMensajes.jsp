@@ -1,4 +1,5 @@
 <%@page import="entitiesJPA.Producto"%>
+<%@page import="jms.MessageChat"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -38,7 +39,7 @@
 <%String mensaje = (String) request.getAttribute("chatMessage");
   HttpSession sesion = request.getSession(false);
   String usuarioSession = (String) session.getAttribute("userEmailSession");
-  String mensajeRecibido = (String) request.getAttribute("mensajeRecibido");%>
+  MessageChat mensajeRecibido = (MessageChat) request.getAttribute("mensajeRecibido");%>
 <!-- Register Product Section -->
     <section id="MessageSection">
         <div class="container">
@@ -57,21 +58,22 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p><b>Emisor: </b></p>
-                                <p class="help-block text-danger"></p>
+                                <p class="help-block text-danger"><%out.print(mensajeRecibido.getAuthor());%></p>
                             </div>
                         </div>
 
    						<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p><b>Motivo: </b></p>
-                                <p class="help-block text-danger"></p>
+                                <p class="help-block text-danger"><%out.print(mensajeRecibido.getReason());%></p>
                             </div>
                         </div>
                         
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p><b>Mensaje: </b></p>
-                                <p class="help-block text-danger"><%out.print(mensajeRecibido);%></p>
+                                <p class="help-block text-danger"><%out.print(mensajeRecibido.getText());%>
+                                </p>
                             </div>
                         </div>
                         

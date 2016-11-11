@@ -30,7 +30,7 @@ public class SentMessageRequestHandler extends ActionHandler {
 		System.out.println("El mensaje a enviar es: " +  mensaje);
 	    //InteraccionMQ mq=new InteraccionMQ();
 	    InteraccionMQ mq = new InteraccionMQ();
-		mq.escrituraMQ(mensaje,destinatario);
+		mq.escrituraMQ(mensajejms,destinatario);
 	}
 
 }

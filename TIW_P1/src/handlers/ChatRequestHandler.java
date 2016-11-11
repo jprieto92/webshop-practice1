@@ -3,6 +3,7 @@ package handlers;
 import javax.servlet.http.HttpSession;
 
 import jms.InteraccionMQ;
+import jms.MessageChat;
 
 public class ChatRequestHandler extends ActionHandler {
 	
@@ -23,7 +24,7 @@ public class ChatRequestHandler extends ActionHandler {
 		HttpSession sesion = request.getSession(false);
 		String usuarioSession = (String) sesion.getAttribute("userEmailSession");
 		InteraccionMQ mq = new InteraccionMQ();
-		String mensaje = mq.lecturaMQ(usuarioSession);
+		MessageChat mensaje = mq.lecturaMQ(usuarioSession);
 		System.out.println("MENSAJES QUE ESTOY RECIBIENDO : ---" + mensaje);
 		/*Aquí debemos de leer de la cola de JMS para enviarle al form los mensajes recibidos*/
 		request.setAttribute("mensajeRecibido", mensaje);

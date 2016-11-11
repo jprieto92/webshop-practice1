@@ -3,6 +3,7 @@ package jms;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.Message;
+import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.TextMessage;
 
@@ -25,7 +26,7 @@ public class InteraccionMQ {
 //	@Resource(mappedName = "jms/queue1.1")
 //	private static Queue queue;
 
-	public void escrituraMQ(String mensaje, String selector) {
+	public void escrituraMQ(MessageChat mensaje, String selector) {
 
 		try {
 
@@ -37,8 +38,10 @@ public class InteraccionMQ {
 
 			Mpro = QSes.createProducer(cola);
 
-			javax.jms.TextMessage men = QSes.createTextMessage();
-			men.setText(mensaje);
+			javax.jms.ObjectMessage men = QSes.createObjectMessage();
+			//javax.jms.ObjectMessage men = QSes.createTextMessage();
+			men.setObject(mensaje);
+			//men.setText(mensaje);
 			men.setJMSCorrelationID(selector);
 			Qcon.start();
 			Mpro.send(men);
@@ -46,6 +49,7 @@ public class InteraccionMQ {
 			this.Mpro.close();
 			this.QSes.close();
 			this.Qcon.close();
+			System.out.println("Mensaje escrito en la cola");
 
 		} catch (javax.jms.JMSException e) {
 			System.out
@@ -62,9 +66,9 @@ public class InteraccionMQ {
 
 	}
 
-	public String lecturaMQ(String strSelectorPasado) {
+	public MessageChat lecturaMQ(String strSelectorPasado) {
 
-		StringBuffer mSB = new StringBuffer(64);
+		MessageChat listaMensajes = new MessageChat();
 		try {
 			contextoInicial = new javax.naming.InitialContext();
 
@@ -77,25 +81,24 @@ public class InteraccionMQ {
 			Mcon = QSes.createConsumer(cola, sSelector);
 			Qcon.start();
 			Message mensaje = null;
-			mSB.append("</br>Estos son los mensajes leidos con el selector "
-					+ strSelectorPasado + " </br>");
+			System.out.println("VOY A LEER DE LA COLA");
 			while (true) {
 				mensaje = Mcon.receive(100);
 				if (mensaje != null) {
-					if (mensaje instanceof TextMessage) {
-						TextMessage m = (TextMessage) mensaje;
-						mSB.append("       Mensaje: " + m.getText() + " </br>");
-						System.out.println(m.getText());
+					if (mensaje instanceof ObjectMessage) {
+						ObjectMessage m = (ObjectMessage) mensaje;
+						System.out.println(m.getObject());
+						listaMensajes = (MessageChat) m.getObject();
+						//System.out.println(listaMensajes.getText());
 					} else {
 						// JHC ************ No es del tipo correcto
 						break;
 					}
 				} else // NO existe mensaje, mensaje es null
 				{
-					mSB.append("No hay mas Mensajes </br>");
+					System.out.println("NO HAY MAS MENSAJES POR RECIBIR");
 					break;
 				}
-                System.out.println(mSB);
 			}
 			this.Mcon.close();
 			this.QSes.close();
@@ -113,7 +116,7 @@ public class InteraccionMQ {
 							+ e.getMessage());
 		}
 
-		return mSB.toString();
+		return listaMensajes;
 
 	}
 }

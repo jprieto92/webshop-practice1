@@ -16,6 +16,11 @@ public class MessageChat implements Serializable {
 		this.text = text;
 		this.reason="";
 	}
+	
+	public MessageChat()
+	{
+		
+	}
 
 	public String getAuthor() {
 		return author;
