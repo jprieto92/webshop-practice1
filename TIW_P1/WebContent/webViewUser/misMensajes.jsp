@@ -39,7 +39,7 @@
 <%String mensaje = (String) request.getAttribute("chatMessage");
   HttpSession sesion = request.getSession(false);
   String usuarioSession = (String) session.getAttribute("userEmailSession");
-  MessageChat mensajeRecibido = (MessageChat) request.getAttribute("mensajeRecibido");%>
+  List<MessageChat> mensajesRecibidos =  (List<MessageChat>)request.getAttribute("mensajesRecibidos");%>
 <!-- Register Product Section -->
     <section id="MessageSection">
         <div class="container">
@@ -55,28 +55,30 @@
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <!-- IMPORTANTE, BUCLE FOR QUE GENERA ESTE CÓDIGO TANTAS VECES COMO MENSAJES TENGAMOS -->
                     <form name="newMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
+             		<%if(mensajesRecibidos!=null){
+						for(MessageChat mensajeNuevo : mensajesRecibidos){%>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p><b>Emisor: </b></p>
-                                <p class="help-block text-danger"><%out.print(mensajeRecibido.getAuthor());%></p>
+                                <p class="help-block text-danger"><%out.print(mensajeNuevo.getAuthor());%></p>
                             </div>
                         </div>
 
    						<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p><b>Motivo: </b></p>
-                                <p class="help-block text-danger"><%out.print(mensajeRecibido.getReason());%></p>
+                                <p class="help-block text-danger"><%out.print(mensajeNuevo.getReason());%></p>
                             </div>
                         </div>
                         
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p><b>Mensaje: </b></p>
-                                <p class="help-block text-danger"><%out.print(mensajeRecibido.getText());%>
+                                <p class="help-block text-danger"><%out.print(mensajeNuevo.getText());%>
                                 </p>
                             </div>
                         </div>
-                        
+                        <%}}%>
                         <input type="hidden" name="pAccion" value="catalog">
                         <br>
                         <div id="success"></div>

@@ -8,6 +8,10 @@ import javax.jms.Queue;
 import javax.jms.TextMessage;
 
 import jms.InformacionProperties;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 public class InteraccionMQ {
@@ -66,9 +70,10 @@ public class InteraccionMQ {
 
 	}
 
-	public MessageChat lecturaMQ(String strSelectorPasado) {
+	public List<MessageChat> lecturaMQ(String strSelectorPasado) {
 
-		MessageChat listaMensajes = new MessageChat();
+		MessageChat mensajeNuevo = new MessageChat();
+		List<MessageChat> listaMensajes = new ArrayList<MessageChat>();
 		try {
 			contextoInicial = new javax.naming.InitialContext();
 
@@ -88,7 +93,8 @@ public class InteraccionMQ {
 					if (mensaje instanceof ObjectMessage) {
 						ObjectMessage m = (ObjectMessage) mensaje;
 						System.out.println(m.getObject());
-						listaMensajes = (MessageChat) m.getObject();
+						mensajeNuevo = (MessageChat) m.getObject();
+						listaMensajes.add(mensajeNuevo);
 						//System.out.println(listaMensajes.getText());
 					} else {
 						// JHC ************ No es del tipo correcto
