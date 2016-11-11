@@ -58,7 +58,7 @@
 						for(String conversacion : nuevasConversaciones){%>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Emisor: </b> <%out.print(conversacion.split(":")[1]);%></p>
+                                <p><b>Usuario: </b> <%out.print(conversacion.split(":")[1]);%></p>
                          	</div>
                             <form action="ControllerServlet" name="formEnviarMensajeProducto" novalidate method="post">
 								<input type="hidden" id="conversacion" name="conversacion" value="<%out.print(conversacion);%>">
