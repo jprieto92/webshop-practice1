@@ -95,8 +95,7 @@
 						method="post">
 						<input type="hidden" name="pAccion" value="logout">
 					</form></li>
-
-			</ul>
+				</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
