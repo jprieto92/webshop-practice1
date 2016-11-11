@@ -17,13 +17,6 @@ public class InboxRequestHandler extends ActionHandler {
 			message = "";
 		}
 		
-		//	}catch(NoResultException e){
-		//		message = message+" ."+e.getMessage();
-		//		throw new NoResultException(e.getMessage());
-		//	}
-		//	finally{
-		//		request.setAttribute("Message", message);
-		//	}
 		HttpSession sesion = request.getSession(false);
 		String usuarioSession = (String) sesion.getAttribute("userEmailSession");
 		InteraccionMQ mq = new InteraccionMQ();

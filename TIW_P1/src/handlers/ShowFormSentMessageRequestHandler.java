@@ -1,7 +1,5 @@
 package handlers;
 
-
-
 import javax.persistence.NoResultException;
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
@@ -14,13 +12,12 @@ public class ShowFormSentMessageRequestHandler extends ActionHandler {
 		String message = (String) request.getAttribute("Message");
 		if(message == null){
 			message = "";
-		}
+		}	
 		
-		request.setAttribute("Message", "Si estás leyendo esto, es porque vamos a mandar un mensaje.");
-		
-		
-		
+		//Se recoge el id de producto
 		String idProducto= request.getParameter("idProducto");
+		
+		
 		ProductManager productManager = new ProductManager();
 		Producto productoBBDD;
 		Usuario destinatario;
@@ -32,6 +29,8 @@ public class ShowFormSentMessageRequestHandler extends ActionHandler {
 			message = message+" ."+"No se puede obtener el propietario o producto";
 			throw new NoResultException(message);
 		}
+		
+		//Se añaden los atributos que el formulario enviarMensaje.jsp necesitará
 		request.setAttribute("destinatario", destinatario.getEmail());
 		request.setAttribute("productoMensaje", productoBBDD);
 	}

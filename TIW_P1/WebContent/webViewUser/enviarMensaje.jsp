@@ -37,11 +37,15 @@
 <body>
 <%@include file="includes/headerWithSession.jsp" %>
 
-
+<!--  Se recuperan los parámetros enviados en el manejador asociado a la accion "enviarMensajeProducto" -->
 <%Producto producto = (Producto)request.getAttribute("productoMensaje");
   String destinatario = (String)request.getAttribute("destinatario");
+  
   HttpSession sesion = request.getSession(false);
   String usuarioSession = (String) sesion.getAttribute("userEmailSession");%>
+  
+  
+  
 <!-- Register Product Section -->
     <section id="MessageSection">
         <div class="container">
@@ -78,6 +82,7 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
+                        <!--  Campos de recolección de datos para enviar -->
                         <input type="hidden" id="destinatario" name="destinatario" value="<%out.print(destinatario);%>">                                                
                         <input type="hidden" id="producto" name="producto" value="<%out.print(producto.getProductId());%>">
                         <input type="hidden" id="emisor" name="emisor" value="<%out.print(usuarioSession);%>">
