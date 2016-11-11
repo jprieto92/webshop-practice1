@@ -3,7 +3,9 @@ package handlers;
 import javax.persistence.NoResultException;
 
 import entitiesJPA.Producto;
+import entitiesJPA.Usuario;
 import entityManagers.ProductManager;
+import entityManagers.UserManager;
 
 public class ShowFormMostrarProducto  extends ActionHandler{
 	public void execute () throws Exception {
@@ -21,13 +23,27 @@ public class ShowFormMostrarProducto  extends ActionHandler{
 			productoBBDD =  gestorProducto.buscarPorId(Integer.parseInt(idProducto));
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No exisgte el producto";
+			message = message+" ."+"No existe el producto";
+			throw new NoResultException(message);
+		}
+		finally{
+			request.setAttribute("Message", message);
+		}
+		String email= productoBBDD.getUsuario().getEmail();
+		UserManager gestorUsuario = new UserManager();
+		Usuario usuarioBBDD;
+		try{
+			usuarioBBDD =  gestorUsuario.buscarPorEmail(email);
+		}
+		catch(NoResultException e){
+			message = message+" ."+"No existe el usuario";
 			throw new NoResultException(message);
 		}
 		finally{
 			request.setAttribute("Message", message);
 		}
 		
+		request.setAttribute("usuarioMostrar", usuarioBBDD);
 		request.setAttribute("productoMostrar", productoBBDD);
 	}
 }
