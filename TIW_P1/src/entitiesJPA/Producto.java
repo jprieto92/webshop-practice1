@@ -26,7 +26,8 @@ import java.util.Date;
 	@NamedQuery(name = Producto.BUSCAR_TITULO, query = "SELECT p FROM Producto p where p.titulo LIKE :titulo"),
 	@NamedQuery(name = Producto.BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE u.nombre  LIKE :nombre"),
 	@NamedQuery(name = Producto.BUSCAR__POR_CIUDAD, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE u.ciudad  LIKE :ciudad"),
-	@NamedQuery(name = Producto.COMPROBAR_PERTENENCIA_PRODUCTO, query = "SELECT p.productId FROM Producto p JOIN p.usuario u WHERE u.email = :emailUser AND p.productId = :productId")
+	@NamedQuery(name = Producto.COMPROBAR_PERTENENCIA_PRODUCTO, query = "SELECT p.productId FROM Producto p JOIN p.usuario u WHERE u.email = :emailUser AND p.productId = :productId"),
+	@NamedQuery(name = Producto.BUSQUEDA_AVANZADA, query = "SELECT p FROM Producto p JOIN p.usuario u WHERE (p.titulo LIKE :titulo OR \"\"=:titulo) AND (p.descripccion LIKE :descripccion OR \"\"=:descripccion) AND (u.email=:emailUsuario OR \"\"=:emailUsuario) AND (u.ciudad=:ciudadUsuario OR \"\"=:ciudadUsuario)  AND (p.categoria.nombre=:nombreCategoria OR \"\"=:nombreCategoria)")
 
 })
 public class Producto implements Serializable {
@@ -47,6 +48,7 @@ public class Producto implements Serializable {
 	public static final String BUSCAR__POR_CIUDAD = "Producto.seleccionarPorCiudad";
 	public static final String BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE = "Producto.seleccionarPorNombreUsuario";
 	public static final String COMPROBAR_PERTENENCIA_PRODUCTO = "Producto.comprobarPertenenciaProductoAUsuario";
+	public static final String BUSQUEDA_AVANZADA = "Producto.busquedaAvanzada";
 
 	
 

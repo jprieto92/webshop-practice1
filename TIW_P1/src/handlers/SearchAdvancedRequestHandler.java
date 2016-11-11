@@ -5,7 +5,7 @@ import javax.persistence.NoResultException;
 import entitiesJPA.Producto;
 import entityManagers.ProductManager;
 
-public class SearchRequestHandler extends ActionHandler {
+public class SearchAdvancedRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
@@ -14,13 +14,19 @@ public class SearchRequestHandler extends ActionHandler {
 			message = "";
 		}
 		
-		String terminoBusqueda = request.getParameter("campoBusqueda");
+		//Se recuperan los cinco parámetros de búsqueda
+		String campoBusquedaTitulo = request.getParameter("campoBusquedaTitulo");
+		String campoBusquedaDescripccion = request.getParameter("campoBusquedaDescripccion");
+		String campoBusquedaEmailVendedor = request.getParameter("campoBusquedaEmailVendedor");
+		String campoBusquedaCiudad = request.getParameter("campoBusquedaCiudad");
+		String campoBusquedaCategoria = request.getParameter("campoBusquedaCategoria");
 
+		
 		List<Producto> productos = null;
 		ProductManager gestorDatos = new ProductManager();
 
 		try {
-			productos = gestorDatos.busquedaSimpleTituloDescripccion(terminoBusqueda);
+			productos = gestorDatos.busquedaAvanzada(campoBusquedaTitulo, campoBusquedaDescripccion, campoBusquedaEmailVendedor, campoBusquedaCiudad, campoBusquedaCategoria);
 		}catch(NoResultException e){
 			message = message+" ."+e.getMessage();
 			throw new NoResultException(e.getMessage());

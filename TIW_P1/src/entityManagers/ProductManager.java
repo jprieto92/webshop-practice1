@@ -226,52 +226,17 @@ public class ProductManager {
 
 	
 	@SuppressWarnings("unchecked")
-	public List<Producto> buscarPor(String tipoFiltrado, String terminoFiltrado) throws Exception {
+	public List<Producto> busquedaSimpleTituloDescripccion(String terminoBusqueda) throws Exception {
 		List<Producto> resultado;
-		String tipoQuery = null;
-		String parameter = null;
-		String parameter2 = null;		
 		
 		//Se añade el caracter comodín a ambos lados del término de búsqueda
-		terminoFiltrado = "%"+terminoFiltrado+"%";
-		
-		//Seleccionamos el tipo de query
-		switch(tipoFiltrado){
-		case "busquedaPorTituloDescripccion": 
-			tipoQuery = Producto.BUSCAR_TITULO_Y_DESCRIPCCION;
-			parameter = "titulo";
-			parameter2 = "descripccion";
-			break;
-		case "busquedaPorCategoria":
-			tipoQuery = Producto.BUSCAR_CATEGORIA_LIKE;
-			parameter = "categoria";
-			break;
-		case "busquedaPorCiudad":
-			tipoQuery = Producto.BUSCAR__POR_CIUDAD;
-			parameter = "ciudad";
-			break;
-		case "busquedaPorNombreUsuario":
-			tipoQuery = Producto.BUSCAR_USUARIO_PROPIETARIO_POR_NOMBRE;
-			parameter = "nombre";
-			break;
-		case "busquedaPorTitulo":
-			tipoQuery = Producto.BUSCAR_TITULO;
-			parameter = "titulo";
-			break;
-		case "busquedaPorDescripccion":
-			tipoQuery = Producto.BUSCAR_DESCRIPCCION;
-			parameter = "descripccion";
-			break;
-		}
+		terminoBusqueda = "%"+terminoBusqueda+"%";
 		
 		EntityManager em = emf.createEntityManager();
 		try{
-			Query query = em.createNamedQuery(tipoQuery,Producto.class);
-			query.setParameter(parameter, terminoFiltrado);
-			//Solo en el caso de la query de busqueda por titulo y descripcción, tendrá un 2º parámetro
-			if(tipoFiltrado.equals("busquedaPorTituloDescripccion")){
-				query.setParameter(parameter2, terminoFiltrado);
-			}
+			Query query = em.createNamedQuery(Producto.BUSCAR_TITULO_Y_DESCRIPCCION,Producto.class);
+			query.setParameter("titulo", terminoBusqueda);
+			query.setParameter("descripccion", terminoBusqueda);
 			resultado = query.getResultList();
 			//Si no existen coincidencias, se lanza una excepción
 			if(resultado.size()==0){
@@ -293,4 +258,43 @@ public class ProductManager {
 		}
 		return resultado;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Producto> busquedaAvanzada(String titulo, String descripccion, String emailUsuario, String ciudadUsuario, String nombreCategoria) throws Exception {
+		List<Producto> resultado;	
+		
+		//Se añade el caracter comodín a ambos lados del término de búsqueda
+		String tituloLike = "%"+titulo+"%";
+		String descripccionLike = "%"+descripccion+"%";
+		
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(Producto.BUSQUEDA_AVANZADA,Producto.class);
+			query.setParameter("titulo", tituloLike);
+			query.setParameter("descripccion", descripccionLike);
+			query.setParameter("emailUsuario", emailUsuario);
+			query.setParameter("ciudadUsuario", ciudadUsuario);
+			query.setParameter("nombreCategoria", nombreCategoria);
+			resultado = query.getResultList();
+			//Si no existen coincidencias, se lanza una excepción
+			if(resultado.size()==0){
+				throw new NoResultException("No existen productos que cumplan con el criterio de búsqueda.");
+			}
+		}catch(IllegalStateException e){
+			e.printStackTrace();
+			throw new IllegalStateException("Error en los parámetros de la query de Producto.buscarPor");		
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return resultado;
+	}
+		
 }
