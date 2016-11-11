@@ -2,14 +2,17 @@ package jms;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
+import javax.jms.QueueBrowser;
 import javax.jms.TextMessage;
 
 import jms.InformacionProperties;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -124,5 +127,62 @@ public class InteraccionMQ {
 
 		return listaMensajes;
 
+	}
+	
+	public List<String> buscarConversaciones(String selectorReceptor)
+	{
+		List<String> listaEmisores = new ArrayList<String>();
+		
+		/*------------------------------------
+		 * ---------------------------------*/
+		try
+	    {
+			contextoInicial = new javax.naming.InitialContext();
+			factory = (javax.jms.ConnectionFactory) contextoInicial.lookup(InformacionProperties.getQCF());
+			cola = (javax.jms.Queue) contextoInicial.lookup(InformacionProperties.getQueue());
+			Qcon = factory.createConnection();
+			QSes = Qcon.createSession(false,javax.jms.QueueSession.AUTO_ACKNOWLEDGE);
+			Enumeration messageEnumeration;
+			ObjectMessage objectMessage;
+	      
+
+			QueueBrowser browser = QSes.createBrowser((Queue) cola);
+	      
+			messageEnumeration = browser.getEnumeration();
+			if (messageEnumeration != null)
+			{
+				if (!messageEnumeration.hasMoreElements())
+				{
+					System.out.println("There are no messages " + "in the queue.");
+				}
+				else
+				{
+					System.out.println("The following messages are in the queue:");
+					while (messageEnumeration.hasMoreElements())
+					{
+						//objectMessage = (ObjectMessage) messageEnumeration.nextElement();
+						Message tempMsg = (Message)messageEnumeration.nextElement(); 
+	        	  // Obtenemos elemento
+					}
+				}
+	      }
+	      browser.close();
+	      this.QSes.close();
+	      this.Qcon.close();
+	    } catch (javax.jms.JMSException e) {
+			System.out.println(".....JHC *************************************** Error de JMS: "
+							+ e.getLinkedException().getMessage());
+			System.out.println(".....JHC *************************************** Error de JMS: "
+							+ e.getLinkedException().toString());
+		} catch (Exception e) {
+			System.out.println("JHC *************************************** Error Exception: "
+							+ e.getMessage());
+		}
+		/* --------------------------------------------------
+		 * --------------------------------------------------*/
+		
+		
+		
+		return listaEmisores;
 	}
 }

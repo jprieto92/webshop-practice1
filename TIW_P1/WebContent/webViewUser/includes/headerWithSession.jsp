@@ -73,7 +73,7 @@
 					HREF="javascript:document.misMensajesSubmitForm.submit()">Mis Mensajes</a>
 					<form action="ControllerServlet" name="misMensajesSubmitForm" novalidate
 						method="post">
-						<input type="hidden" name="pAccion" value="misMensajes">
+						<input type="hidden" name="pAccion" value="bandejaEntrada">
 					</form></li>
 				<li class="page-scroll"><a
 					HREF="javascript:document.userProfileSubmitForm.submit()">Perfil
