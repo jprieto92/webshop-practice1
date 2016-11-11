@@ -26,9 +26,10 @@ public class ChatRequestHandler extends ActionHandler {
 		//	}
 		HttpSession sesion = request.getSession(false);
 		String usuarioSession = (String) sesion.getAttribute("userEmailSession");
+		String conversacion = (String) request.getAttribute("conversacion");
 		InteraccionMQ mq = new InteraccionMQ();
 		List<MessageChat> listaMensajes = new ArrayList<MessageChat>();
-        listaMensajes = mq.lecturaMQ(usuarioSession);
+        listaMensajes = mq.lecturaMQ(conversacion);
 		System.out.println("MENSAJES QUE ESTOY RECIBIENDO : ---" + listaMensajes.size());
 		/*Aquí debemos de leer de la cola de JMS para enviarle al form los mensajes recibidos*/
 		request.setAttribute("mensajesRecibidos", listaMensajes);

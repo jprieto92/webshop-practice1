@@ -29,7 +29,10 @@ public class InboxRequestHandler extends ActionHandler {
 		InteraccionMQ mq = new InteraccionMQ();
 		List<String> nuevasConversaciones = new ArrayList<String>();
 		nuevasConversaciones = mq.buscarConversaciones(usuarioSession);
-		System.out.println("MENSAJES QUE ESTOY RECIBIENDO : ---" + nuevasConversaciones.size());
+		if(nuevasConversaciones!=null && nuevasConversaciones.size()>0)
+		{
+			System.out.println("MENSAJES QUE ESTOY RECIBIENDO : ---" + nuevasConversaciones.size());
+		}
 		/*Aquí debemos de leer de la cola de JMS para enviarle al form los mensajes recibidos*/
 		request.setAttribute("conversacionesNuevas", nuevasConversaciones);
 	}

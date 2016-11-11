@@ -54,13 +54,22 @@
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <!-- IMPORTANTE, BUCLE FOR QUE GENERA ESTE CÓDIGO TANTAS VECES COMO MENSAJES TENGAMOS -->
                     <form name="newMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
-             		<%if(nuevasConversaciones!=null){
+             		<%if(nuevasConversaciones!=null && nuevasConversaciones.size()!=0){
 						for(String conversacion : nuevasConversaciones){%>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Emisor: </b></p>
-                                <p class="help-block text-danger"><%out.print(conversacion);%></p>
-                            </div>
+                                <p><b>Emisor: </b> <%out.print(conversacion.split(":")[1]);%></p>
+                         	</div>
+                            <form action="ControllerServlet" name="formEnviarMensajeProducto" novalidate method="post">
+								<input type="hidden" id="conversacion" name="conversacion" value="<%out.print(conversacion);%>">
+								<input type="hidden" name="pAccion" value="misMensajes">
+								<div id="success"></div>
+								<div class="row">
+									<div class="form-group col-xs-12">
+										<button type="submit" class="btn btn-success btn-lg">Ver mensajes</button>
+									</div>
+								</div>
+							</form>
                         </div>
                         <%}}%>
                         <input type="hidden" name="pAccion" value="catalog">

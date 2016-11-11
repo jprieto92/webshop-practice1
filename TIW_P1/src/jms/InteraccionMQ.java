@@ -49,7 +49,7 @@ public class InteraccionMQ {
 			//javax.jms.ObjectMessage men = QSes.createTextMessage();
 			men.setObject(mensaje);
 			//men.setText(mensaje);
-			men.setJMSCorrelationID(selector);
+			men.setJMSCorrelationID(selector+":"+mensaje.getAuthor());
 			Qcon.start();
 			Mpro.send(men);
 
@@ -132,7 +132,8 @@ public class InteraccionMQ {
 	public List<String> buscarConversaciones(String selectorReceptor)
 	{
 		List<String> listaEmisores = new ArrayList<String>();
-		
+		String emisores = "";
+		String correlations = "";
 		/*------------------------------------
 		 * ---------------------------------*/
 		try
@@ -143,7 +144,7 @@ public class InteraccionMQ {
 			Qcon = factory.createConnection();
 			QSes = Qcon.createSession(false,javax.jms.QueueSession.AUTO_ACKNOWLEDGE);
 			Enumeration messageEnumeration;
-			ObjectMessage objectMessage;
+			Message tempMsg;
 	      
 
 			QueueBrowser browser = QSes.createBrowser((Queue) cola);
@@ -161,8 +162,13 @@ public class InteraccionMQ {
 					while (messageEnumeration.hasMoreElements())
 					{
 						//objectMessage = (ObjectMessage) messageEnumeration.nextElement();
-						Message tempMsg = (Message)messageEnumeration.nextElement(); 
-	        	  // Obtenemos elemento
+						tempMsg = (Message)messageEnumeration.nextElement();
+						System.out.println(" HE ENCONTRADO UN MENSAJE CON ID: " + tempMsg.getJMSCorrelationID());
+						correlations = tempMsg.getJMSCorrelationID();
+						if(correlations.split(":")[0].equals(selectorReceptor) && (correlations.split(":").length>1))
+						{
+							listaEmisores.add(correlations);
+						}
 					}
 				}
 	      }
