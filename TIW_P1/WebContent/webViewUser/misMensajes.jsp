@@ -55,33 +55,24 @@
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <!-- IMPORTANTE, BUCLE FOR QUE GENERA ESTE CÓDIGO TANTAS VECES COMO MENSAJES TENGAMOS -->
                     <form name="newMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
+                    <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <p class="help-block text-danger"><h5>Conversación con: <%out.print(mensajesRecibidos.get(0).getAuthor());%></h5>
+                                </p>
+                            </div>
+                    </div>
              		<%if(mensajesRecibidos!=null){
 						for(MessageChat mensajeNuevo : mensajesRecibidos){%>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Emisor: </b></p>
-                                <p class="help-block text-danger"><%out.print(mensajeNuevo.getAuthor());%></p>
-                            </div>
-                        </div>
-
-   						<div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Motivo: </b></p>
-                                <p class="help-block text-danger"><%out.print(mensajeNuevo.getReason());%></p>
-                            </div>
-                        </div>
-                        
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Mensaje: </b></p>
                                 <p class="help-block text-danger"><%out.print(mensajeNuevo.getText());%>
                                 </p>
                             </div>
                         </div>
                         <%}}%>
-                        <input type="hidden" name="pAccion" value="catalog">
                         <br>
                         <div id="success"></div>
+                        <input type="hidden" name="pAccion" value="catalog">
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <button type="submit" class="btn btn-success btn-lg">OK</button>

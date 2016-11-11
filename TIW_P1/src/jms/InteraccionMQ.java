@@ -165,7 +165,7 @@ public class InteraccionMQ {
 						tempMsg = (Message)messageEnumeration.nextElement();
 						System.out.println(" HE ENCONTRADO UN MENSAJE CON ID: " + tempMsg.getJMSCorrelationID());
 						correlations = tempMsg.getJMSCorrelationID();
-						if(correlations.split(":")[0].equals(selectorReceptor) && (correlations.split(":").length>1))
+						if(correlations.split(":")[0].equals(selectorReceptor) && (correlations.split(":").length>1) &&  (listaEmisores.contains(correlations)==false))
 						{
 							listaEmisores.add(correlations);
 						}
