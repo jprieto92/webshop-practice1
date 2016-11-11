@@ -7,8 +7,9 @@ import entitiesJPA.Usuario;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
-public class ShowFormMostrarProducto extends ActionHandler{
+public class ShowFormMostrarProductoAdminRequestHandler extends ActionHandler{
 	public void execute () throws Exception {
+		System.out.println("hemos llegado al show form mostrar");
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
 		if(message == null){
@@ -16,7 +17,7 @@ public class ShowFormMostrarProducto extends ActionHandler{
 		}
 		
 		String idProducto= request.getParameter("idProducto");
-			
+		System.out.println("tenemos el id del producto que es:"+idProducto);	
 		ProductManager gestorProducto = new ProductManager();
 		Producto productoBBDD;
 		try{

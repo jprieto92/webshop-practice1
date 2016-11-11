@@ -30,6 +30,31 @@
 				<hr class="star-primary">
 			</div>
 		</div>
+		<form action="ControllerAdminServlet" name="formModificarProducto"
+					novalidate method="post">
+					<input type="hidden" name="pAccion" value="comprobarUsuarioMostrarPerfilAdmin">
+					<input type="hidden" name="idUsuario"
+						value="<%out.print(usuario.getEmail());%>">
+						<%System.out.println("Se va a proceder a modificar el usuario con email:"+usuario.getEmail()+" desde gestionarUsuarios.JSP"); %>
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+						</div>
+					</div>
+				</form>
+				<form action="ControllerAdminServlet" name="formEliminarProducto"
+					novalidate method="post">
+					<input type="hidden" name="pAccion" value="comprobarUsuarioEliminarUsuarioAdmin">
+					<input type="hidden" name="idUsuario"
+						value="<%out.print(usuario.getEmail());%>">
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
+						</div>
+					</div>
+				</form>	
 
 	</div>
 	</section>

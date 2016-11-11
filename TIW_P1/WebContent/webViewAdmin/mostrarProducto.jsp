@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="entitiesJPA.Producto"%>
     <%@page import="entitiesJPA.Usuario"%>
+    <%@page import="entitiesJPA.Disponibilidad" %>
+    <%@page import="java.util.List"%>
 <%@page import="utilidades.UtilidadesImagen" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +14,7 @@
 <body>
 
 	<%@include file="includes/headerWithSession.jsp"%>
-<%Producto producto = (Producto) request.getAttribute("idProducto"); 
+<%Producto producto = (Producto) request.getAttribute("productoMostrar"); 
 	Usuario usuario = (Usuario) request.getAttribute("usuarioMostrar");%>
 <section id="portfolio">
 	<div class="container">
@@ -78,8 +80,8 @@
 
 			</div>
 		</div>
-				<form action="ControllerServlet" name="formModificarProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="modificarProducto">
+				<form action="ControllerAdminServlet" name="formModificarProducto" novalidate method="post">
+				<input type="hidden" name="pAccion" value="modificarProductoAdmin">
 				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 				<div id="success"></div>
 				<div class="row">
@@ -88,18 +90,43 @@
 					</div>
 				</div>
 			</form>
-				<form action="ControllerServlet" name="formCambiarDisponibilidadProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="ShowFormChangeAvailability">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Cambiar disponibilidad</button>
+			<form name="sentMessage" action="ControllerAdminServlet" id="contactForm"
+					enctype="multipart/form-data" novalidate method="post">
+
+					<div class="row control-group">
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls">
+							<label>Disponibilidad</label> <select class="form-control"
+								id="categoriaProducto" name="disponibilidadProducto">
+								<%	Disponibilidad disponibilidadProducto= (Disponibilidad)request.getAttribute("disponibilidadProducto"); 
+								List<Disponibilidad> listaDisponibilidades = (List<Disponibilidad>) request.getAttribute("listaDeDisponibilidades");
+                                	for(Disponibilidad disponibilidad : listaDisponibilidades){
+                                		if(disponibilidad.equals(disponibilidadProducto)){
+                                			out.println("<option value=\""+ disponibilidad.getIdDisponibilidad() + "\" selected>"+disponibilidad.getNombre()+"</option>");
+                                		}else{
+                                			out.println("<option value=\""+ disponibilidad.getIdDisponibilidad() + "\" >"+disponibilidad.getNombre()+"</option>");
+                                		}
+                                	}
+                                	%>
+							</select>
+							<p class="help-block text-danger"></p>
+						</div>
 					</div>
-				</div>
-			</form>	
+					<!--  Se recoge el idProducto para luego volverlo a enviar -->
+					<input type="hidden" name="idProducto" value="<% out.print(request.getParameter("idProducto"));%>"> <br>
+					<!--  Se envia la acción del formulario -->
+					<input type="hidden" name="pAccion"
+						value="cambiarDisponibilidadProductoAdmin"> <br>
+					<div id="success"></div>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<button type="submit" class="btn btn-success btn-lg">Modificar disponibilidad</button>
+						</div>
+					</div>
+				</form>
+				
 			
-			<form action="ControllerServlet" name="formEliminarProducto" novalidate method="post">
+			<form action="ControllerAdminServlet" name="formEliminarProducto" novalidate method="post">
 				<input type="hidden" name="pAccion" value="comprobarUsuarioEliminarProducto">
 				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 				<div id="success"></div>

@@ -1,6 +1,7 @@
 <%@page import="entitiesJPA.Producto"%>
 <%@page import="utilidades.UtilidadesImagen"%>
 <%@page import="java.util.List"%>
+<%@page import="utilidades.UtilidadesList"%>
 <%@ page
 	import="java.util.List,java.util.ArrayList,org.apache.commons.codec.binary.StringUtils,org.apache.commons.codec.binary.Base64;"%>
 
@@ -97,6 +98,8 @@
 		<div class="row">
 			<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
 			if(listaProductos!=null){
+				//Se reordena aleatoriamente la lista de productos
+				UtilidadesList.reordenarAleatoriamente(listaProductos);
 			for(Producto producto : listaProductos){%>
 
 
@@ -109,46 +112,21 @@
 				</div>
 
 				<p></p>
-				<form action="ControllerAdminServlet" name="formEliminarProducto"
-					novalidate method="post">
-					<input type="hidden" name="pAccion" value="eliminarProductoAdmin">
-					<input type="hidden" name="idProducto"
-						value="<% out.print(producto.getProductId()); %>">
-					<div id="success"></div>
-					<div class="row">
-						<div class="form-group col-xs-12">
-							<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
-						</div>
-					</div>
-				</form>
+				
 
 				<form action="ControllerAdminServlet" name="formModificarProducto"
 					novalidate method="post">
-					<input type="hidden" name="pAccion" value="modificarProductoAdmin">
+					<input type="hidden" name="pAccion" value="mostrarProductoAdmin">
 					<input type="hidden" name="idProducto"
 						value="<% out.print(producto.getProductId()); %>">
 					<div id="success"></div>
 					<div class="row">
 						<div class="form-group col-xs-12">
-							<button type="submit" class="btn btn-success btn-lg">Modificar</button>
+							<button type="submit" class="btn btn-success btn-lg">M&aacute;s informaci&oacute;n</button>
 						</div>
 					</div>
 				</form>
 
-				<form action="ControllerAdminServlet"
-					name="formCambiarDisponibilidadProducto" novalidate method="post">
-					<input type="hidden" name="pAccion"
-						value="ShowFormChangeAvailabilityAdmin"> <input
-						type="hidden" name="idProducto"
-						value="<% out.print(producto.getProductId()); %>">
-					<div id="success"></div>
-					<div class="row">
-						<div class="form-group col-xs-12">
-							<button type="submit" class="btn btn-success btn-lg">Cambiar
-								disponibilidad</button>
-						</div>
-					</div>
-				</form>
 			</div>
 
 			<%}} %>
