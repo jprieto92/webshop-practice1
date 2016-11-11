@@ -2,6 +2,7 @@
 <%@page import="entitiesJPA.Categoria"%>
 <%@page import="utilidades.UtilidadesImagen"%>
 <%@page import="java.util.List"%>
+<%@page import="utilidades.UtilidadesList" %>
 <%@ page
 	import="java.util.List,java.util.ArrayList,org.apache.commons.codec.binary.StringUtils,org.apache.commons.codec.binary.Base64;"%>
 
@@ -90,6 +91,8 @@
 		<div class="row">
 				<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
 				if(listaProductos!=null){
+					//Se reordena aleatoriamente la lista de productos
+					UtilidadesList.reordenarAleatoriamente(listaProductos);
 			for(Producto producto : listaProductos){%>
 
 
