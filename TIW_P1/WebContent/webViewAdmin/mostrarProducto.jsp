@@ -94,7 +94,7 @@
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
 				<div class="row control-group">
-					<div class="form-group col-xs-12 floating-label-form-group controls">
+					
 						<label>Disponibilidad</label> <select class="form-control" id="categoriaProducto" name="disponibilidadProducto">
 						<%	Disponibilidad disponibilidadProducto= (Disponibilidad)request.getAttribute("disponibilidadProducto"); 
 							List<Disponibilidad> listaDisponibilidades = (List<Disponibilidad>) request.getAttribute("listaDeDisponibilidades");
@@ -107,7 +107,6 @@
                         }}%>
 							</select>
 							<p class="help-block text-danger"></p>
-					</div>
 				</div>
 			    </div>
 			</div>
