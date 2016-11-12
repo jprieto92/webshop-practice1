@@ -24,10 +24,14 @@
 			<div class="col-lg-12 text-center">
 				<h2>
 					Información detallada de
-					<%=usuario.getNombre()%>
-					<%=usuario.getApellido1()%>
-					<%=usuario.getApellido2()%></h2>
+					<%out.print(usuario.getEmail());%></h2>
 				<hr class="star-primary">
+				<p><b>Nombre:</b> <%out.print(usuario.getNombre());%></p>
+				<p><b>Apellido 1:</b> <%out.print(usuario.getApellido1());%></p>
+				<p><b>Apellido 2:</b> <%out.print(usuario.getApellido2());%></p>
+				<p><b>Ciudad:</b> <%out.print(usuario.getCiudad());%></p>
+				<p><b>Teléfono:</b> <%out.print(usuario.getTelefono());%></p>
+				<p><b>Fecha de alta:</b> <%out.print(usuario.getFechaAlta());%></p>
 			</div>
 		</div>
 		<form action="ControllerAdminServlet" name="formModificarProducto"
@@ -42,20 +46,18 @@
 							<button type="submit" class="btn btn-success btn-lg">Modificar</button>
 						</div>
 					</div>
-				</form>
-				<form action="ControllerAdminServlet" name="formEliminarProducto"
-					novalidate method="post">
+		</form>
+		<form action="ControllerAdminServlet" name="formEliminarProducto" novalidate method="post">
 					<input type="hidden" name="pAccion" value="comprobarUsuarioEliminarUsuarioAdmin">
-					<input type="hidden" name="idUsuario"
-						value="<%out.print(usuario.getEmail());%>">
+					<input type="hidden" name="idUsuario" value="<%out.print(usuario.getEmail());%>">
 					<div id="success"></div>
 					<div class="row">
 						<div class="form-group col-xs-12">
 							<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
 						</div>
 					</div>
-				</form>	
-				<form action="ControllerAdminServlet" name="formEnviarMensaje" novalidate method="post">
+		</form>	
+		<form action="ControllerAdminServlet" name="formEnviarMensaje" novalidate method="post">
 				<input type="hidden" name="pAccion" value="enviarMensajeAdmin">
 				<input type="hidden" name="destinatario" value="<% out.print(usuario.getEmail()); %>">
 				<div id="success"></div>
@@ -64,7 +66,7 @@
 						<button type="submit" class="btn btn-success btn-lg">Enviar mensaje</button>
 					</div>
 				</div>
-			</form>
+		</form>
 
 	</div>
 	</section>
