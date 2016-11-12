@@ -26,13 +26,11 @@
 				<hr class="star-primary">
 			</div>
 		</div>
-
+		<form name="sentMessage" action="ControllerAdminServlet" id="contactForm" enctype="multipart/form-data" novalidate method="post">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-				<form name="sentMessage" action="ControllerAdminServlet" id="contactForm" enctype="multipart/form-data"
-					novalidate method="post">
 					<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 					
 					<div class="row control-group">
@@ -50,9 +48,10 @@
                                 	%>
                                 </select>
                                 <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-					<div class="row control-group">
+                       </div>
+                 </div>
+                <div class="col-lg-8 col-lg-offset-2">
+				<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p>Titulo</p> 
@@ -63,7 +62,8 @@
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
-
+					</div>
+					<div class="col-lg-8 col-lg-offset-2">
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
@@ -74,6 +74,8 @@
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
+					</div>
+					<div class="col-lg-8 col-lg-offset-2">
 					<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p>Realiza envios</p>
@@ -90,8 +92,9 @@
                                 </select>
                                 <p class="help-block text-danger"></p>
                             </div>
-                        </div>      
-                        
+                        </div> 
+                        </div>     
+                        <div class="col-lg-8 col-lg-offset-2">
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p>Precio negociable</p>
@@ -108,13 +111,14 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
+                        </div>
 					
 					
-					
+					<div class="col-lg-8 col-lg-offset-2">
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<p>Precio</p> <input type="text" class="form-control"
+							<p>Precio ($)</p> <input type="text" class="form-control"
 								value="<%out.print(producto.getPrecio()); %>" id="precioProducto"
 								name="precioProducto" required
 								data-validation-required-message="Campo requerido.">
@@ -128,12 +132,14 @@
 							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto.getImagen())); %>">
 						</div>
 					</div>
-					
+					</div>
+					<div class="col-lg-8 col-lg-offset-2">
 					<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls ">
                                 <input type="file" class="form-control" placeholder="Imagen 1 del producto" id="imagen1Producto" name="imagen1Producto" >
                                 <p class="help-block text-danger"></p>
                             </div>
+                    </div>
                     </div>
 					
 
@@ -149,8 +155,6 @@
 					</div>
 				</form>
 			</div>
-		</div>
-	</div>
 	</section>
 	
 	<%@include file="includes/footer.jsp"%>
