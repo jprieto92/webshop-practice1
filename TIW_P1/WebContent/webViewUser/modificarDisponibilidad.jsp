@@ -31,8 +31,6 @@
 					enctype="multipart/form-data" novalidate method="post">
 
 					<div class="row control-group">
-						<div
-							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Disponibilidad</label> <select class="form-control"
 								id="categoriaProducto" name="disponibilidadProducto">
 								<%	Disponibilidad disponibilidadProducto= (Disponibilidad)request.getAttribute("disponibilidadProducto"); 
@@ -48,7 +46,7 @@
 							</select>
 							<p class="help-block text-danger"></p>
 						</div>
-					</div>
+					
 					<!--  Se recoge el idProducto para luego volverlo a enviar -->
 					<input type="hidden" name="idProducto" value="<% out.print(request.getParameter("idProducto"));%>"> <br>
 					<!--  Se envia la acción del formulario -->

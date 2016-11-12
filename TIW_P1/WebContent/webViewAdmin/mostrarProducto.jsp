@@ -76,13 +76,21 @@
 
 			</div>
 			<div class="col-lg-12 text-center">
+				<h4>Fecha publicación</h4>
+				<p>
+					<%out.print(producto.getFechaPublicacion());%>
+				</p>
+
+
+			</div>
+			<div class="col-lg-12 text-center">
 				<h4>Propietario</h4>
 				<p>
 					<%out.print(producto.getUsuario().getEmail());%>
 				</p>
 			</div>
 		</div>
-		</div>
+		
 		<div class="col-lg-12 text-center">
 				<h4>Disponibilidad Actual</h4>
 				<p>
@@ -147,6 +155,7 @@
 							<button type="submit" class="btn btn-success btn-lg">Ver Propietario</button>
 						</div>
 				</form>	
+				</div>
 				</div>
 	</section>
     <%@include file="includes/footer.jsp"%>
