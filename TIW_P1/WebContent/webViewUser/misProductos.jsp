@@ -58,7 +58,12 @@
             </div>
             <div class="row">
                 		<% List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaDeProductos");
-			for(Producto producto : listaProductos){%>
+						if(listaProductos==null || listaProductos.isEmpty())
+						{
+							out.print("<p>No tienes ningún producto por ahora.<p>");
+						}else
+						{
+                			for(Producto producto : listaProductos){%>
                 
                 
                 <div class="col-sm-4 portfolio-item">
@@ -79,7 +84,7 @@
 	
                 </div>
              
-             		<%} %>
+             		<%}} %>
             </div>
         </div>
     </section>
