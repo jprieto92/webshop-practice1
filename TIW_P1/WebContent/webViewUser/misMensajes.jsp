@@ -54,7 +54,6 @@
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <!-- IMPORTANTE, BUCLE FOR QUE GENERA ESTE CÓDIGO TANTAS VECES COMO MENSAJES TENGAMOS -->
-                    <form name="newMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
                     <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p class="help-block text-danger"><h5>Conversación con: <%out.print(mensajesRecibidos.get(0).getAuthor());%></h5>
@@ -70,26 +69,28 @@
                         </div>
                         <%}}%>
                         <br>
-                        <input type="hidden" name="pAccion" value="enviarMensajeProducto">
-                        <input type="hidden" name="destinatario" value="<%out.print(mensajesRecibidos.get(0).getAuthor());%>">
-						<div id="success"></div>
-							<div class="row">
-								<div class="form-group col-xs-12">
+                        <form action="ControllerServlet" name="formResponderMensaje" novalidate method="post">
+                        	<input type="hidden" name="pAccion" value="enviarMensajeProducto">
+                        	<input type="hidden" name="destinatario" value="<%out.print(mensajesRecibidos.get(0).getAuthor());%>">
+							<div id="success"></div>
+								<div class="row">
+									<div class="form-group col-xs-12">
 									<button type="submit" class="btn btn-success btn-lg">Responder mensaje</button>
+									</div>
 								</div>
-							</div>
-							</div>
-                        <div id="success"></div>
+						</form>
+						</div>
+						<form action="ControllerServlet" name="formResponderMensaje" novalidate method="post">	
+                        <div id="fail"></div>
                         <input type="hidden" name="pAccion" value="catalog">
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <button type="submit" class="btn btn-success btn-lg">OK</button>
                             </div>
                         </div>
-                    </form>
+                    	</form>
                 </div>
             </div>
-        </div>
     </section>
 
 <%@include file="includes/footer.jsp" %>

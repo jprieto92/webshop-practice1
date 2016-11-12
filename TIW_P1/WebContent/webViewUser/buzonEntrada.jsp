@@ -53,7 +53,7 @@
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <!-- IMPORTANTE, BUCLE FOR QUE GENERA ESTE CÓDIGO TANTAS VECES COMO MENSAJES TENGAMOS -->
-                    <form name="newMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
+                    
              		<%if(nuevasConversaciones!=null && nuevasConversaciones.size()!=0){
 						for(String conversacion : nuevasConversaciones){%>
                         <div class="row control-group">
@@ -72,7 +72,8 @@
 							</form>
                         </div>
                         <%}}%>
-                        <input type="hidden" name="pAccion" value="misMensajes">
+                        <form action="ControllerServlet" name="formEnviarMensaje" novalidate method="post">
+                        <input type="hidden" name="pAccion" value="catalog">
                         <br>
                         <div id="success"></div>
                         <div class="row">
