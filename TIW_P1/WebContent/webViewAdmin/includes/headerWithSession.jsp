@@ -72,11 +72,10 @@
 					</form></li>
 
 				<li class="page-scroll"><a
-					HREF="javascript:document.misMensajesSubmitForm.submit()">Contactar
-						con usuarios</a>
+					HREF="javascript:document.misMensajesSubmitForm.submit()">Bandeja de Entrada</a>
 					<form action="ControllerAdminServlet" name="misMensajesSubmitForm"
 						novalidate method="post">
-						<input type="hidden" name="pAccion" value="">
+						<input type="hidden" name="pAccion" value="bandejaEntradaAdmin">
 					</form></li>
 				<li class="page-scroll"><a
 					HREF="javascript:document.logoutSubmitForm.submit()">Logout</a>
