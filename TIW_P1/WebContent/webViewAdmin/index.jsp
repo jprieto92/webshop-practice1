@@ -68,9 +68,9 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<label>Name</label> <input type="password" class="form-control"
+							<label>Password</label> <input type="password" class="form-control"
 								placeholder="Contraseña" id="pass" name="passLogin" required
-								data-validation-required-message="Please enter your name.">
+								data-validation-required-message="Please enter your password.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
