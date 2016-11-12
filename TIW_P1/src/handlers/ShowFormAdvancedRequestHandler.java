@@ -5,6 +5,8 @@ import java.util.List;
 import entitiesJPA.Categoria;
 import entityManagers.CategoriaManager;
 
+/**ShowFormAdvancedRequestHandler --> Se encarga de de obtener las distintas
+ * categorias para poder realizar la busqueda avanzada*/
 public class ShowFormAdvancedRequestHandler extends ActionHandler {
 	public void execute () throws Exception {	
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

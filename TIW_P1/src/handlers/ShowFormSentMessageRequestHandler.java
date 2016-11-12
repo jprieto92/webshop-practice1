@@ -6,6 +6,8 @@ import entitiesJPA.Usuario;
 import entityManagers.ProductManager;
 import handlers.ActionHandler;
 
+/**ShowFormSentMessageRequestHandler --> Se encarga de obtener los parametros
+ * para el formulario de envio de mensaje*/
 public class ShowFormSentMessageRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

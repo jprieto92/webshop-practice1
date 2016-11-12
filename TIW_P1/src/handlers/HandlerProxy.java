@@ -3,6 +3,8 @@ package handlers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**HandlerProxy --> Se encarga de consultar las acciones a tomar
+ * en caso de acierto o error, para guiar la navegacion de la web*/
 public class HandlerProxy {
 
 	private static HandlerProxy hdlProxy;
@@ -19,6 +21,9 @@ public class HandlerProxy {
 	} //getInstance
 	
 	public void creaAction (HttpServletRequest request, HttpServletResponse response, String actionName){
+		/*Creamos la accion para conducir el uso de la web*
+		 * consultando en el handler properties para ver las
+		 * diferentes acciones a realizar*/
 		try{
 			
 			Boolean nextHandler = false;

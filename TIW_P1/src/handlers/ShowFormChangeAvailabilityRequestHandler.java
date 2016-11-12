@@ -9,6 +9,8 @@ import entitiesJPA.Disponibilidad;
 import entityManagers.DisponibilidadManager;
 import entityManagers.ProductManager;
 
+/**ShowFormChangeAvailabilityRequestHandler --> Se encarga de mostrar 
+ * las diferentes opciones para el cambio de la disponibilidad de un producto*/
 public class ShowFormChangeAvailabilityRequestHandler  extends ActionHandler{
 
 	@Override

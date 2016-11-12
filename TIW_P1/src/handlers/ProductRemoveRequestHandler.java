@@ -3,6 +3,8 @@ package handlers;
 import javax.persistence.NoResultException;
 import entityManagers.ProductManager;
 
+/**ProductRemoveRequestHandler --> Se encarga de eliminar un producto de la 
+ * base de datos*/
 public class ProductRemoveRequestHandler  extends ActionHandler{
 
 	@Override

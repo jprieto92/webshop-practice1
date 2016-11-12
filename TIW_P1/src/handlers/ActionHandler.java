@@ -3,6 +3,8 @@ package handlers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**ActionHandler --> Clase abstracta de quien hereda el resto de handlers
+ * para conducir la navegacion por la web*/
 public abstract class ActionHandler {
 
 	protected HttpServletRequest request; 

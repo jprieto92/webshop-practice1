@@ -7,7 +7,7 @@ import entitiesJPA.Producto;
 import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
 
-
+/**UpdateProductRequestHandler --> Se encarga de actualizar un producto*/
 public class UpdateProductRequestHandler  extends ActionHandler{
 
 	@Override

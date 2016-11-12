@@ -2,6 +2,8 @@ package handlers;
 
 import entityManagers.UserManager;
 
+/**UnsubscribeRequestHandler --> Se encarga de dar de baja a un usuario
+ * del sistema*/
 public class UnsubscribeRequestHandler extends ActionHandler {
 
 	public void execute () throws Exception {

@@ -7,6 +7,8 @@ import entitiesJPA.Usuario;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
+/**ShowFormMostrarProducto --> Se encarga de obtener los parametros necesarios
+ * para mostrar un producto*/
 public class ShowFormMostrarProducto extends ActionHandler{
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

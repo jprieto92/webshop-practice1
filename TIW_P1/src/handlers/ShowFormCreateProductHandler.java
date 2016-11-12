@@ -5,6 +5,8 @@ import java.util.List;
 import entitiesJPA.Categoria;
 import entityManagers.CategoriaManager;
 
+/**ShowFormCreateProductHandler --> Se encarga de devolver las distintas 
+ * categorias de un producto para su creacion en el jsp*/
 public class ShowFormCreateProductHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

@@ -2,6 +2,9 @@ package jms;
 
 import java.io.Serializable;
 
+/**MessageChat --> Será el objecto que se envia a la cola
+ * JMS como mensaje, teniendo autor del mensaje, receptor
+ * y el mensaje que se quiere enviar*/
 public class MessageChat implements Serializable {
 	private String author;	 // Autor del mensaje
 	private String receiver; // Receptor destinatario del mensaje

@@ -7,6 +7,9 @@ import entitiesJPA.Usuario;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
+/** ShowFormMostrarMiProductoRequestHandler --> Se encarga de 
+ * obtener los distintos parametros para el formulario de mostrar
+ * un producto del usuario de la sesion*/
 public class ShowFormMostrarMiProductoRequestHandler extends ActionHandler{
 	
 	public void execute () throws Exception {

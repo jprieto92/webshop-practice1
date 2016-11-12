@@ -11,7 +11,8 @@ import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
-
+/**CreateProductRequestHandler --> Manejador que controla la creacion
+ * de un nuevo producto escribiendo en la base de datos*/
 public class CreateProductRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {

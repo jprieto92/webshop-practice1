@@ -4,6 +4,8 @@ import handlers.ActionHandler;
 import jms.InteraccionMQ;
 import jms.MessageChat;
 
+/**SentMessageRequestHandler --> Se encarga de mandar a la cola JMS
+ * un nuevo mensaje*/
 public class SentMessageRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
@@ -11,7 +13,7 @@ public class SentMessageRequestHandler extends ActionHandler {
 		if(message == null){
 			message = "";
 		}
-
+		/*Escribimos en la cola*/
 		String destinatario= request.getParameter("destinatario");
 		String emisor= request.getParameter("emisor");
 		String mensaje= request.getParameter("mensaje");

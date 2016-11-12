@@ -6,7 +6,7 @@ import entitiesJPA.TipoUsuario;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
-//Manejador de la accion "registro".
+/**RegisterRequestHandler --> Manejador de la accion de registro*/
 public class RegisterRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

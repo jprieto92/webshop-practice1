@@ -7,6 +7,8 @@ import entitiesJPA.Usuario;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
+/**ShowFormMostrarProducto --> Se encarga de generar los parametros necesarios
+ * para mostrar un producto a un admin*/
 public class ShowFormMostrarProductoAdminRequestHandler extends ActionHandler{
 	public void execute () throws Exception {
 		System.out.println("hemos llegado al show form mostrar");

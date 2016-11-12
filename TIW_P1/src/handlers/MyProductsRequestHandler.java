@@ -9,6 +9,9 @@ import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
 import entityManagers.ProductManager;
 
+/**MyProductsRequestHandler --> Se encarga de consultar en la base
+ * de datos los productos del usuario de la sesion y los devuelve
+ * para ser mostrados*/
 public class MyProductsRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		
@@ -21,7 +24,7 @@ public class MyProductsRequestHandler extends ActionHandler {
 		//Se recupera el email del usuario de la sesion
 		HttpSession session = request.getSession(false);
 		String emailUsuarioSession =  (String) session.getAttribute("userEmailSession");
-		
+		/*Obtenemos los productos del usuario de la sesion para mostraselos*/
 		List<Producto> productos;
 		ProductManager gestorDatos = new ProductManager();
 		try {

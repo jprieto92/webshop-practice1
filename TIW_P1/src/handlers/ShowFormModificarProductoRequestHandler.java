@@ -8,6 +8,8 @@ import entitiesJPA.Producto;
 import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
 
+/**ShowFormModificarProductoRequestHandler --> Se encarga de de obtener 
+ * los distintos parametros para el formulario de modificacion de producto*/
 public class ShowFormModificarProductoRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

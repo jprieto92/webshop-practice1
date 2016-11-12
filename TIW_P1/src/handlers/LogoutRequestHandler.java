@@ -3,6 +3,8 @@ package handlers;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
+/**LogoutRequestHandler --> Se encarga de gestionar la peticion de logout de la pagina
+ * cerrando la sesion del user*/
 public class LogoutRequestHandler extends ActionHandler {
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

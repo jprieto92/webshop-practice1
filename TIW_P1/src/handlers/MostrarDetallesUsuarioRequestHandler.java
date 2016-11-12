@@ -2,6 +2,7 @@ package handlers;
 
 import javax.persistence.NoResultException;
 
+/**MostrarDetallesUsuarioRequestHandler --> Se encarga de mostrar los detalles del usuario*/
 public class MostrarDetallesUsuarioRequestHandler extends ActionHandler {
 	 
  	public void execute () throws Exception {

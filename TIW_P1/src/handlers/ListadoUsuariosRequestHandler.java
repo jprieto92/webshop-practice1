@@ -6,6 +6,9 @@ import javax.persistence.NoResultException;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
+/**ListadoUsuariosRequestHandler --> Se encarga de consultar
+ * los usuarios de la bbdd y devolver una lista con aquellos
+ * que no son admin*/
 public class ListadoUsuariosRequestHandler extends ActionHandler {
 	 
  	public void execute () throws Exception {

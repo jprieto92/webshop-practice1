@@ -17,6 +17,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+/**InteraccionMQ --> Se encarga de la interaccion con la cola JMS
+ * escritura - lectura consumiendo - consultar sin consumir*/
 public class InteraccionMQ {
 
 	private javax.jms.ConnectionFactory factory = null;

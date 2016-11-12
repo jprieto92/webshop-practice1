@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
+/**UsersSearchRequestHandler --> Se encarga de la busqueda de un usuario*/
 public class UsersSearchRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		

@@ -4,6 +4,8 @@ import javax.persistence.NoResultException;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
+/** ShowFormModificarUsuarioRequestHandler --> Se encarga de cargar las diferentes
+ * opciones para el formulario de modificacion de usuario*/
 public class ShowFormModificarUsuarioRequestHandler  extends ActionHandler{
 	public void execute () throws Exception {
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción

@@ -2,6 +2,8 @@ package handlers;
 
 import java.util.ResourceBundle;
 
+/**HandlerConf --> Se encarga de controlar la carga de las propiedades
+ * del proyecto para guiarse en la navegacion*/
 public class HandlerConf {
 	
 	private String propertiesPath;
@@ -17,7 +19,7 @@ public class HandlerConf {
 	
 	public String getProperty(String ppropertyKey) 
 	{ 
-		
+		/*Obtenemos las properties del proyecto*/
 		props = ResourceBundle.getBundle(getPropertiesPath() ); 
 		
 		System.out.println(" pidiendo la propiedad  " + ppropertyKey );

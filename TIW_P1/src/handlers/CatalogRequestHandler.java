@@ -6,6 +6,8 @@ import javax.persistence.NoResultException;
 import entitiesJPA.Producto;
 import entityManagers.ProductManager;
 
+/**CatalogRequestHandler --> Maneja  la obtencion de productos
+ * para el catalogo*/
 public class CatalogRequestHandler extends ActionHandler {
 
 	public void execute () throws Exception {		
@@ -14,7 +16,7 @@ public class CatalogRequestHandler extends ActionHandler {
 		if(message == null){
 			message = "";
 		}
-		
+		/*Devolvemos al jsp de catalogo todos los productos*/
 		List<Producto> productos = null;
 		ProductManager gestorDatos = new ProductManager();
 

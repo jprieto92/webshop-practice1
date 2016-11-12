@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import entitiesJPA.Producto;
 import entityManagers.ProductManager;
 
+/**SearchAdvancedRequestHandler --> Se encarga de realizar la busqueda avanzada*/
 public class SearchAdvancedRequestHandler extends ActionHandler {
 	
 	public void execute () throws Exception {		

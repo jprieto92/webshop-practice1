@@ -8,6 +8,7 @@ import javax.servlet.http.Part;
 import entitiesJPA.Usuario;
 import entityManagers.UserManager;
 
+/**ModificarUsuarioRequestHandler --> Se encarga de modificar el usuario*/
 public class ModificarUsuarioRequestHandler extends ActionHandler {
 
 	@Override

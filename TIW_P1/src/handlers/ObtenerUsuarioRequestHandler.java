@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 import entityManagers.UserManager;
 import handlers.ActionHandler;
 
+/**ObtenerUsuarioRequestHandler --> Se encarga de obtener un usuario
+ * para posteriormente poderlo modificar etc*/
 public class ObtenerUsuarioRequestHandler extends ActionHandler {
 
 	@Override

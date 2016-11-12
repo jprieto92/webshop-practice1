@@ -7,6 +7,8 @@ import entitiesJPA.Producto;
 import entityManagers.DisponibilidadManager;
 import entityManagers.ProductManager;
 
+/**ChangeAvailabilityRequestHandler --> Manejador que cambia la disponibilidad
+ * de un producto*/
 public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 
 	@Override
