@@ -78,7 +78,7 @@
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p>Mensaje nuevo: </p>
                                 <!-- <textarea name="message" class="form-control" cols="40" rows="6" id="descripcion" name="descripcion" required data-validation-required-message="Por favor, introduce una descripcción."></textarea>-->
-                                <input type="text" class="form-control" placeholder="Mensaje" id="mensaje" name ="mensaje" maxlength="500" required data-validation-required-message="Por favor, introduce un mensaje.">
+                                <textarea class="form-control" placeholder="Mensaje" id="mensaje" name ="mensaje" maxlength="500" cols="50" rows="8"required data-validation-required-message="Por favor, introduce un mensaje."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

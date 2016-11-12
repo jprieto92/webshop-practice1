@@ -65,8 +65,7 @@
 						for(MessageChat mensajeNuevo : mensajesRecibidos){%>
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p class="help-block text-danger"><%out.print(mensajeNuevo.getText());%>
-                                </p>
+                                <textarea cols="100" rows="4" placeholder="<%out.print(mensajeNuevo.getText());%>" disabled></textarea>
                             </div>
                         </div>
                         <%}}%>
