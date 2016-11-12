@@ -61,14 +61,14 @@
                     <form name="sentMessage" action="ControllerAdminServlet" id="contactForm" novalidate method="post">
    						<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Destinatario: <%out.print(destinatario); %></b></p>
+                                <p><b>Destinatario: </b> <%out.print(destinatario); %></p>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p>Mensaje nuevo: </p>
+                                <p><b>Mensaje nuevo: </b></p>
                                 <!-- <textarea name="message" class="form-control" cols="40" rows="6" id="descripcion" name="descripcion" required data-validation-required-message="Por favor, introduce una descripcción."></textarea>-->
                                 <textarea class="form-control" placeholder="Mensaje" id="mensaje" name ="mensaje" maxlength="500" cols="50" rows="8"required data-validation-required-message="Por favor, introduce un mensaje."></textarea>
                                 <p class="help-block text-danger"></p>
