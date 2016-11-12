@@ -15,7 +15,7 @@
 
 	<%@include file="includes/headerWithSession.jsp"%>
 	<%Producto producto = (Producto) request.getAttribute("productoMostrar"); 
-	Usuario usuario = (Usuario) request.getAttribute("usuarioMostrar");%>
+	  Usuario usuario = (Usuario) request.getAttribute("usuarioMostrar");%>
 	<section id="portfolio">
 		<div class="container">
 			<div class="row">
