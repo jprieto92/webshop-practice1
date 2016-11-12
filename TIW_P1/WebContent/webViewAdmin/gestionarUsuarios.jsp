@@ -86,14 +86,14 @@
 
 
 			<div class="col-sm-4 portfolio-item">
-				<h4><%=usuario.getNombre() + usuario.getApellido1() + usuario.getApellido2()%></h4>
+				<h4><%=usuario.getNombre() + " " + usuario.getApellido1() + " " + usuario.getApellido2()%></h4>
 				<div
 					style="width: 160px; height: 160px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; background: rgba(24, 188, 156, 0.5); -webkit-box-shadow: #BFBEBF 7px 7px 7px; -moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;">
 					<img style="height: 160px;"
 						src="<%out.print(UtilidadesImagen.mostrarImagen(usuario.getImagenPerfil()));%>">
 				</div>
 
-				<p></p>
+				<p><b><%out.print(usuario.getEmail()); %></b></p>
 
 				<form action="ControllerAdminServlet"
 					name="formCambiarDisponibilidadProducto" novalidate method="post">
