@@ -12,7 +12,6 @@ public class SentMessageRequestHandler extends ActionHandler {
 			message = "";
 		}
 
-		String idProducto= request.getParameter("producto");
 		String destinatario= request.getParameter("destinatario");
 		String emisor= request.getParameter("emisor");
 		String mensaje= request.getParameter("mensaje");

@@ -38,8 +38,7 @@
 <%@include file="includes/headerWithSession.jsp" %>
 
 <!--  Se recuperan los parámetros enviados en el manejador asociado a la accion "enviarMensajeProducto" -->
-<%Producto producto = (Producto)request.getAttribute("productoMensaje");
-  String destinatario = (String)request.getAttribute("destinatario");
+<%String destinatario = (String)request.getAttribute("destinatario");
   
   HttpSession sesion = request.getSession(false);
   String usuarioSession = (String) sesion.getAttribute("userEmailSession");%>
@@ -60,16 +59,9 @@
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post">
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Producto: <%out.print(producto.getTitulo()); %></b></p>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-
    						<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Destinatario: <%out.print(producto.getUsuario().getEmail()); %></b></p>
+                                <p><b>Destinatario: <%out.print(destinatario); %></b></p>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -84,7 +76,6 @@
                         </div>
                         <!--  Campos de recolección de datos para enviar -->
                         <input type="hidden" id="destinatario" name="destinatario" value="<%out.print(destinatario);%>">                                                
-                        <input type="hidden" id="producto" name="producto" value="<%out.print(producto.getProductId());%>">
                         <input type="hidden" id="emisor" name="emisor" value="<%out.print(usuarioSession);%>">
                         <input type="hidden" name="pAccion" value="sendMessage">
                         

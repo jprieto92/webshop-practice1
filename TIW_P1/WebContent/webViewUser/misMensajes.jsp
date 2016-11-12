@@ -70,6 +70,15 @@
                         </div>
                         <%}}%>
                         <br>
+                        <input type="hidden" name="pAccion" value="enviarMensajeProducto">
+                        <input type="hidden" name="destinatario" value="<%out.print(mensajesRecibidos.get(0).getAuthor());%>">
+						<div id="success"></div>
+							<div class="row">
+								<div class="form-group col-xs-12">
+									<button type="submit" class="btn btn-success btn-lg">Responder mensaje</button>
+								</div>
+							</div>
+							</div>
                         <div id="success"></div>
                         <input type="hidden" name="pAccion" value="catalog">
                         <div class="row">

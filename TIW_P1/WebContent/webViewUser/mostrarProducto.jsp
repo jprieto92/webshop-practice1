@@ -102,7 +102,7 @@
 			</div>
 			<form action="ControllerServlet" name="formModificarProducto" novalidate method="post">
 				<input type="hidden" name="pAccion" value="enviarMensajeProducto">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
+				<input type="hidden" name="destinatario" value="<% out.print(producto.getUsuario().getEmail()); %>">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">

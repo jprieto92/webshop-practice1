@@ -15,24 +15,10 @@ public class ShowFormSentMessageRequestHandler extends ActionHandler {
 		}	
 		
 		//Se recoge el id de producto
-		String idProducto= request.getParameter("idProducto");
-		
-		
-		ProductManager productManager = new ProductManager();
-		Producto productoBBDD;
-		Usuario destinatario;
-		try{
-			productoBBDD =  productManager.buscarPorId(Integer.parseInt(idProducto));
-			destinatario = productoBBDD.getUsuario();	
-		}
-		catch(NoResultException e){
-			message = message+" ."+"No se puede obtener el propietario o producto";
-			throw new NoResultException(message);
-		}
+		String destinatario= request.getParameter("destinatario");
 		
 		//Se añaden los atributos que el formulario enviarMensaje.jsp necesitará
-		request.setAttribute("destinatario", destinatario.getEmail());
-		request.setAttribute("productoMensaje", productoBBDD);
+		request.setAttribute("destinatario", destinatario);
 	}
 
 }
