@@ -97,7 +97,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p> <b>Verificar Contraseña</b></p> <input type="password"
 								class="form-control" name="Verficar Contraseña" id="verifypass"
-								name="verifypass">
+								name="verifypass" onblur="verificacionPass('passRegister', 'verifypass')">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>

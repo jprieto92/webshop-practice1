@@ -10,3 +10,15 @@ function hash(idPassword, idPasswordHash){
 		document.getElementById(idPasswordHash).value = hashPass;	
 	}
 }
+
+function verificacionPass(pass, verifyPass) {
+	//Se recuperan ambas contraseñas y se comparan
+    var pass = document.getElementById(pass).value;
+    var verifypass = document.getElementById(verifyPass).value;
+
+    //Si no coinciden, se borra la segunda contraseña de verificación y se lanza una ventana de aviso
+    if(pass != verifypass){
+        document.getElementById("verifypass").value="";
+    	alert("Las claves de acceso deben coincidir. Por favor, verifiquelas.");
+    }
+ }
