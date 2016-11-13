@@ -29,7 +29,7 @@ public class SearchAdvancedRequestHandler extends ActionHandler {
 		try {
 			productos = gestorDatos.busquedaAvanzada(campoBusquedaTitulo, campoBusquedaDescripccion, campoBusquedaEmailVendedor, campoBusquedaCiudad, campoBusquedaCategoria);
 		}catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

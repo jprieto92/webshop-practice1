@@ -1,9 +1,5 @@
 package handlers;
 
-import javax.persistence.NoResultException;
-import entitiesJPA.Producto;
-import entitiesJPA.Usuario;
-import entityManagers.ProductManager;
 import handlers.ActionHandler;
 
 /**ShowFormSentMessageRequestHandler --> Se encarga de obtener los parametros

@@ -11,7 +11,6 @@ import entityManagers.UserManager;
  * para mostrar un producto a un admin*/
 public class ShowFormMostrarProductoAdminRequestHandler extends ActionHandler{
 	public void execute () throws Exception {
-		System.out.println("hemos llegado al show form mostrar");
 		//Mensaje para pasar entre páginas JSP para comunicar el resultado de la acción
 		String message = (String) request.getAttribute("Message");
 		if(message == null){
@@ -19,14 +18,14 @@ public class ShowFormMostrarProductoAdminRequestHandler extends ActionHandler{
 		}
 		
 		String idProducto= request.getParameter("idProducto");
-		System.out.println("tenemos el id del producto que es:"+idProducto);	
+	
 		ProductManager gestorProducto = new ProductManager();
 		Producto productoBBDD;
 		try{
 			productoBBDD =  gestorProducto.buscarPorId(Integer.parseInt(idProducto));
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existe el producto";
+			message = message+" "+"No existe el producto"+".";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -39,7 +38,7 @@ public class ShowFormMostrarProductoAdminRequestHandler extends ActionHandler{
 			usuarioBBDD =  gestorUsuario.buscarPorEmail(email);
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existe el usuario";
+			message = message+" "+"No existe el usuario"+".";
 			throw new NoResultException(message);
 		}
 		finally{

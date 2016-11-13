@@ -22,7 +22,7 @@ public class LogoutRequestHandler extends ActionHandler {
 		try{
 	 		session.invalidate();
 		}catch(IllegalStateException e){
-			message = message+" ."+"Ha habido un problema al cerrar la sesión";
+			message = message+" "+"Ha habido un problema al cerrar la sesión"+".";
 			throw new NoResultException(message);
 		}
 		finally{

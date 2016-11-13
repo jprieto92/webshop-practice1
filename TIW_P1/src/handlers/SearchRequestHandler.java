@@ -25,7 +25,7 @@ public class SearchRequestHandler extends ActionHandler {
 		try {
 			productos = gestorDatos.busquedaSimpleTituloDescripccion(terminoBusqueda);
 		}catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

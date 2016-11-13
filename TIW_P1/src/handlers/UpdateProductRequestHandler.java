@@ -32,7 +32,7 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 			productoBBDD = productManager.buscarPorId(idP);
 		}
 		catch(NoResultException e){
-			message = message+" ."+"Error en la modificación del producto";
+			message = message+" "+"Error en la modificación del producto"+".";
 			throw new NoResultException(message);
  		}
 		finally{
@@ -46,7 +46,7 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 			categoria = categoriaManager.buscarPorId(idCategoria);
 		}
 		catch(Exception e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new Exception(message);
  		}
 		finally{
@@ -73,7 +73,7 @@ public class UpdateProductRequestHandler  extends ActionHandler{
 			message = productManager.modificar(productoBBDD);
 		}
 		catch(Exception e){
-			message = message+" ."+"Error en la actualización del producto";
+			message = message+" "+"Error en la actualización del producto"+".";
 			throw new Exception(message);
  		}
 		finally{

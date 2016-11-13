@@ -27,7 +27,7 @@ public class ComprobarPropietarioProductoRequestHandler  extends ActionHandler{
 		try {
 			gestorDatos.comprobarPertenenciaProducto(idProducto, emailUsuarioSession);
 		}catch(NoResultException e){
-			message.concat(" ."+e.getMessage());
+			message = message + " " +e.getMessage() +".";
 			throw new NoResultException(message);
 		}
 		finally{

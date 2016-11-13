@@ -52,7 +52,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 			usuarioBBDD = userManager.buscarPorEmail(emailUsuarioSession);
 
 		}catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(e.getMessage());
 		}
 		finally{
@@ -79,7 +79,7 @@ public class CreateProductRequestHandler extends ActionHandler {
 			message = message+". "+gestorDatos.insertar(productoAInsertar);
 		}catch(Exception e){
 			//Hay que lanzar una excepcion, para saber que no se ha insertado y asi mandarle a otro manejador distinto
-			message = message+" ."+"Error en la creacion del producto";			
+			message = message+" "+"Error en la creacion del producto"+".";			
 			throw new Exception(message);
 		}
 		finally{

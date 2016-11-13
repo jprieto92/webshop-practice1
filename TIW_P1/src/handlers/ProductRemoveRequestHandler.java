@@ -21,9 +21,9 @@ public class ProductRemoveRequestHandler  extends ActionHandler{
 		//Se borra el producto de la BBDD
 		ProductManager gestorDatos = new ProductManager();
 		try {
-			message = message+" ."+gestorDatos.darDeBaja(idProducto);
-		}catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+gestorDatos.darDeBaja(idProducto)+".";
+		}catch(Exception e){
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(e.getMessage());
 		}
 		finally{

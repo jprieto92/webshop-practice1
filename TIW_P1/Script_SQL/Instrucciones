@@ -1,7 +1,7 @@
 Para cargar un dump:
 
-mysql tiw < dumpBackupV8.sql --user=root --password=admin
+mysql < scriptFinal.sql --user=root --password=admin
 
 Para realizar un dump:
 
-mysqldump -u root --password=admin tiw > dumpBackupV8.sql
+mysqldump -u root --password=admin tiw > scriptFinal.sql

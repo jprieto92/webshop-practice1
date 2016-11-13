@@ -31,7 +31,7 @@ public class ShowFormChangeAvailabilityRequestHandler  extends ActionHandler{
 			disponibilidadProducto =  productManager.buscarDisponibilidadPorId(idProducto);
 		}
 		catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(message);
 		}	
 		//Se pasarán las categorías que debe mostrar en el formulario, cargadas de la BBDD
@@ -41,7 +41,7 @@ public class ShowFormChangeAvailabilityRequestHandler  extends ActionHandler{
 			disponibilidadesBBDD =  gestorDisponibilidades.buscarTodas();
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existen disponibilidades";
+			message = message+" "+"No existen disponibilidades"+".";
 			throw new NoResultException(message);
 		}		
 		finally{

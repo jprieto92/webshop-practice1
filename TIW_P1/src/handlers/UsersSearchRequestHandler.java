@@ -23,7 +23,7 @@ public class UsersSearchRequestHandler extends ActionHandler {
 		try {
 			usuarios = gestorDatosUsuario.buscarPorNombre(terminoFiltrado);
 		}catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(message);
 		}
 		finally{

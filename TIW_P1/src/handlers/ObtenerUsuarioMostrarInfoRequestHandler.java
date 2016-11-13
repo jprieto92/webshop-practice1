@@ -1,9 +1,5 @@
 package handlers;
 
-
-import javax.persistence.NoResultException;
-import javax.servlet.http.HttpSession;
-import entityManagers.UserManager;
 import handlers.ActionHandler;
 
 /**ObtenerUsuarioMostrarInfoRequestHandler --> Se encarga de obtener un usuario

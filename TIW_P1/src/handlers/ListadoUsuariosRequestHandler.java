@@ -25,7 +25,7 @@ public class ListadoUsuariosRequestHandler extends ActionHandler {
 		try {
 			usuarios = gestorDatosUsuario.buscarTodosUsers();
 		}catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(message);
 		}
 		finally{

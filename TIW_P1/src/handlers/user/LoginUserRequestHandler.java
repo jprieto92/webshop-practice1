@@ -28,7 +28,7 @@ import handlers.ActionHandler;
 			emailUserBBDD = gestorDatosUsuario.comprobarCredencialesDevuelveEmail(email, pass, 1);
 		}
 		catch(NoResultException e){
-			message.concat(" ."+e.getMessage());
+			message = message + " " +e.getMessage()+".";
 			throw new NoResultException(e.getMessage());
  		}
 		finally{

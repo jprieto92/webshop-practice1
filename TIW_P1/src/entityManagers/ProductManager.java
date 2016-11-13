@@ -218,8 +218,10 @@ public class ProductManager {
 			em.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			throw new Exception("Ha habido un error con la baja del producto");
+		}
+		finally {
 			em.close();
-			throw ex;
 		}
 		return "El producto con id "+idProducto+" se ha dado de baja correctamente";
 	}

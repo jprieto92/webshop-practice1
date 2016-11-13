@@ -24,7 +24,7 @@ public class UnsubscribeRequestHandler extends ActionHandler {
 			message = userManager.darDeBaja(emailUsuario);
 		}
 		catch(Exception e){
-			message = message+" ."+"Error en la baja del usuario";
+			message = message+" "+"Error en la baja del usuario"+".";
 			throw new Exception(message);
 		}
 		finally{

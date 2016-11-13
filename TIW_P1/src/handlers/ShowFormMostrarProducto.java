@@ -25,7 +25,7 @@ public class ShowFormMostrarProducto extends ActionHandler{
 			productoBBDD =  gestorProducto.buscarPorId(Integer.parseInt(idProducto));
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existe el producto";
+			message = message+" "+"No existe el producto"+".";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -38,7 +38,7 @@ public class ShowFormMostrarProducto extends ActionHandler{
 			usuarioBBDD =  gestorUsuario.buscarPorEmail(email);
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existe el usuario";
+			message = message+" "+"No existe el usuario"+".";
 			throw new NoResultException(message);
 		}
 		finally{

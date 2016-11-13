@@ -141,7 +141,7 @@
 				
 		</form>
 			<form action="ControllerAdminServlet" name="formEliminarProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="comprobarUsuarioEliminarProductoAdmin">
+				<input type="hidden" name="pAccion" value="eliminarProductoAdmin">
 				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 				<div id="success"></div>
 					<div class="form-group col-xs-12">

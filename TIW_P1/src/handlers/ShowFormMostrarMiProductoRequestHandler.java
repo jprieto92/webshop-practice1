@@ -31,7 +31,7 @@ public class ShowFormMostrarMiProductoRequestHandler extends ActionHandler{
 			productoBBDD =  gestorProducto.buscarPorId(Integer.parseInt(idProducto));
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existe el producto";
+			message = message+" "+"No existe el producto"+".";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -44,7 +44,7 @@ public class ShowFormMostrarMiProductoRequestHandler extends ActionHandler{
 			usuarioBBDD =  gestorUsuario.buscarPorEmail(email);
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existe el usuario";
+			message = message+" "+"No existe el usuario"+".";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -57,15 +57,14 @@ public class ShowFormMostrarMiProductoRequestHandler extends ActionHandler{
 				disponibilidadesBBDD =  gestorDisponibilidades.buscarTodas();
 		}
 		catch(NoResultException e){
-				message = message+" ."+"No existen disponibilidades";
+				message = message+" "+"No existen disponibilidades"+".";
 				throw new NoResultException(message);
 		}		
 		finally{
 				request.setAttribute("Message", message);
 		}
-		
+
 		request.setAttribute("listaDeDisponibilidades", disponibilidadesBBDD);
-		
 		request.setAttribute("usuarioMostrar", usuarioBBDD);
 		request.setAttribute("idProducto", productoBBDD);
 	}

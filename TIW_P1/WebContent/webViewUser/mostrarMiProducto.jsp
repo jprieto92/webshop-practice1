@@ -99,9 +99,13 @@
 				<div class="row control-group">
 					
 						<label>Disponibilidad</label> <select class="form-control" id="categoriaProducto" name="disponibilidadProducto">
+						<!--  Se obtiene la disponibilidad actual del producto y la lista de disponibilidades existente en la BBDD.
+						
+						Se crea una lista de disponibilidades mediante un desplegable, dejando como preseleccionada la actual del producto-->
 						<%	Disponibilidad disponibilidadProducto= (Disponibilidad)producto.getDisponibilidad(); 
 							List<Disponibilidad> listaDisponibilidades = (List<Disponibilidad>) request.getAttribute("listaDeDisponibilidades");
                         	for(Disponibilidad disponibilidad : listaDisponibilidades){
+                        		
                         	if(disponibilidad.equals(disponibilidadProducto))
                         	{
                         		out.println("<option value=\""+ disponibilidad.getIdDisponibilidad() + "\" selected>"+disponibilidad.getNombre()+"</option>");

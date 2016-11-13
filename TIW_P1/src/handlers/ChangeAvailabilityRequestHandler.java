@@ -29,7 +29,7 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 			productoBBDD =  productManager.buscarPorId(idProducto);
 		}
 		catch(NoResultException e){
-			message = message+" ."+"No existe el producto con el id "+idProducto;
+			message = message+" "+"No existe el producto con el id "+idProducto+".";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -43,7 +43,7 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 			disponibilidadBBDD =  disponiblidadManager.buscarPorId(idNuevaDisponibilidad);
 		}
 		catch(NoResultException e){
-			message = message +" ."+"No existe la disponibilidad con el id "+idNuevaDisponibilidad;
+			message = message +" "+"No existe la disponibilidad con el id "+idNuevaDisponibilidad+".";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -57,7 +57,7 @@ public class ChangeAvailabilityRequestHandler  extends ActionHandler{
 			message = productManager.modificar(productoBBDD);
 		}catch(RollbackException e){
 			//Hay que lanzar una excepcion, para saber que no se ha modificado y asi mandarle a otro manejador distinto
-			message = message+" ."+"Error en la modificación del producto con id "+idProducto;
+			message = message+" "+"Error en la modificación del producto con id "+idProducto+".";
 			throw new Exception(message);
 		}
 		finally{

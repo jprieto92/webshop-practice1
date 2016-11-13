@@ -37,7 +37,7 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 			usuarioBBDD = userManager.buscarPorEmail(emailUsuario);
 
 		}catch(NoResultException e){
-			message = message+" ."+e.getMessage();
+			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(message);
 		}
 		finally{
@@ -69,7 +69,7 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 			message = message+" ."+userManager.modificar(usuarioBBDD);
 		}
 		catch(Exception e){
-			message = message+" ."+"Error en la modificación del usuario";
+			message = message+" "+"Error en la modificación del usuario"+".";
 			throw new Exception(message);
  		}
 		finally{

@@ -42,9 +42,9 @@ public class RegisterRequestHandler extends ActionHandler {
 		//Gestora de la persistencia de los datos de usuario
 		UserManager gestorDatos = new UserManager();
 		try {
-			message = message+" ."+gestorDatos.insertar(usuarioAInsertar);
+			message = message+" "+gestorDatos.insertar(usuarioAInsertar)+".";
 		}catch(Exception e){
-			message = message+" ."+"Error en la creacion del usuario";
+			message = message+" "+"Error en la creacion del usuario"+".";
 			throw new Exception(message);
 		}
 		finally{
