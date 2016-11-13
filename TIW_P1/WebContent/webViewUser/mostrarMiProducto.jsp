@@ -30,8 +30,7 @@
 		<div class="container">
 		<div class="row">
 		<div class="col-lg-12 text-center">
-				<div 
-				style="width: 160px; height: 160px; margin:0 auto; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; background: rgba(24, 188, 156, 0.5); -webkit-box-shadow: #BFBEBF 7px 7px 7px; -moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;">
+				<div style="width: 160px; height: 160px; margin:0 auto; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; background: rgba(24, 188, 156, 0.5); -webkit-box-shadow: #BFBEBF 7px 7px 7px; -moz-box-shadow: #BFBEBF 7px 7px 7px; box-shadow: #BFBEBF 7px 7px 7px;">
 				<img style="width: 100%;"
 					src="<% out.print(UtilidadesImagen.mostrarImagen(producto.getImagen())); %>">
 				</div>
