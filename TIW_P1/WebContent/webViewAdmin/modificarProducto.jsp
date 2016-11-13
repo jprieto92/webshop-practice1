@@ -34,7 +34,7 @@
 					<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 					
 					<div class="row control-group">
-                                <p>Categoria</p>
+                                <p><b>Categoria</b></p>
                                 <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                 	for(Categoria categoria : listaCategorias){
@@ -54,7 +54,7 @@
 				<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<p>Titulo</p> 
+							<p><b>Titulo</b></p> 
 							<input type="text" class="form-control"
 							value="<%out.print(producto.getTitulo()); %>" id="tituloProducto"name="tituloProducto" 
 								required
@@ -67,7 +67,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<p>Descripcion</p> <input type="text" class="form-control"
+							<p><b>Descripcion</b></p> <input type="text" class="form-control"
 								value="<%out.print(producto.getDescripccion()); %>" id="descripcionProducto"
 								name="descripcionProducto" required
 								data-validation-required-message="Campo requerido.">
@@ -78,7 +78,7 @@
 					<div class="col-lg-8 col-lg-offset-2">
 					<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p>Realiza envios</p>
+                                <p><b>Realiza envios</b></p>
                                 <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
                                 	<%if(producto.getEnvios().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
@@ -97,7 +97,7 @@
                         <div class="col-lg-8 col-lg-offset-2">
                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p>Precio negociable</p>
+                                <p><b>Precio negociable</b></p>
                                 <select class="form-control" id="precioNegociable" name ="precioNegociable">
                                 	<%if(producto.getPrecioNegociable().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
@@ -118,7 +118,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
-							<p>Precio ($)</p> <input type="text" class="form-control"
+							<p><b>Precio ($)</b></p> <input type="text" class="form-control"
 								value="<%out.print(producto.getPrecio()); %>" id="precioProducto"
 								name="precioProducto" required
 								data-validation-required-message="Campo requerido.">
@@ -129,6 +129,7 @@
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
+							<p><b>Imagen</b></p> 
 							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto.getImagen())); %>">
 						</div>
 					</div>
