@@ -63,7 +63,7 @@
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 				<form name="sentMessage" action="ControllerServlet" id="contactForm"
-					novalidate method="post" enctype="multipart/form-data" onsubmit="hash('passRegister', 'passHashRegister')">
+					method="post" enctype="multipart/form-data" onsubmit="hash('passRegister', 'passHashRegister')">
 					
 					<div class="row control-group">
 						<div
@@ -84,7 +84,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p><b>Contraseña</b></p> <input type="password"
-								class="form-control" name="passRegister" id="passRegister" required data-validation-required-message="Por favor, introduce tu contraseña.">
+								class="form-control" name="passRegister" id="passRegister">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -97,8 +97,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p> <b>Verificar Contraseña</b></p> <input type="password"
 								class="form-control" name="Verficar Contraseña" id="verifypass"
-								name="verifypass" required
-								data-validation-required-message="Las contraseñas no coinciden">
+								name="verifypass">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -120,7 +119,7 @@
 							<p><b>Apellido 1</b></p> <input type="text" class="form-control"
 								value="<%=userEntity.getApellido1()%>" id="Apellido 1"
 								name="apellido1" required
-								data-validation-required-message="Campo requerido.">
+								data-validation-required-message="Por favor, introduce tu primer apellido.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -131,7 +130,7 @@
 							<p><b>Apellido 2</b></p> <input type="text" class="form-control"
 								value="<%=userEntity.getApellido2()%>" id="Apellido 2"
 								name="apellido2" required
-								data-validation-required-message="Campo requerido.">
+								data-validation-required-message="Por favor, introduce tu segundo apellido.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -141,7 +140,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p><b>Ciudad</b></p> <input type="text" class="form-control"
 								value="<%=userEntity.getCiudad()%>" id="Ciudad" name="ciudad"
-								required data-validation-required-message="Campo requerido.">
+								required data-validation-required-message="Por favor, introduce tu ciudad.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -150,8 +149,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p><b>Teléfono</b></p> <input type="phone" class="form-control"
-								value="<%=userEntity.getTelefono()%>" id="phone" name="phone"
-								required data-validation-required-message="Campo opcional">
+								value="<%=userEntity.getTelefono()%>" id="phone" name="phone">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>

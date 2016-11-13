@@ -60,14 +60,14 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-				<form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post" onsubmit="hash('passLogin', 'passHashLogin')">
+				<form name="sentMessage" action="ControllerServlet" id="contactForm" method="post" onsubmit="hash('passLogin', 'passHashLogin')">
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Email Address</label> <input type="email"
 								class="form-control" placeholder="Correo electrónico" id="email"
 								name="emailLogin" required
-								data-validation-required-message="Please enter your email address.">
+								data-validation-required-message="Por favor, introduzca un correo electrónico.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Password</label> <input type="password" class="form-control"
 								placeholder="Contraseña" id="passLogin" name="passLogin" required
-								data-validation-required-message="Please enter your password.">
+								data-validation-required-message="Por favor, introduzca una contraseña">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -112,7 +112,7 @@
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 
 				<form name="sentMessage" action="ControllerServlet" id="contactForm"
-					novalidate method="post" enctype="multipart/form-data" onsubmit="hash('passRegister', 'passHashRegister')">
+					method="post" enctype="multipart/form-data" onsubmit="hash('passRegister', 'passHashRegister')">
 
 
 					<div class="row control-group">
@@ -121,7 +121,7 @@
 							<label>Email Address</label> <input type="email"
 								class="form-control" placeholder="Correo electrónico" id="email"
 								name="email" required
-								data-validation-required-message="Please enter your email address.">
+								data-validation-required-message="Por favor, introduzca un correo electrónico.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -135,7 +135,7 @@
 							<label>Contraseña</label> <input type="password"
 								class="form-control" placeholder="Contraseña" id="passRegister"
 								name="passRegister" required
-								data-validation-required-message="Por favor, introduce tu contraseña.">
+								data-validation-required-message="Por favor, introduzca una contraseña">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -146,7 +146,7 @@
 							<label> Verificar Contraseña</label> <input type="password"
 								class="form-control" placeholder="Verficar Contraseña"
 								id="verifypass" name="verifypass" required
-								data-validation-required-message="Por favor, introduce otra vez tu contraseña.">
+								data-validation-required-message="Por favor, introduzca una contraseña de verificación.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -166,7 +166,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Apellido 1</label> <input type="text" class="form-control"
 								placeholder="Apellido 1" id="Apellido 1" name="apellido1"
-								required data-validation-required-message="Campo requerido.">
+								required data-validation-required-message="Por favor, introduce tu primer apellido.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -176,7 +176,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Apellido 2</label> <input type="text" class="form-control"
 								placeholder="Apellido 2" id="Apellido 2" name="apellido2"
-								required data-validation-required-message="Campo requerido.">
+								required data-validation-required-message="Por favor, introduce tu segundo apellido.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -186,7 +186,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Ciudad</label> <input type="text" class="form-control"
 								placeholder="Ciudad" id="Ciudad" name="ciudad" required
-								data-validation-required-message="Campo requerido.">
+								data-validation-required-message="Por favor, introduce tu ciudad.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -195,8 +195,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Teléfono</label> <input type="phone" class="form-control"
-								placeholder="Teléfono" id="phone" name="phone" required
-								data-validation-required-message="Campo opcional">
+								placeholder="Teléfono" id="phone" name="phone">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -204,7 +203,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls ">
 							<label>Imagen perfil</label> <input type="file"
-								class="form-control" placeholder="Imagen de perfil"
+								class="form-control" required placeholder="Imagen de perfil"
 								id="imagenPerfil" name="imagenPerfil">
 							<p class="help-block text-danger"></p>
 						</div>

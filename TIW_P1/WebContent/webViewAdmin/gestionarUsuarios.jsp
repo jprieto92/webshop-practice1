@@ -59,16 +59,16 @@
 
 		<!-- Búsquedas -->
 		<div class="row">
-			<form action="ControllerAdminServlet" name="formProductos" novalidate
+			<form action="ControllerAdminServlet" name="formProductos"
 				method="post">
 				<input type="hidden" name="pAccion" value="buscarUsuariosAdmin">
 				<div id="success"></div>
 				<div class="row">
 					<div class="form-group col-xs-12">
 						<input type="text" class="form-control"
-							placeholder="Término de búsqueda" id="campoBusqueda"
+							placeholder="Nombre de usuario" id="campoBusqueda"
 							name="campoBusqueda" required
-							data-validation-required-message="Please enter your email address.">
+							data-validation-required-message="Por favor, introduzca un nombre de usuario.">
 						<p></p>
 						<button type="submit" class="btn btn-success btn-lg">Buscar</button>
 					</div>

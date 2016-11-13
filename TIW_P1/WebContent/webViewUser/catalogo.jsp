@@ -58,7 +58,7 @@
 		</div>
 		
 		<div class="row">
-			<form action="ControllerServlet" name="formProductos" novalidate
+			<form action="ControllerServlet" name="formProductos"
 				method="post">
 				<input type="hidden" name="pAccion" value="buscarProductosSimple">
 				<div id="success"></div>
@@ -67,7 +67,7 @@
 						<input type="text" class="form-control"
 							placeholder="Término de búsqueda" id="campoBusqueda"
 							name="campoBusqueda" required
-							data-validation-required-message="Please enter your email address.">
+							data-validation-required-message="Por favor, introduzca un título de producto o parte de la descripcción.">
 						<p></p>
 						<button type="submit" class="btn btn-success btn-lg">Buscar</button>
 					</div>

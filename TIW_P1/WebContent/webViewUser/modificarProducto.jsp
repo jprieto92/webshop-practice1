@@ -31,13 +31,12 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-				<form name="sentMessage" action="ControllerServlet" id="contactForm" enctype="multipart/form-data"
-					novalidate method="post">
+				<form name="sentMessage" action="ControllerServlet" id="contactForm" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 					
 					<div class="row control-group">
                                 <label>Categoria</label>
-                                <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
+                                <select class="form-control" required id="categoriaProducto" name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                 	for(Categoria categoria : listaCategorias){
                                 		if(categoria.equals(producto.getCategoria())){
@@ -76,7 +75,7 @@
 					<div class="row control-group">
                            
                                 <label>Realiza envios</label>
-                                <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
+                                <select class="form-control" id="realizaEnviosProducto" required name ="realizaEnviosProducto">
                                 	<%if(producto.getEnvios().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
                                 		out.println("<option value=\"NO\" >NO</option>");
@@ -94,7 +93,7 @@
                        <div class="row control-group">
                             
                                 <label>Precio negociable</label>
-                                <select class="form-control" id="precioNegociable" name ="precioNegociable">
+                                <select class="form-control" id="precioNegociable" required name ="precioNegociable">
                                 	<%if(producto.getPrecioNegociable().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
                                 		out.println("<option value=\"NO\" >NO</option>");

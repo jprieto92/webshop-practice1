@@ -60,7 +60,7 @@
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <p><b>Usuario: </b> <%out.print(conversacion.split(":")[1]);%></p>
                          	</div>
-                            <form action="ControllerAdminServlet" name="formEnviarMensajeProducto" novalidate method="post">
+                            <form action="ControllerAdminServlet" name="formEnviarMensajeProducto" method="post">
 								<input type="hidden" id="conversacion" name="conversacion" value="<%out.print(conversacion);%>">
 								<input type="hidden" name="pAccion" value="misMensajesAdmin">
 								<div id="success"></div>
@@ -72,7 +72,8 @@
 							</form>
                         </div>
                         <%}}%>
-                        <form action="ControllerAdminServlet" name="formEnviarMensaje" novalidate method="post">
+                        
+                        <form action="ControllerAdminServlet" name="formEnviarMensaje" method="post">
                         <input type="hidden" name="pAccion" value="gestionarProductos">
                         <br>
                         <div id="success"></div>

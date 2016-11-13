@@ -61,7 +61,7 @@
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 				<form name="sentMessage" action="ControllerAdminServlet" id="contactForm"
-					novalidate method="post" enctype="multipart/form-data" onsubmit="hash('passRegister', 'passHashRegister')">
+					method="post" enctype="multipart/form-data" onsubmit="hash('passRegister', 'passHashRegister')">
 					
 					<div class="row control-group">
 						<div
@@ -82,7 +82,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p><b>Contraseña</b></p> <input type="password"
-								class="form-control" name="passRegister" id="passRegister" required data-validation-required-message="Por favor, introduce tu contraseña.">
+								class="form-control" name="passRegister" id="passRegister">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -95,8 +95,7 @@
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p><b>Verificar Contraseña</b></p> <input type="password"
 								class="form-control" name="Verficar Contraseña" id="verifypass"
-								name="verifypass" required
-								data-validation-required-message="Las contraseñas no coinciden">
+								name="verifypass">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -148,8 +147,7 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<p><b>Teléfono</b></p> <input type="phone" class="form-control"
-								value="<%=usuario.getTelefono()%>" id="phone" name="phone"
-								required data-validation-required-message="Campo opcional">
+								value="<%=usuario.getTelefono()%>" id="phone" name="phone">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>

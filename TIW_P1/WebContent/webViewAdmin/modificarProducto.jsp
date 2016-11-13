@@ -31,13 +31,12 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-				<form name="sentMessage" action="ControllerAdminServlet" id="contactForm" enctype="multipart/form-data"
-					novalidate method="post">
+				<form name="sentMessage" action="ControllerAdminServlet" id="contactForm" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 					
 					<div class="row control-group">
                                 <label>Categoria</label>
-                                <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
+                                <select class="form-control" id="categoriaProducto" required name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                 	for(Categoria categoria : listaCategorias){
                                 		if(categoria.equals(producto.getCategoria())){
@@ -68,7 +67,7 @@
 							<label>Descripcion</label> 
 							<textarea class="form-control" id="descripcionProducto" 
 							name ="descripcionProducto" maxlength="500" cols="50" rows="6"
-							required data-validation-required-message="Campo requerido."><%out.print(producto.getDescripccion()); %></textarea>
+							required data-validation-required-message="Por favor, introduzca una descripccion de producto."><%out.print(producto.getDescripccion()); %></textarea>
 							
 							<p class="help-block text-danger"></p>
 						
@@ -76,7 +75,7 @@
 					<div class="row control-group">
                            
                                 <label>Realiza envios</label>
-                                <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
+                                <select class="form-control" required id="realizaEnviosProducto" name ="realizaEnviosProducto">
                                 	<%if(producto.getEnvios().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
                                 		out.println("<option value=\"NO\" >NO</option>");
@@ -94,7 +93,7 @@
                        <div class="row control-group">
                             
                                 <label>Precio negociable</label>
-                                <select class="form-control" id="precioNegociable" name ="precioNegociable">
+                                <select class="form-control" required id="precioNegociable" name ="precioNegociable">
                                 	<%if(producto.getPrecioNegociable().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
                                 		out.println("<option value=\"NO\" >NO</option>");
@@ -115,7 +114,7 @@
 							<label>Precio ($)</label> <input type="text" class="form-control"
 								value="<%out.print(producto.getPrecio()); %>" id="precioProducto"
 								name="precioProducto" required
-								data-validation-required-message="Campo requerido.">
+								data-validation-required-message="Por favor, introduzca un precio.">
 							<p class="help-block text-danger"></p>
 						
 					</div>

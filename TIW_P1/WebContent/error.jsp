@@ -38,21 +38,21 @@
 
 <body id="page-top" class="index">
 
-	<%@include file="includes/headerWithoutSession.jsp"%>
+	<%@include file="webViewUser/includes/headerWithoutSession.jsp"%>
 
 	<!-- Login Section -->
 	<section id="login">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h2>Se ha producido un error</h2>
+				<h2>Se ha producido un error inesperado</h2>
 				<hr class="star-primary">
 			</div>
 		</div>
 	</div>
 	</section>
 
-	<%@include file="includes/footer.jsp"%>
+	<%@include file="webViewAdmin/includes/footer.jsp"%>
 
 </body>
 </html>

@@ -10,12 +10,12 @@
 	
 	<error-page>
 		<error-code>404</error-code>
-		<location>/webViewUser/error.jsp</location>
+		<location>/error.jsp</location>
 	</error-page>
 	
 	<error-page>
 		<error-code>500</error-code>
-		<location>/webViewUser/error.jsp</location>
+		<location>/error.jsp</location>
 	</error-page>	
 	
 </web-app>

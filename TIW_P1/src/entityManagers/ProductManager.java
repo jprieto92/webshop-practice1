@@ -229,14 +229,18 @@ public class ProductManager {
 	public List<Producto> busquedaSimpleTituloDescripccion(String terminoBusqueda) throws Exception {
 		List<Producto> resultado;
 		
+		//Solo se busca por un único término
+		String[] terminos = terminoBusqueda.split(" ");
+		String termino = terminos[0];
+		
 		//Se añade el caracter comodín a ambos lados del término de búsqueda
-		terminoBusqueda = "%"+terminoBusqueda+"%";
+		termino = "%"+termino+"%";
 		
 		EntityManager em = emf.createEntityManager();
 		try{
 			Query query = em.createNamedQuery(Producto.BUSCAR_TITULO_Y_DESCRIPCCION,Producto.class);
-			query.setParameter("titulo", terminoBusqueda);
-			query.setParameter("descripccion", terminoBusqueda);
+			query.setParameter("titulo", termino);
+			query.setParameter("descripccion", termino);
 			resultado = query.getResultList();
 			//Si no existen coincidencias, se lanza una excepción
 			if(resultado.size()==0){
@@ -263,17 +267,30 @@ public class ProductManager {
 	public List<Producto> busquedaAvanzada(String titulo, String descripccion, String emailUsuario, String ciudadUsuario, String nombreCategoria) throws Exception {
 		List<Producto> resultado;	
 		
+		//Solo se busca por un único término
+		String[] terminosTitulo = titulo.split(" ");
+		String terminoTitulo = terminosTitulo[0];
+		
+		String[] terminosDescripcion = descripccion.split(" ");
+		String terminoDescripcion = terminosDescripcion[0];
+		
+		String[] terminosEmailUsuario = emailUsuario.split(" ");
+		String terminoEmailUsuario = terminosEmailUsuario[0];
+		
+		String[] terminosCiudadUsuario = ciudadUsuario.split(" ");
+		String terminoCiudadUsuario = terminosCiudadUsuario[0];
+		
 		//Se añade el caracter comodín a ambos lados del término de búsqueda
-		String tituloLike = "%"+titulo+"%";
-		String descripccionLike = "%"+descripccion+"%";
+		String tituloLike = "%"+terminoTitulo+"%";
+		String descripcionLike = "%"+terminoDescripcion+"%";
 		
 		EntityManager em = emf.createEntityManager();
 		try{
 			Query query = em.createNamedQuery(Producto.BUSQUEDA_AVANZADA,Producto.class);
 			query.setParameter("titulo", tituloLike);
-			query.setParameter("descripccion", descripccionLike);
-			query.setParameter("emailUsuario", emailUsuario);
-			query.setParameter("ciudadUsuario", ciudadUsuario);
+			query.setParameter("descripccion", descripcionLike);
+			query.setParameter("emailUsuario", terminoEmailUsuario);
+			query.setParameter("ciudadUsuario", terminoCiudadUsuario);
 			query.setParameter("nombreCategoria", nombreCategoria);
 			resultado = query.getResultList();
 			//Si no existen coincidencias, se lanza una excepción

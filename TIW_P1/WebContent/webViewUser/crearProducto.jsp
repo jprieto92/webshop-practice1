@@ -48,7 +48,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post" enctype="multipart/form-data">
+                    <form name="sentMessage" action="ControllerServlet" id="contactForm" method="post" enctype="multipart/form-data">
                         <div class="row control-group">
                                 <label>Titulo</label>
                                 <input type="text" class="form-control" placeholder="Titulo" id="tituloProducto" name ="tituloProducto" required data-validation-required-message="Por favor, introduce un título de producto">
@@ -58,7 +58,7 @@
 
                         <div class="row control-group">
                                 <label>Categoria</label>
-                                <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
+                                <select class="form-control" required id="categoriaProducto" name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                 	for(Categoria categoria : listaCategorias){
                                 		out.println("<option value=\""+ categoria.getIdCategoria() + "\">"+categoria.getNombre()+"</option>");
@@ -82,7 +82,7 @@
                         <div class="row control-group">
                            
                                 <label>Imagen 1</label>
-                                <input type="file" class="form-control" placeholder="Imagen 1 del producto" id="imagen1Producto" name="imagen1Producto" >
+                                <input type="file" class="form-control" required placeholder="Imagen 1 del producto" id="imagen1Producto" name="imagen1Producto" >
                                 <p class="help-block text-danger"></p>
                             
                         </div>
@@ -90,7 +90,7 @@
                         
                        <div class="row control-group">
                                 <label>Realiza Envíos</label>
-                                <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
+                                <select class="form-control" required id="realizaEnviosProducto" name ="realizaEnviosProducto">
                                 	<option value="si">Si</option>
                                 	<option value="no">No</option>
                                 </select>
@@ -100,7 +100,7 @@
                         
                        <div class="row control-group">
                                 <label>Precio negociable</label>
-                                <select class="form-control" id="precioNegociable" name ="precioNegociable">
+                                <select class="form-control" required id="precioNegociable" name ="precioNegociable">
                                 	<option value="si">Si</option>
                                 	<option value="no">No</option>
                                 </select>
