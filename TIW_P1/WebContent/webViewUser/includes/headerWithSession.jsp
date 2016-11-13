@@ -101,12 +101,12 @@
 		String usuarioSessionGeneral = (String) session.getAttribute("userEmailSession"); %>
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-2">
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav left">
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li class="page-scroll"> <font color="#81F79F">Usuario: <%out.print(usuarioSessionGeneral);%></font>
-					</form></li>
-					</ul>
-			</div>
+				</li>
+			</ul>
+		</div>
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
@@ -124,9 +124,37 @@
 		</div>
 	</div>
 	</header>
+	<div class="container">
+		<div class="row">
+	<label id="redirect2">
 	
-		<!-- Si existe, se imprime el mensaje que nos hayan pasado desde el controlador -->
-	<% if(null!=request.getAttribute("Message")){out.println(request.getAttribute("Message"));} %>
+		<font size=4><b><% if(null!=request.getAttribute("Message")){
+		out.println(request.getAttribute("Message"));} %>
+		</b> </font>
+	</label>
+	</div></div>
+	<script type="text/javascript">
+	//<![CDATA[
+		var countdownfrom=3;
+		var currentsecond=4;
+		function countredirect(){
+			if (currentsecond!=1){
+				currentsecond-=1;
+			}
+			else{
+				document.getElementById("redirect2").innerHTML="";
+			return
+			}
+			setTimeout("countredirect()",1000);
+		}	
+		countredirect()
+//]]>
+</script> <!--webbot bot="HTMLMarkup" endspan -->
+
+
+
+	
+	
 	
 	
 </body>
