@@ -97,6 +97,16 @@
 					</form></li>
 				</ul>
 		</div>
+		<%HttpSession sesionGeneral = request.getSession(false);
+		String usuarioSessionGeneral = (String) session.getAttribute("userEmailSession"); %>
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-2">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="hidden"><a href="#page-top"></a></li>
+				<li class="page-scroll"> <font color="#81F79F">Usuario: <%out.print(usuarioSessionGeneral);%></font>
+					</form></li>
+					</ul>
+			</div>
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
