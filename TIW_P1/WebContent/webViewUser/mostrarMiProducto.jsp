@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@page import="entitiesJPA.Producto"%>
     <%@page import="entitiesJPA.Usuario"%>
+     <%@page import="entitiesJPA.Disponibilidad" %>
+     <%@page import="java.util.List"%>
 <%@page import="utilidades.UtilidadesImagen" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -90,6 +92,38 @@
 					<%out.print(producto.getDisponibilidad().getNombre());%>
 				</p>
 			</div>
+			
+			<form name="sentMessage" action="ControllerServlet" id="contactForm" enctype="multipart/form-data" novalidate method="post">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+				<div class="row control-group">
+					
+						<label>Disponibilidad</label> <select class="form-control" id="categoriaProducto" name="disponibilidadProducto">
+						<%	Disponibilidad disponibilidadProducto= (Disponibilidad)producto.getDisponibilidad(); 
+							List<Disponibilidad> listaDisponibilidades = (List<Disponibilidad>) request.getAttribute("listaDeDisponibilidades");
+                        	for(Disponibilidad disponibilidad : listaDisponibilidades){
+                        	if(disponibilidad.equals(disponibilidadProducto))
+                        	{
+                        		out.println("<option value=\""+ disponibilidad.getIdDisponibilidad() + "\" selected>"+disponibilidad.getNombre()+"</option>");
+                        	}else{
+                        		out.println("<option value=\""+ disponibilidad.getIdDisponibilidad() + "\" >"+disponibilidad.getNombre()+"</option>");
+                        }}%>
+							</select>
+							<p class="help-block text-danger"></p>
+				</div>
+			    </div>
+			</div>
+			<!--  Se recoge el idProducto para luego volverlo a enviar -->
+			<input type="hidden" name="idProducto" value="<% out.print(request.getParameter("idProducto"));%>"> <br>
+			<!--  Se envia la acción del formulario -->
+			<input type="hidden" name="pAccion" value="cambiarDisponibilidadProducto"> <br>
+			<div id="success"></div>
+				<div class="row">
+					<div class="form-group col-xs-12">
+						<button type="submit" class="btn btn-success btn-lg">Modificar disponibilidad</button>
+					</div>
+				</div>
+			</form>
 
 
 
@@ -101,16 +135,6 @@
 				<div class="row">
 					<div class="form-group col-xs-12">
 						<button type="submit" class="btn btn-success btn-lg">Modificar Producto</button>
-					</div>
-				</div>
-			</form>
-				<form action="ControllerServlet" name="formCambiarDisponibilidadProducto" novalidate method="post">
-				<input type="hidden" name="pAccion" value="ShowFormChangeAvailability">
-				<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
-				<div id="success"></div>
-				<div class="row">
-					<div class="form-group col-xs-12">
-						<button type="submit" class="btn btn-success btn-lg">Cambiar disponibilidad</button>
 					</div>
 				</div>
 			</form>	

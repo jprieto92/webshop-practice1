@@ -1,9 +1,13 @@
 package handlers;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
+import entitiesJPA.Disponibilidad;
 import entitiesJPA.Producto;
 import entitiesJPA.Usuario;
+import entityManagers.DisponibilidadManager;
 import entityManagers.ProductManager;
 import entityManagers.UserManager;
 
@@ -46,6 +50,21 @@ public class ShowFormMostrarMiProductoRequestHandler extends ActionHandler{
 		finally{
 			request.setAttribute("Message", message);
 		}
+		//Se pasarán las categorías que debe mostrar en el formulario, cargadas de la BBDD
+		DisponibilidadManager gestorDisponibilidades = new DisponibilidadManager();
+		List<Disponibilidad> disponibilidadesBBDD;
+		try{
+				disponibilidadesBBDD =  gestorDisponibilidades.buscarTodas();
+		}
+		catch(NoResultException e){
+				message = message+" ."+"No existen disponibilidades";
+				throw new NoResultException(message);
+		}		
+		finally{
+				request.setAttribute("Message", message);
+		}
+		
+		request.setAttribute("listaDeDisponibilidades", disponibilidadesBBDD);
 		
 		request.setAttribute("usuarioMostrar", usuarioBBDD);
 		request.setAttribute("idProducto", productoBBDD);
