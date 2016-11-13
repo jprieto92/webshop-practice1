@@ -38,9 +38,10 @@
 			</div>
 			<div class="col-lg-12 text-center">
 				<h4>Descripcion</h4>
-				<p>
-					<%out.print(producto.getDescripccion());%>
-				</p>
+				<div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+					<textarea style="text-align: center;" cols="100" rows="6" disabled><%out.print(producto.getDescripccion());%></textarea>
+				</div></div>
 
 			</div>
 			<div class="col-lg-12 text-center">

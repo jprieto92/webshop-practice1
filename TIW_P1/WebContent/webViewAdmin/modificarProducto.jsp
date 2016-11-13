@@ -18,7 +18,7 @@
 	<% Producto producto = (Producto) request.getAttribute("productoModificar"); %>
 
 	<!-- Register Section -->
-	<section id="register">
+<section id="register">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
@@ -26,15 +26,17 @@
 				<hr class="star-primary">
 			</div>
 		</div>
-		<form name="sentMessage" action="ControllerAdminServlet" id="contactForm" enctype="multipart/form-data" novalidate method="post">
+
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+				<form name="sentMessage" action="ControllerAdminServlet" id="contactForm" enctype="multipart/form-data"
+					novalidate method="post">
 					<input type="hidden" name="idProducto" value="<% out.print(producto.getProductId()); %>">
 					
 					<div class="row control-group">
-                                <p><b>Categoria</b></p>
+                                <label>Categoria</label>
                                 <select class="form-control" id="categoriaProducto" name ="categoriaProducto">
                                 	<% List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaDeCategorias");
                                 	for(Categoria categoria : listaCategorias){
@@ -48,37 +50,32 @@
                                 	%>
                                 </select>
                                 <p class="help-block text-danger"></p>
-                       </div>
-                 </div>
-                <div class="col-lg-8 col-lg-offset-2">
-				<div class="row control-group">
-						<div
-							class="form-group col-xs-12 floating-label-form-group controls">
-							<p><b>Titulo</b></p> 
+                            
+                        </div>
+					<div class="row control-group">
+						
+							<label>Titulo</label> 
 							<input type="text" class="form-control"
 							value="<%out.print(producto.getTitulo()); %>" id="tituloProducto"name="tituloProducto" 
 								required
 								data-validation-required-message="Por favor, introduce el titulo del producto.">
 							<p class="help-block text-danger"></p>
-						</div>
+						
 					</div>
-					</div>
-					<div class="col-lg-8 col-lg-offset-2">
+
 					<div class="row control-group">
-						<div
-							class="form-group col-xs-12 floating-label-form-group controls">
-							<p><b>Descripcion</b></p> <input type="text" class="form-control"
-								value="<%out.print(producto.getDescripccion()); %>" id="descripcionProducto"
-								name="descripcionProducto" required
-								data-validation-required-message="Campo requerido.">
+						
+							<label>Descripcion</label> 
+							<textarea class="form-control" id="descripcionProducto" 
+							name ="descripcionProducto" maxlength="500" cols="50" rows="6"
+							required data-validation-required-message="Campo requerido."><%out.print(producto.getDescripccion()); %></textarea>
+							
 							<p class="help-block text-danger"></p>
-						</div>
+						
 					</div>
-					</div>
-					<div class="col-lg-8 col-lg-offset-2">
 					<div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Realiza envios</b></p>
+                           
+                                <label>Realiza envios</label>
                                 <select class="form-control" id="realizaEnviosProducto" name ="realizaEnviosProducto">
                                 	<%if(producto.getEnvios().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
@@ -91,13 +88,12 @@
              
                                 </select>
                                 <p class="help-block text-danger"></p>
-                            </div>
-                        </div> 
-                        </div>     
-                        <div class="col-lg-8 col-lg-offset-2">
+                            
+                        </div>      
+                        
                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <p><b>Precio negociable</b></p>
+                            
+                                <label>Precio negociable</label>
                                 <select class="form-control" id="precioNegociable" name ="precioNegociable">
                                 	<%if(producto.getPrecioNegociable().equals("SI")){
                                 		out.println("<option value=\"SI\" selected >SI</option>");
@@ -109,38 +105,32 @@
                                 	} %>
                                 </select>
                                 <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
+                           
                         </div>
 					
 					
-					<div class="col-lg-8 col-lg-offset-2">
+					
 					<div class="row control-group">
-						<div
-							class="form-group col-xs-12 floating-label-form-group controls">
-							<p><b>Precio ($)</b></p> <input type="text" class="form-control"
+						
+							<label>Precio ($)</label> <input type="text" class="form-control"
 								value="<%out.print(producto.getPrecio()); %>" id="precioProducto"
 								name="precioProducto" required
 								data-validation-required-message="Campo requerido.">
 							<p class="help-block text-danger"></p>
-						</div>
+						
 					</div>
 					
 					<div class="row control-group">
-						<div
-							class="form-group col-xs-12 floating-label-form-group controls">
-							<p><b>Imagen</b></p> 
+							<label>Imagen</label><br>
 							<img style="height: 50px;" src="<% out.print(UtilidadesImagen.mostrarImagen(producto.getImagen())); %>">
-						</div>
+						
 					</div>
-					</div>
-					<div class="col-lg-8 col-lg-offset-2">
+					
 					<div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls ">
+                            
                                 <input type="file" class="form-control" placeholder="Imagen 1 del producto" id="imagen1Producto" name="imagen1Producto" >
                                 <p class="help-block text-danger"></p>
-                            </div>
-                    </div>
+                            
                     </div>
 					
 

@@ -73,7 +73,8 @@
                             
                                 <label>Descripción</label>
                                 <!-- <textarea name="message" class="form-control" cols="40" rows="6" id="descripcion" name="descripcion" required data-validation-required-message="Por favor, introduce una descripcción."></textarea>-->
-                                <input type="text" class="form-control" placeholder="Descripcción" id="descripcion" name ="descripcion" required data-validation-required-message="Por favor, introduce una descripcción.">
+							    <textarea class="form-control" placeholder="Descripcción" id="descripcion" name ="descripcion" maxlength="500" cols="50" rows="6"required data-validation-required-message="Por favor, introduce una descripcción."></textarea>
+                                
                                 <p class="help-block text-danger"></p>
                             
                         </div>

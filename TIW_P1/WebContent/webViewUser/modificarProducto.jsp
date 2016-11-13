@@ -65,10 +65,11 @@
 
 					<div class="row control-group">
 						
-							<label>Descripcion</label> <input type="text" class="form-control"
-								value="<%out.print(producto.getDescripccion()); %>" id="descripcionProducto"
-								name="descripcionProducto" required
-								data-validation-required-message="Campo requerido.">
+							<label>Descripcion</label> 
+							<textarea class="form-control" id="descripcionProducto" 
+							name ="descripcionProducto" maxlength="500" cols="50" rows="6"
+							required data-validation-required-message="Campo requerido."><%out.print(producto.getDescripccion()); %></textarea>
+							
 							<p class="help-block text-danger"></p>
 						
 					</div>
