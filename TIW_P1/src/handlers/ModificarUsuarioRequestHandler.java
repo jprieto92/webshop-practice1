@@ -23,7 +23,7 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		String emailUsuario =  (String) request.getAttribute("emailUserModificar");
 		
 		//Recogemos los datos del formulario
-		String nuevaContraseña = request.getParameter("pass");
+		String nuevaContraseña = request.getParameter("passHashRegister");
 		String nuevoNombre = request.getParameter("name");
 		String nuevoApellido1 = request.getParameter("apellido1");
 		String nuevoApellido2 = request.getParameter("apellido2");
@@ -47,7 +47,7 @@ public class ModificarUsuarioRequestHandler extends ActionHandler {
 		//Actualizamos los datos del usuarioBBDD acorde a las modificaciones solicitadas
 		
 		//Si la constraseña no ha variado, no se modifica
-		if(nuevaContraseña!= null){
+		if(nuevaContraseña!= ""){
 			usuarioBBDD.setContraseña(nuevaContraseña);
 		}
 		//Si la imagen no ha variado, no se modifica

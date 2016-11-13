@@ -33,7 +33,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	<script type="text/javascript" src="js/sha256.js"></script>
+	<script type="text/javascript" src="js/funcionesFormulario.js"></script>
 </head>
 
 <body id="page-top" class="index">
@@ -54,7 +55,7 @@
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 				<form name="sentMessage" action="ControllerAdminServlet" id="contactForm"
-					novalidate method="post">
+					novalidate method="post" onsubmit="hash('passLogin', 'passHashLogin')">
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
@@ -69,11 +70,14 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Password</label> <input type="password" class="form-control"
-								placeholder="Contraseña" id="pass" name="passLogin" required
+								placeholder="Contraseña" id="passLogin" name="passLogin" required
 								data-validation-required-message="Please enter your password.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
+
+					<!-- Campo donde almacenar la contraseña en hash -->
+					<input type="hidden" id="passHashLogin" name="passHashLogin">
 
 					<input type="hidden" name="pAccion" value="loginAdmin"> <br>
 					<div id="success"></div>

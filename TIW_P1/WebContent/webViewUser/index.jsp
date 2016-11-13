@@ -33,7 +33,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	<script type="text/javascript" src="js/sha256.js"></script>
+	<script type="text/javascript" src="js/funcionesFormulario.js"></script>
 </head>
 
 <body id="page-top" class="index">
@@ -59,8 +60,7 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-				<form name="sentMessage" action="ControllerServlet" id="contactForm"
-					novalidate method="post">
+				<form name="sentMessage" action="ControllerServlet" id="contactForm" novalidate method="post" onsubmit="hash('passLogin', 'passHashLogin')">
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
@@ -75,11 +75,14 @@
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Password</label> <input type="password" class="form-control"
-								placeholder="Contraseña" id="pass" name="passLogin" required
+								placeholder="Contraseña" id="passLogin" name="passLogin" required
 								data-validation-required-message="Please enter your password.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
+					
+					<!-- Campo donde almacenar la contraseña en hash -->
+					<input type="hidden" id="passHashLogin" name="passHashLogin">
 
 					<input type="hidden" name="pAccion" value="login"> <br>
 					<div id="success"></div>
@@ -107,8 +110,11 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
 				<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+
 				<form name="sentMessage" action="ControllerServlet" id="contactForm"
-					novalidate method="post" enctype="multipart/form-data">
+					novalidate method="post" enctype="multipart/form-data" onsubmit="hash('passRegister', 'passHashRegister')">
+
+
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
@@ -119,18 +125,21 @@
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
-
+					
+					<!-- Campo donde almacenar la contraseña en hash -->
+					<input type="hidden" id="passHashRegister" name="passHashRegister">
+					
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Contraseña</label> <input type="password"
-								class="form-control" placeholder="Contraseña" id="pass"
-								name="pass" required
+								class="form-control" placeholder="Contraseña" id="passRegister"
+								name="passRegister" required
 								data-validation-required-message="Por favor, introduce tu contraseña.">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
-
+					
 					<div class="row control-group">
 						<div
 							class="form-group col-xs-12 floating-label-form-group controls">
@@ -192,12 +201,14 @@
 						</div>
 					</div>
 					<div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls ">
-                                <label>Imagen perfil</label>
-                                <input type="file" class="form-control" placeholder="Imagen de perfil" id="imagenPerfil" name="imagenPerfil">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
+						<div
+							class="form-group col-xs-12 floating-label-form-group controls ">
+							<label>Imagen perfil</label> <input type="file"
+								class="form-control" placeholder="Imagen de perfil"
+								id="imagenPerfil" name="imagenPerfil">
+							<p class="help-block text-danger"></p>
+						</div>
+					</div>
 
 					<input type="hidden" name="pAccion" value="register"> <br>
 					<div id="success"></div>

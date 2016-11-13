@@ -34,7 +34,7 @@ public class RegisterRequestHandler extends ActionHandler {
 		usuarioAInsertar.setNombre((String)request.getParameter("name"));
 		usuarioAInsertar.setCiudad((String)request.getParameter("ciudad"));
 		usuarioAInsertar.setEmail((String)request.getParameter("email"));
-		usuarioAInsertar.setContraseña((String)request.getParameter("pass"));
+		usuarioAInsertar.setContraseña((String)request.getParameter("passHashRegister"));
 		usuarioAInsertar.setTelefono(Integer.parseInt(request.getParameter("phone")));
 		usuarioAInsertar.setFechaAlta(new java.util.Date());
 		usuarioAInsertar.setTipoUsuario(tipoUsuario);

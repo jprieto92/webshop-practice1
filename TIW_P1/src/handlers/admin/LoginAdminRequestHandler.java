@@ -16,7 +16,7 @@ import handlers.ActionHandler;
 		
 		//Recuperacion campos formulario login
  		String email = (String) request.getParameter("emailLogin");
- 		String pass = (String) request.getParameter("passLogin");
+ 		String pass = (String) request.getParameter("passHashLogin");
 
 		//Comprobar que el usuario existe en la BBDD. 
 		UserManager gestorDatosUsuario = new UserManager();
