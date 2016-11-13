@@ -146,7 +146,7 @@
 							<label> Verificar Contraseña</label> <input type="password"
 								class="form-control" placeholder="Verficar Contraseña"
 								id="verifypass" name="verifypass" required
-								data-validation-required-message="Por favor, introduzca una contraseña de verificación.">
+								data-validation-required-message="Por favor, introduzca una contraseña de verificación." onblur="comprobarpass()">
 							<p class="help-block text-danger"></p>
 						</div>
 					</div>
@@ -223,7 +223,15 @@
 	</section>
 
 	<%@include file="includes/footer.jsp"%>
-
+<script>
+function comprobarpass() {
+    var pass = document.getElementById("passRegister").value;
+    var verifypass = document.getElementById("verifypass").value;
+    if(pass != verifypass){
+    	alert("Los campos contraseña y verificar contraseña deben ser iguales");
+    }
+}
+</script>
 </body>
 
 </html>
