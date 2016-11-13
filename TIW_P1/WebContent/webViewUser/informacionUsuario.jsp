@@ -20,6 +20,7 @@
 					Información detallada de
 					<%out.print(usuario.getEmail());%></h2>
 				<hr class="star-primary">
+				<p><img style="height: 150px;" src="<% out.print(UtilidadesImagen.mostrarImagen(usuario.getImagenPerfil())); %>"></p>
 				<p><b>Nombre:</b> <%out.print(usuario.getNombre());%></p>
 				<p><b>Apellido 1:</b> <%out.print(usuario.getApellido1());%></p>
 				<p><b>Apellido 2:</b> <%out.print(usuario.getApellido2());%></p>
