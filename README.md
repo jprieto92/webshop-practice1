@@ -17,6 +17,14 @@ This README would normally document whatever steps are necessary to get your app
 * How to run tests
 * Deployment instructions
 
+
++Todos los usuarios de la parte user tienen la contraseña:
++
++12345
++
++A la parte admin se accede modificando la url:
++
++http://localhost:8080/TIW_P1/ControllerAdminServlet
 ### Contribution guidelines ###
 
 * Writing tests
