@@ -70,6 +70,13 @@
 						novalidate method="post">
 						<input type="hidden" name="pAccion" value="gestionarUsuarios">
 					</form></li>
+				<li class="page-scroll"><a
+					HREF="javascript:document.categoriesSubmitForm.submit()">Gestionar
+						categorias</a>
+					<form action="ControllerAdminServlet" name="categoriesSubmitForm"
+						novalidate method="post">
+						<input type="hidden" name="pAccion" value="gestionarCategorias">
+					</form></li>
 
 				<li class="page-scroll"><a
 					HREF="javascript:document.misMensajesSubmitForm.submit()">Bandeja de Entrada</a>
