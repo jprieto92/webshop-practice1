@@ -18,13 +18,23 @@
 
 	<!-- Register Section -->
 <section id="register">
-	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2>Gestion Categorias</h2>
 				<hr class="star-primary">
 			</div>
 		</div>
+		<div class="container">
+			<div class="row">
+            <form action="ControllerAdminServlet" name="formInsertarCategoria" novalidate method="post">
+				<input type="hidden" name="pAccion" value="insertarCategoriaAdmin">
+				<div id="success"></div>
+				<div class="form-group col-xs-12">
+					<button type="submit" class="btn btn-success btn-lg">Insertar Categoria</button>
+				</div>
+			</form>
+			</div>
+			</div>
 
 	<div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
@@ -39,21 +49,40 @@
                         <td align="center"><b>Id</b></td>
                         <td align="center"><b>Nombre</b></td>
                         <td align="center"><b>Descripción</b></td>
+ 						<td></td>                   
+ 						<td></td> 
                         </tr>
              		<%for(Categoria categoriaAux : categorias){%>
                         <tr>
-                        <td><b><%out.print(categoriaAux.getIdCategoria());%>&nbsp;</b></td>
-                        <td><%out.print(categoriaAux.getNombre());%></td>
-                        <td><%out.print(categoriaAux.getDescripccion());%></td>
-                         </tr>
+                        <td align="center"><b><%out.print(categoriaAux.getIdCategoria());%>&nbsp;&nbsp;</b></td>
+                        <td><%out.print(categoriaAux.getNombre());%>&nbsp;&nbsp;</td>
+                        <td><%out.print(categoriaAux.getDescripccion());%>&nbsp;&nbsp;<br></td>
+                        <td style="vertical-align: top;"><form name="sentMessage" action="ControllerAdminServlet" id="formModificarCategoria" enctype="multipart/form-data" novalidate method="post">
+						  <input type="hidden" name="pAccion" value="modificarCategoriaAdmin">
+						  <input type="hidden" name="seleccionarCategoria" value="<%out.print(categoriaAux.getIdCategoria());%>">
+						  
+						  <div class="row">
+						  <div class="form-group col-xs-12">
+						  <button type="submit" class="btn btn-success btn-lg">Modificar</button>
+						  </div>
+						  </div>
+						  </form>
+						</td>
+						<td style="vertical-align: top;"><form action="ControllerAdminServlet" name="formEliminarCategoria" novalidate method="post">
+							<input type="hidden" name="pAccion" value="eliminarCategoriaAdmin">
+							<input type="hidden" name="seleccionarCategoria" value="<%out.print(categoriaAux.getIdCategoria());%>">
+							<div id="success"></div>
+							<div class="form-group col-xs-12">
+								<button type="submit" class="btn btn-success btn-lg">Eliminar</button>
+							</div>
+						</form></td>
+                        </tr>
                     <%}%>
                     </tbody>
                     </table>
-                    
                 </div>
             </div>
-        </div>
-	
+            
 	</section>
 	
 	<%@include file="includes/footer.jsp"%>
