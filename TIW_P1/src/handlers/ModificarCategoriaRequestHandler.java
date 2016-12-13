@@ -22,7 +22,9 @@ public class ModificarCategoriaRequestHandler  extends ActionHandler{
 			message = "";
 		}
 		
-		String idNuevaCategoria = (request.getParameter("seleccionarCategoria"));
+		String idNuevaCategoria = (request.getParameter("idCategoria"));
+		String nombre = (request.getParameter("nombreCategoria"));
+		String descripcion = (request.getParameter("descripcionCategoria"));
 		
 		CategoriaManager gestorCategoria = new CategoriaManager();
 		Categoria categoriaBBDD;
@@ -36,10 +38,19 @@ public class ModificarCategoriaRequestHandler  extends ActionHandler{
 		finally{
 			request.setAttribute("Message", message);
 		}
-		
-		request.setAttribute("categoriaModificar", categoriaBBDD);
-		
-		
+		//Actualizamos el usuario en la BBDD
+		categoriaBBDD.setNombre(nombre);
+		categoriaBBDD.setDescripccion(descripcion);
+		try{
+			message = message+" ."+gestorCategoria.modificar(categoriaBBDD);
+		}
+		catch(Exception e){
+			message = message+" "+"Error en la modificación de la categoria"+".";
+			throw new Exception(message);
+		}
+		finally{
+			request.setAttribute("Message", message);
+		}
 	}
 
 }
