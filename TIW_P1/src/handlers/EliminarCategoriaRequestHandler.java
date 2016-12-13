@@ -1,7 +1,10 @@
 package handlers;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
+import entitiesJPA.Producto;
 import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
 
@@ -16,21 +19,40 @@ public class EliminarCategoriaRequestHandler  extends ActionHandler{
 		if(message == null){
 			message = "";
 		}
-		
+		int valid=0;
 		//Se recupera el id del producto
 		String idCategoria = (request.getParameter("seleccionarCategoria"));
 		
 		//Se borra el producto de la BBDD
 		CategoriaManager gestorDatos = new CategoriaManager();
+		ProductManager gestorProdutos = new ProductManager();
+		List<Producto> productos;
+		productos = gestorProdutos.buscarTodos();
 		try {
-			//message = message+" "+gestorDatos.eliminar()+".";
-		}catch(Exception e){
+			productos = gestorProdutos.buscarTodos();
+		}catch(NoResultException e){
 			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(e.getMessage());
 		}
 		finally{
 			request.setAttribute("Message", message);
-		}	
+		}
+		
+		for(int i=0;i<productos.size();i++)
+		{
+			if(productos.get(i).getCategoria().getIdCategoria() == Integer.parseInt(idCategoria))
+			{
+				message = "Categoria no eliminada. Productos vinculados.";
+				valid =1;
+				break;
+			}
+			
+		}
+		if(valid==0)
+		{
+			//borrar categoria
+		}
+		request.setAttribute("Message", message);
 	}
 
 }
