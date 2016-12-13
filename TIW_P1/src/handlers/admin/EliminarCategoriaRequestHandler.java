@@ -1,4 +1,4 @@
-package handlers;
+package handlers.admin;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import entitiesJPA.Producto;
 import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
+import handlers.ActionHandler;
 
 /**ProductRemoveRequestHandler --> Se encarga de eliminar un producto de la 
  * base de datos*/
@@ -19,17 +20,19 @@ public class EliminarCategoriaRequestHandler  extends ActionHandler{
 		if(message == null){
 			message = "";
 		}
-		int valid=0;
-		//Se recupera el id del producto
-		String idCategoria = (request.getParameter("seleccionarCategoria"));
+
+		//Se recupera el id de la categoria
+		int idCategoria = Integer.parseInt((request.getParameter("seleccionarCategoria")));
 		
-		//Se borra el producto de la BBDD
-		CategoriaManager gestorDatos = new CategoriaManager();
+		//Se comprueba que no existen productos con ese idCategoria
 		ProductManager gestorProdutos = new ProductManager();
-		List<Producto> productos;
-		productos = gestorProdutos.buscarTodos();
+		CategoriaManager gestorCategorias = new CategoriaManager();
 		try {
-			productos = gestorProdutos.buscarTodos();
+			//Comprueba si existen productos asociados
+			message = gestorProdutos.comprobarProductosAsociadosCategoria(idCategoria);
+			
+			//Si no existen, se procede a borrar la categoria
+			message = gestorCategorias.darDeBaja(idCategoria);
 		}catch(NoResultException e){
 			message = message+" "+e.getMessage()+".";
 			throw new NoResultException(e.getMessage());
@@ -37,22 +40,6 @@ public class EliminarCategoriaRequestHandler  extends ActionHandler{
 		finally{
 			request.setAttribute("Message", message);
 		}
-		
-		for(int i=0;i<productos.size();i++)
-		{
-			if(productos.get(i).getCategoria().getIdCategoria() == Integer.parseInt(idCategoria))
-			{
-				message = "Categoria no eliminada. Productos vinculados.";
-				valid =1;
-				break;
-			}
-			
-		}
-		if(valid==0)
-		{
-			//borrar categoria
-		}
-		request.setAttribute("Message", message);
 	}
 
 }

@@ -1,10 +1,11 @@
-package handlers;
+package handlers.admin;
 
 import javax.persistence.NoResultException;
 
 import entitiesJPA.Categoria;
 import entityManagers.CategoriaManager;
 import entityManagers.ProductManager;
+import handlers.ActionHandler;
 
 /**ProductRemoveRequestHandler --> Se encarga de eliminar un producto de la 
  * base de datos*/

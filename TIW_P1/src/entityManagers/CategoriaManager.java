@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import entitiesJPA.Categoria;
+import entitiesJPA.Producto;
 
 
 
@@ -146,5 +147,23 @@ public class CategoriaManager {
 		}
   		return resultado;
   	}
+  	
+	public String darDeBaja(Integer idCategoria) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		Categoria categoriaBBDD = null;
+		try {
+			categoriaBBDD = em.find(Categoria.class, idCategoria);
+			em.getTransaction().begin();
+			em.remove(categoriaBBDD);
+			em.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new Exception("Ha habido un error con la baja de la categoria");
+		}
+		finally {
+			em.close();
+		}
+		return "La categoria con id "+idCategoria+" se ha dado de baja correctamente";
+	}
   	
 }

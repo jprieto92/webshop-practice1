@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import entitiesJPA.Categoria;
 import entitiesJPA.Disponibilidad;
 import entitiesJPA.Producto;
 
@@ -105,6 +107,38 @@ public class ProductManager {
 			em.close();
 		}
 		return resultado;
+	}
+	
+	/**
+	 * Comprueba si existen productos asociados a una categoria
+	 * @param idCategoria
+	 * @return String con mensaje del resultado satisfactorio.
+	 * @throws Exception si no existen productos asociados a la categoria
+	 */
+	@SuppressWarnings("unchecked")
+	public String comprobarProductosAsociadosCategoria(int idCategoria) throws Exception {
+		List<Producto> resultado;
+		EntityManager em = emf.createEntityManager();
+		try{
+			Query query = em.createNamedQuery(Producto.BUSCAR_CATEGORIA_ID,Producto.class);
+			query.setParameter("idCategoria", idCategoria);
+			resultado = query.getResultList();
+			//Si existen coincidencias, se lanza una excepción
+			if(resultado.size()>0){
+				throw new NoResultException("La categoria con id "+idCategoria+" tiene productos asociados. No se puede eliminar");
+			}
+		}
+		catch(NoResultException e){
+			throw new NoResultException(e.getMessage());		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw new Exception();		
+		}
+		finally {
+			em.close();
+		}
+		return "La categoria con id "+idCategoria+" no tiene productos asociados. Se puede eliminar";
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -1,4 +1,4 @@
-package handlers;
+package handlers.admin;
 
 import javax.persistence.NoResultException;
 import javax.persistence.RollbackException;
@@ -9,6 +9,7 @@ import entitiesJPA.Producto;
 import entityManagers.CategoriaManager;
 import entityManagers.DisponibilidadManager;
 import entityManagers.ProductManager;
+import handlers.ActionHandler;
 
 /**ChangeAvailabilityRequestHandler --> Manejador que cambia la disponibilidad
  * de un producto*/

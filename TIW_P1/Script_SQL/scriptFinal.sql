@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
--- Host: localhost    Database: tiw
+-- Host: localhost    Database: tiwP1
 -- ------------------------------------------------------
 -- Server version	5.7.13-0ubuntu0.16.04.2
 
@@ -19,9 +19,9 @@
 -- Table structure for table `categoria`
 --
 
-CREATE DATABASE tiw;
+CREATE DATABASE tiwP1;
 
-USE tiw;
+USE tiwP1;
 
 DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

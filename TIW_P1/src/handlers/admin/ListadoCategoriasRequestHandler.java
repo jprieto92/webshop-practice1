@@ -1,4 +1,4 @@
-package handlers;
+package handlers.admin;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import entitiesJPA.Categoria;
 import entitiesJPA.Usuario;
 import entityManagers.CategoriaManager;
 import entityManagers.UserManager;
+import handlers.ActionHandler;
 
 /**ListadoUsuariosRequestHandler --> Se encarga de consultar
  * los usuarios de la bbdd y devolver una lista con aquellos
